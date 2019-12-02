@@ -6,8 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="2019\input.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <None Update="2019\2\input.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 
