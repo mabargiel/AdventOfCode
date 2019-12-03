@@ -1,4 +1,3 @@
-using System.Linq;
 using NUnit.Framework;
 
 namespace AdventOfCode.Tests._2017
@@ -13,7 +12,7 @@ namespace AdventOfCode.Tests._2017
         public void Part1(string input, int expectedResult)
         {
             var d1 = new AdventOfCode._2017._1.Day1(input);
-            
+
             Assert.AreEqual(expectedResult, d1.Part1());
         }
     }

@@ -6,8 +6,8 @@ namespace AdventOfCode._2019._2
 {
     public class Day2 : IAdventDay<int, int>
     {
-        private readonly int _part2Target;
         private readonly int[] _input;
+        private readonly int _part2Target;
 
         public Day2(IEnumerable<int> input, int part2Target = 0)
         {
@@ -22,49 +22,45 @@ namespace AdventOfCode._2019._2
 
         public int Part2()
         {
-            for (int i = 0; i <= 99; i++)
+            for (var i = 0; i <= 99; i++)
             {
-                for (int j = 0; j <= 99; j++)
+                for (var j = 0; j <= 99; j++)
                 {
                     var input = (int[]) _input.Clone();
                     if (RunProgram(input) == _part2Target)
                     {
-                        goto result;
+                        return 100 * _input[1] + _input[2];
                     }
 
                     _input[1] = i;
                     _input[2] = j;
                 }
             }
-            result: return 100 * _input[1] + _input[2];
+
+            throw new ArgumentException("Could not find a noun and a verb to achieve the expected result");
         }
 
-        private static int RunProgram(int[] input)
+        private static int RunProgram(IList<int> input)
         {
             var startPosition = 0;
             while (input[startPosition] != (int) Signals.HaltProgram)
             {
-                var aPos = input[startPosition + 1];
-                var bPos = input[startPosition + 2];
+                var nounPos = input[startPosition + 1];
+                var verbPos = input[startPosition + 2];
                 var targetPos = input[startPosition + 3];
-                var inputLength = input.Length - 1;
-                
-                if (aPos > inputLength || bPos > inputLength || targetPos > inputLength)
+                var inputLength = input.Count - 1;
+
+                if (nounPos > inputLength || verbPos > inputLength || targetPos > inputLength)
                 {
                     return -1;
                 }
 
-                switch ((Signals) input[startPosition])
+                input[targetPos] = (Signals) input[startPosition] switch
                 {
-                    case Signals.Add:
-                        input[targetPos] = input[aPos] + input[bPos];
-                        break;
-                    case Signals.Multiply:
-                        input[targetPos] = input[aPos] * input[bPos];
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                    Signals.Add => (input[nounPos] + input[verbPos]),
+                    Signals.Multiply => (input[nounPos] * input[verbPos]),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
 
                 startPosition += 4;
             }

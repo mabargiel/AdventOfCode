@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using System.Linq;
 
 namespace AdventOfCode._2017._1
@@ -18,12 +18,14 @@ namespace AdventOfCode._2017._1
 
             var result = 0;
             var digitsCount = digits.Count;
-            
+
             for (var currIndex = 0; currIndex < digits.Count; currIndex++)
             {
                 var nextDigit = currIndex == digitsCount - 1 ? digits[0] : digits[currIndex + 1];
                 if (digits[currIndex] == nextDigit)
+                {
                     result += digits[currIndex];
+                }
             }
 
             return result;
@@ -31,7 +33,7 @@ namespace AdventOfCode._2017._1
 
         public int Part2()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
