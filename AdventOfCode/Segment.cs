@@ -11,8 +11,8 @@ namespace AdventOfCode
             End = end;
         }
 
-        private Point Start { get; }
-        private Point End { get; }
+        public Point Start { get; }
+        public Point End { get; }
 
         public Point? GetIntersection(Segment segment)
         {

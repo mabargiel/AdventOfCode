@@ -24,14 +24,57 @@ namespace AdventOfCode._2019._3
 
             var intersectionPoints = wire1Segments.GetIntersects(wire2Segments);
 
-            return intersectionPoints.Select(point => Math.Abs(point.X - CentralPort.X) + Math.Abs(point.Y - CentralPort.Y)).Min();
+            return intersectionPoints.Select(ManhattanDistance).Min();
         }
 
         public int Part2()
         {
-            throw new NotImplementedException();
+            var wire1Segments = new WireSegments(_wire1);
+            var wire2Segments = new WireSegments(_wire2);
+
+            var intersectionPoints = wire1Segments.GetIntersects(wire2Segments);
+
+            var distances = from point in intersectionPoints
+                let w1Dist = GetDistance(wire1Segments, point)
+                let w2Dist = GetDistance(wire2Segments, point)
+                select w1Dist + w2Dist;
+
+            return (int) distances.Min();
         }
 
+        private static int ManhattanDistance(Point point)
+        {
+            return Math.Abs(point.X - CentralPort.X) + Math.Abs(point.Y - CentralPort.Y);
+        }
+
+        private static double GetDistance(WireSegments wireSegments, Point point)
+        {
+            double Distance(Point x, Point y)
+            {
+                return Math.Sqrt(Math.Pow(x.X - y.X, 2) + Math.Pow(x.Y - y.Y, 2));
+            }
+
+            bool IsBetween(Point a, Point b, Point cBetween)
+            {
+                return Math.Abs(Distance(a, cBetween) + Distance(cBetween, b) - Distance(a, b)) < 0.1;
+            }
+
+            double distance = 0;
+            foreach (var segment in wireSegments.Segments)
+            {
+                if (!IsBetween(segment.Start, segment.End, point))
+                {
+                    distance += Distance(segment.Start, segment.End);
+                }
+                else
+                {
+                    distance += Distance(segment.Start, point);
+                    break;
+                }
+            }
+
+            return distance;
+        }
 
         private class WireSegments
         {
@@ -74,7 +117,7 @@ namespace AdventOfCode._2019._3
                 Segments = segmentsList.ToArray();
             }
 
-            private Segment[] Segments { get; }
+            public Segment[] Segments { get; }
 
             public IEnumerable<Point> GetIntersects(WireSegments wireSegments)
             {
