@@ -19,6 +19,11 @@ namespace AdventOfCode._2019._3
 
         public int Part1()
         {
+            int ManhattanDistance(Point point)
+            {
+                return Math.Abs(point.X - CentralPort.X) + Math.Abs(point.Y - CentralPort.Y);
+            }
+            
             var wire1Segments = new WireSegments(_wire1);
             var wire2Segments = new WireSegments(_wire2);
 
@@ -40,11 +45,6 @@ namespace AdventOfCode._2019._3
                 select w1Dist + w2Dist;
 
             return (int) distances.Min();
-        }
-
-        private static int ManhattanDistance(Point point)
-        {
-            return Math.Abs(point.X - CentralPort.X) + Math.Abs(point.Y - CentralPort.Y);
         }
 
         private static double GetDistance(WireSegments wireSegments, Point point)
