@@ -24,8 +24,8 @@ namespace AdventOfCode._2019._3
                 return Math.Abs(point.X - CentralPort.X) + Math.Abs(point.Y - CentralPort.Y);
             }
             
-            var wire1Segments = new WireSegments(_wire1);
-            var wire2Segments = new WireSegments(_wire2);
+            var wire1Segments = new Wire(_wire1);
+            var wire2Segments = new Wire(_wire2);
 
             var intersectionPoints = wire1Segments.GetIntersects(wire2Segments);
 
@@ -34,8 +34,8 @@ namespace AdventOfCode._2019._3
 
         public int Part2()
         {
-            var wire1Segments = new WireSegments(_wire1);
-            var wire2Segments = new WireSegments(_wire2);
+            var wire1Segments = new Wire(_wire1);
+            var wire2Segments = new Wire(_wire2);
 
             var intersectionPoints = wire1Segments.GetIntersects(wire2Segments);
 
@@ -47,7 +47,7 @@ namespace AdventOfCode._2019._3
             return (int) distances.Min();
         }
 
-        private static double GetDistance(WireSegments wireSegments, Point point)
+        private static double GetDistance(Wire wire, Point point)
         {
             double Distance(Point x, Point y)
             {
@@ -60,7 +60,7 @@ namespace AdventOfCode._2019._3
             }
 
             double distance = 0;
-            foreach (var segment in wireSegments.Segments)
+            foreach (var segment in wire.Segments)
             {
                 if (!IsBetween(segment.Start, segment.End, point))
                 {
@@ -76,9 +76,9 @@ namespace AdventOfCode._2019._3
             return distance;
         }
 
-        private class WireSegments
+        private class Wire
         {
-            public WireSegments(IEnumerable<string> wire)
+            public Wire(IEnumerable<string> wire)
             {
                 var segmentsList = new List<Segment>();
 
@@ -119,9 +119,9 @@ namespace AdventOfCode._2019._3
 
             public Segment[] Segments { get; }
 
-            public IEnumerable<Point> GetIntersects(WireSegments wireSegments)
+            public IEnumerable<Point> GetIntersects(Wire wire)
             {
-                var intersectingSegments = Segments.SelectMany(x => wireSegments.Segments.Select(y => y.GetIntersection(x))).Where(x => x != null).Cast<Point>();
+                var intersectingSegments = Segments.SelectMany(x => wire.Segments.Select(y => y.GetIntersection(x))).Where(x => x != null).Cast<Point>();
                 return intersectingSegments;
             }
 

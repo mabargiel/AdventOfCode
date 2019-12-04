@@ -1,4 +1,5 @@
 using System.Drawing;
+using AdventOfCode._2019._3;
 using NUnit.Framework;
 
 namespace AdventOfCode.Tests

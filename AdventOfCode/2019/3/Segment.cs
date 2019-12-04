@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace AdventOfCode
+namespace AdventOfCode._2019._3
 {
     public class Segment
     {
