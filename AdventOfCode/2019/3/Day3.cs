@@ -23,7 +23,7 @@ namespace AdventOfCode._2019._3
             {
                 return Math.Abs(point.X - CentralPort.X) + Math.Abs(point.Y - CentralPort.Y);
             }
-            
+
             var wire1Segments = new Wire(_wire1);
             var wire2Segments = new Wire(_wire2);
 
