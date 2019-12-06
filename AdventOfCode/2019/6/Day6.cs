@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,98 +71,30 @@ namespace AdventOfCode._2019._6
             var meObjectOrbit = _map.First(x => x.Name == "YOU").OrbitsOn;
             var santaOrbitObject = _map.First(x => x.Name == "SAN").OrbitsOn;
 
-            var vertexes = new SortedList<OribitngObject>();
+            var vertexes = new OrderedBag<Vertex>();
             foreach (var oribitngObject in _map.Where(x => x.Name != "YOU" && x.Name != "SAN"))
             {
-                vertexes.Add(oribitngObject.Equals(meObjectOrbit) ? 0 : int.MaxValue, oribitngObject);
+                vertexes.Add(new Vertex(oribitngObject, oribitngObject.Equals(meObjectOrbit) ? 0 : int.MaxValue));
             }
 
             while (vertexes.Any())
             {
-                var u = vertexes.First();
-                vertexes.Remove(0);
+                var u = vertexes.RemoveFirst();
+                var neighbours = vertexes.Where(x =>
+                    (x.OribitngObject.OrbitsOn.Equals(u.OribitngObject) || x.OribitngObject.Equals(u.OribitngObject.OrbitsOn)) && u.Cost + 1 < x.Cost).ToList();
                 
-                var neighbours = vertexes.Where(x => x.Value.OrbitsOn.Equals(u.Value) || x.Value.Equals(u.Value.OrbitsOn)).ToList();
+                if (u.OribitngObject.Equals(santaOrbitObject))
+                    return u.Cost;
                 
-                if (u.Value.Name == "I")
-                    return u.Key;
-                
-                foreach (var neighbour in neighbours)
+                foreach (var neighbour in neighbours.Where(neighbour => u.Cost + 1 < neighbour.Cost))
                 {
-                    if (u.Key + 1 < neighbour.Key)
-                    {
-                        vertexes.Remove(neighbour);
-                        neighbour.Key = u.Key + 1;
-                        vertexes.Add(neighbour);
-                    }
+                    neighbour.Cost = u.Cost + 1;
                 }
+                
+                vertexes = new OrderedBag<Vertex>(vertexes);
             }
 
             return -1;
-        }
-    }
-
-    public class Vertex : IComparable<Vertex>
-    {
-        public OribitngObject OribitngObject { get; }
-        public int Cost { get; set; }
-
-        public Vertex(OribitngObject oribitngObject, int cost)
-        {
-            OribitngObject = oribitngObject;
-            Cost = cost;
-        }
-
-        public int CompareTo(Vertex other)
-        {
-            return Cost.CompareTo(other.Cost);
-        }
-    }
-
-    public class OribitngObject : IEquatable<OribitngObject>
-    {
-        public string Name { get; }
-        public OribitngObject OrbitsOn { get; }
-
-        public OribitngObject(string name, OribitngObject orbitsOn)
-        {
-            Name = name;
-            OrbitsOn = orbitsOn;
-        }
-
-        public bool Equals(OribitngObject other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            return Name == other.Name;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            return obj.GetType() == GetType() && Equals((OribitngObject) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return Name != null ? Name.GetHashCode() : 0;
         }
     }
 }

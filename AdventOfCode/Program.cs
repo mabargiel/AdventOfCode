@@ -18,7 +18,7 @@ namespace AdventOfCode
             var split = input.Split(Environment.NewLine);
 
             var d1 = new Day6(split);
-            Console.WriteLine(d1.Part1());
+            Console.WriteLine(d1.Part2());
         }
     }
 }
