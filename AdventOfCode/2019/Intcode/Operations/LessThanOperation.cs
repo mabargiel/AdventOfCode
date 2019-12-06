@@ -1,23 +1,23 @@
-using System.Collections.Generic;
-
 namespace AdventOfCode._2019.Intcode.Operations
 {
     public class LessThanOperation : IOperation
     {
-        private readonly bool _nounImmediate;
-        private readonly bool _verbImmediate;
+        private readonly Argument _arg1;
+        private readonly Argument _arg2;
+        private readonly Argument _arg3;
 
-        public LessThanOperation(in bool nounImmediate, in bool verbImmediate)
+        public LessThanOperation(Argument arg1, Argument arg2, Argument arg3)
         {
-            _nounImmediate = nounImmediate;
-            _verbImmediate = verbImmediate;
+            _arg1 = arg1;
+            _arg2 = arg2;
+            _arg3 = arg3;
         }
 
-        public void Execute(IList<int> code, ref int position, ref int output)
+        public void Execute(ref int position, ref int output)
         {
-            var shouldStoreValue = (_nounImmediate ? code[position + 1] : code[code[position + 1]]) < (_verbImmediate ? code[position + 2] : code[code[position + 2]]);
+            var shouldStoreValue = _arg1.Value < _arg2.Value;
 
-            code[code[position + 3]] = shouldStoreValue ? 1 : 0;
+            _arg3.Set(shouldStoreValue ? 1 : 0);
 
             position += 4;
         }

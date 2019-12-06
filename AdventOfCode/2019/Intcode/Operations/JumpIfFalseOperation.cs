@@ -1,27 +1,28 @@
-using System.Collections.Generic;
-
 namespace AdventOfCode._2019.Intcode.Operations
 {
     public class JumpIfFalseOperation : IOperation
     {
-        private readonly bool _nounImmediate;
-        private readonly bool _verbImmediate;
+        private readonly Argument _arg1;
+        private readonly Argument _arg2;
 
-        public JumpIfFalseOperation(in bool nounImmediate, bool verbImmediate)
+        public JumpIfFalseOperation(Argument arg1, Argument arg2)
         {
-            _nounImmediate = nounImmediate;
-            _verbImmediate = verbImmediate;
+            _arg1 = arg1;
+            _arg2 = arg2;
         }
 
-        public void Execute(IList<int> code, ref int position, ref int output)
+        public void Execute(ref int position, ref int output)
         {
-            var shouldJump = (_nounImmediate ? code[position + 1] : code[code[position + 1]]) == 0;
+            var shouldJump = _arg1.Value == 0;
 
             if (!shouldJump)
+            {
                 position += 3;
-            else if (_verbImmediate)
-                position = code[position + 2];
-            else position = code[code[position + 2]];
+            }
+            else
+            {
+                position = _arg2.Value;
+            }
         }
     }
 }

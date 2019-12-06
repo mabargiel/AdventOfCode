@@ -1,28 +1,21 @@
-using System.Collections.Generic;
-
 namespace AdventOfCode._2019.Intcode.Operations
 {
     public class AddOperation : IOperation
     {
-        private readonly bool _nounImmediateMode;
-        private readonly bool _verbImmediateMode;
+        private readonly Argument _arg1;
+        private readonly Argument _arg2;
+        private readonly Argument _arg3;
 
-        public AddOperation(bool nounImmediateMode, bool verbImmediateMode)
+        public AddOperation(Argument arg1, Argument arg2, Argument arg3)
         {
-            _nounImmediateMode = nounImmediateMode;
-            _verbImmediateMode = verbImmediateMode;
+            _arg1 = arg1;
+            _arg2 = arg2;
+            _arg3 = arg3;
         }
 
-        public void Execute(IList<int> code, ref int position, ref int output)
+        public void Execute(ref int position, ref int output)
         {
-            var nounPos = code[position + 1];
-            var verbPos = code[position + 2];
-            var targetPos = code[position + 3];
-
-            var noun = _nounImmediateMode ? nounPos : code[nounPos];
-            var verb = _verbImmediateMode ? verbPos : code[verbPos];
-            
-            code[targetPos] = noun + verb;
+            _arg3.Set(_arg1.Value + _arg2.Value);
 
             position += 4;
         }

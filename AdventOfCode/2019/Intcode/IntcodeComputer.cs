@@ -11,29 +11,29 @@ namespace AdventOfCode._2019.Intcode
         {
             _code = code;
         }
-        
+
         public int Run(int input)
         {
-            var operationFactory = new OperationFactory(input);
-            var operation = operationFactory.Create(_code[0]);
+            var positionPointer = 0;
+            var operationFactory = new OperationFactory(input, _code, ref positionPointer);
+            var operation = operationFactory.Create();
 
-            var currentPosition = 0;
             var output = 0;
-            while ((OpCode) _code[currentPosition] != OpCode.HaltProgram)
+            while ((OpCode) _code[positionPointer] != OpCode.HaltProgram)
             {
                 if (operation == null)
                 {
                     break;
                 }
-                
-                operation.Execute(_code, ref currentPosition, ref output);
+
+                operation.Execute(ref positionPointer, ref output);
 
                 if (output == -1)
                 {
                     return -1;
                 }
-                
-                operation = operationFactory.Create(_code[currentPosition]);
+
+                operation = operationFactory.Create();
             }
 
             return output;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode._2019._1
@@ -36,7 +35,7 @@ namespace AdventOfCode._2019._1
 
         private static int CalculateFuel(int mass)
         {
-            return (int) Math.Floor(mass / 3d) - 2;
+            return mass / 3 - 2;
         }
     }
 }

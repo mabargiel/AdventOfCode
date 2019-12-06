@@ -1,19 +1,17 @@
-using System.Collections.Generic;
-
 namespace AdventOfCode._2019.Intcode.Operations
 {
     public class OutputOperation : IOperation
     {
-        private readonly bool _nounImmediate;
+        private readonly Argument _arg1;
 
-        public OutputOperation(bool nounImmediate)
+        public OutputOperation(Argument arg1)
         {
-            _nounImmediate = nounImmediate;
+            _arg1 = arg1;
         }
-        
-        public void Execute(IList<int> code, ref int position, ref int output)
+
+        public void Execute(ref int position, ref int output)
         {
-            output = _nounImmediate ? code[position + 1] : code[code[position + 1]];
+            output = _arg1.Value;
             position += 2;
         }
     }
