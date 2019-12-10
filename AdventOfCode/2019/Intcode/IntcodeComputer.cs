@@ -1,31 +1,34 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AdventOfCode._2019.Intcode.Operations;
 
 namespace AdventOfCode._2019.Intcode
 {
     public class IntcodeComputer
     {
-        private readonly Program _program;
+        public Program Program { get; }
 
         public IntcodeComputer(Program program)
         {
-            _program = program;
+            Program = program;
         }
 
-        public int? Run()
+        public long Run()
         {
-            var operationFactory = new OperationFactory(_program);
+            var operationFactory = new OperationFactory(Program);
             var operation = operationFactory.Create();
 
-            while ((OpCode) _program.CurrentInteger() != OpCode.HaltProgram)
+            while (true)
             {
+                if (Program.CurrentInteger() == (int) OpCode.HaltProgram)
+                {
+                    return Program.Output.Last();
+                }
+                
                 operation.Execute();
                 operation = operationFactory.Create();
             }
-
-            _program.ResetInstructions();
-            return _program.IO.Any() ? (int?) _program.IO.Dequeue() : null;
         }
     }
 }

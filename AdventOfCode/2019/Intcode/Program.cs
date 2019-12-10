@@ -1,35 +1,35 @@
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace AdventOfCode._2019.Intcode
 {
-    public class Program
+    public class Program : ICloneable
     {
-        private readonly IList<int> _code;
-        public IList<int> Runtime { get; private set; }
+        public IList<long> Instructions { get; }
         public int Pointer { get; set; }
-        public Queue<int> IO { get; } = new Queue<int>();
+        public BlockingCollection<long> IO { get; } = new BlockingCollection<long>();
+        public Queue<long> Output { get; } = new Queue<long>();
 
-        public Program(IList<int> code)
+        public Program(IList<long> instructions)
         {
-            Runtime = code;
-            _code = code;
+            Instructions = instructions;
         }
 
-        public Program(IList<int> code, int? input) : this(code)
+        public Program(IList<long> instructions, long? input) : this(instructions)
         {
             if(input.HasValue)
-                IO.Enqueue(input.Value);
+                IO.Add(input.Value);
         }
 
-        public int CurrentInteger()
+        public long CurrentInteger()
         {
-            return Runtime[Pointer];
+            return Instructions[Pointer];
         }
 
-        public void ResetInstructions()
+        public object Clone()
         {
-            Runtime = _code;
-            Pointer = 0;
+            return new Program(new List<long>(Instructions));
         }
     }
 }

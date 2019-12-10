@@ -21,9 +21,9 @@ namespace AdventOfCode._2019.Intcode.Operations
             var nounImmediate = nounImmediateModeCode == 1;
             var verbImmediate = verbImmediateModeCode == 1;
 
-            var arg1 = new Argument(_program.Runtime, nounImmediate, _program.Pointer + 1);
-            var arg2 = new Argument(_program.Runtime, verbImmediate, _program.Pointer + 2);
-            var arg3 = new Argument(_program.Runtime, false, _program.Pointer + 3);
+            var arg1 = new Argument(_program.Instructions, nounImmediate, _program.Pointer + 1);
+            var arg2 = new Argument(_program.Instructions, verbImmediate, _program.Pointer + 2);
+            var arg3 = new Argument(_program.Instructions, false, _program.Pointer + 3);
 
             return (OpCode) opCode switch
             {
