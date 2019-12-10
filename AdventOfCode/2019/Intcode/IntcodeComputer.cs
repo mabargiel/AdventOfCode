@@ -24,6 +24,7 @@ namespace AdventOfCode._2019.Intcode
                 operation = operationFactory.Create();
             }
 
+            _program.ResetInstructions();
             return _program.IO.Any() ? (int?) _program.IO.Dequeue() : null;
         }
     }
