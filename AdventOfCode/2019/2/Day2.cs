@@ -18,7 +18,7 @@ namespace AdventOfCode._2019._2
 
         public int Part1()
         {
-            new IntcodeComputer(_input).Run(0);
+            new IntcodeComputer(new Intcode.Program(_input)).Run();
 
             return _input[0];
         }
@@ -32,8 +32,8 @@ namespace AdventOfCode._2019._2
                     try
                     {
                         var input = (int[]) _input.Clone();
-                        var computer = new IntcodeComputer(input);
-                        computer.Run(0);
+                        var computer = new IntcodeComputer(new Intcode.Program(input));
+                        computer.Run();
 
                         if (input[0] == _part2Target)
                         {

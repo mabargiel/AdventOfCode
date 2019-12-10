@@ -5,10 +5,10 @@ namespace AdventOfCode.Tests._2019
     public class Day5
     {
         [Test]
-        [TestCase(new[] { 1002, 4, 3, 4, 33 }, 1, 0)]
-        [TestCase(new[] { 3, 0, 4, 0, 99 }, 1, 1)]
-        [TestCase(new[] { 4, 3, 99, 80 }, 1, 80)]
-        public void Part1(int[] code, int input, int output)
+        [TestCase(new[] { 1002, 4, 3, 4, 33 }, null, null)]
+        [TestCase(new[] { 3, 0, 4, 0, 99 }, 10, 10)]
+        [TestCase(new[] { 4, 3, 99, 80 }, null, 80)]
+        public void Part1(int[] code, int? input, int? output)
         {
             var d5 = new AdventOfCode._2019._5.Day5(code, input);
 

@@ -1,44 +1,30 @@
 using System.Collections.Generic;
+using System.Linq;
 using AdventOfCode._2019.Intcode.Operations;
 
 namespace AdventOfCode._2019.Intcode
 {
     public class IntcodeComputer
     {
-        private readonly IList<int> _code;
+        private readonly Program _program;
 
-        public IntcodeComputer(IList<int> code)
+        public IntcodeComputer(Program program)
         {
-            _code = code;
+            _program = program;
         }
 
-        public int Run(int input)
+        public int? Run()
         {
-            var positionPointer = new PositionPointer();
-            var operationFactory = new OperationFactory(input, _code, positionPointer);
+            var operationFactory = new OperationFactory(_program);
             var operation = operationFactory.Create();
 
-            var output = 0;
-            while ((OpCode) _code[positionPointer.Position] != OpCode.HaltProgram)
+            while ((OpCode) _program.CurrentInteger() != OpCode.HaltProgram)
             {
-                if (operation == null)
-                {
-                    break;
-                }
-
-                var position = positionPointer.Position;
-                operation.Execute(ref position, ref output);
-                positionPointer.Position = position;
-
-                if (output == -1)
-                {
-                    return -1;
-                }
-
+                operation.Execute();
                 operation = operationFactory.Create();
             }
 
-            return output;
+            return _program.IO.Any() ? (int?) _program.IO.Dequeue() : null;
         }
     }
 }

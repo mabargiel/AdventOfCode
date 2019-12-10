@@ -1,23 +1,19 @@
-using System.Collections.Generic;
+using System;
 
 namespace AdventOfCode._2019.Intcode.Operations
 {
     public class OperationFactory
     {
-        private readonly IList<int> _code;
-        private readonly PositionPointer _pointer;
-        private readonly int _input;
+        private readonly Program _program;
 
-        public OperationFactory(in int input, IList<int> code, PositionPointer pointer)
+        public OperationFactory(Program program)
         {
-            _input = input;
-            _code = code;
-            _pointer = pointer;
+            _program = program;
         }
 
-        public IOperation Create()
+        public BaseOperation Create()
         {
-            var instruction = _code[_pointer.Position];
+            var instruction = _program.CurrentInteger();
             var opCode = instruction % 100;
             var nounImmediateModeCode = instruction / 100 % 10;
             var verbImmediateModeCode = instruction / 1000 % 10;
@@ -25,21 +21,22 @@ namespace AdventOfCode._2019.Intcode.Operations
             var nounImmediate = nounImmediateModeCode == 1;
             var verbImmediate = verbImmediateModeCode == 1;
 
-            var arg1 = new Argument(_code, nounImmediate, _pointer.Position + 1);
-            var arg2 = new Argument(_code, verbImmediate, _pointer.Position + 2);
-            var arg3 = new Argument(_code, false, _pointer.Position + 3);
+            var arg1 = new Argument(_program.Code, nounImmediate, _program.Pointer + 1);
+            var arg2 = new Argument(_program.Code, verbImmediate, _program.Pointer + 2);
+            var arg3 = new Argument(_program.Code, false, _program.Pointer + 3);
 
             return (OpCode) opCode switch
             {
-                OpCode.Add => (IOperation) new AddOperation(arg1, arg2, arg3),
-                OpCode.Multiply => new MultiplyOperation(arg1, arg2, arg3),
-                OpCode.Input => new InputOperation(arg1, _input),
-                OpCode.Output => new OutputOperation(arg1),
-                OpCode.JumpIfTrue => new JumpIfTrueOperation(arg1, arg2),
-                OpCode.JumpIfFalse => new JumpIfFalseOperation(arg1, arg2),
-                OpCode.LessThan => new LessThanOperation(arg1, arg2, arg3),
-                OpCode.Equals => new EqualsOperation(arg1, arg2, arg3),
-                _ => null
+                OpCode.Add => (BaseOperation) new AddOperation(_program, arg1, arg2, arg3),
+                OpCode.Multiply => new MultiplyOperation(_program, arg1, arg2, arg3),
+                OpCode.Input => new InputOperation(_program, arg1),
+                OpCode.Output => new OutputOperation(_program, arg1),
+                OpCode.JumpIfTrue => new JumpIfTrueOperation(_program, arg1, arg2),
+                OpCode.JumpIfFalse => new JumpIfFalseOperation(_program, arg1, arg2),
+                OpCode.LessThan => new LessThanOperation(_program, arg1, arg2, arg3),
+                OpCode.Equals => new EqualsOperation(_program, arg1, arg2, arg3),
+                OpCode.HaltProgram => null,
+                _ => throw new ArgumentOutOfRangeException($"Could not process opcode: {opCode}")
             };
         }
     }
