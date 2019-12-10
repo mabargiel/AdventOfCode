@@ -1,21 +1,20 @@
 namespace AdventOfCode._2019.Intcode.Operations
 {
-    public class InputOperation : IOperation
+    public class InputOperation : BaseOperation
     {
+        private readonly Program _program;
         private readonly Argument _arg1;
-        private readonly int _input;
 
-        public InputOperation(Argument arg1, in int input)
+        public InputOperation(Program program, Argument arg1) : base(program, 2)
         {
+            _program = program;
             _arg1 = arg1;
-            _input = input;
         }
 
-        public void Execute(ref int position, ref int output)
+        public override void Execute()
         {
-            _arg1.Set(_input);
-
-            position += 2;
+            _arg1.Set(_program.IO.Dequeue());
+            base.Execute();
         }
     }
 }

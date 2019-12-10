@@ -2,27 +2,27 @@ using AdventOfCode._2019.Intcode;
 
 namespace AdventOfCode._2019._5
 {
-    public class Day5 : IAdventDay<int, int>
+    public class Day5 : IAdventDay<int?, int?>
     {
         private readonly int[] _code;
-        private readonly int _input;
+        private readonly int? _initialInput;
 
-        public Day5(int[] code, in int input)
+        public Day5(int[] code, in int? initialInput)
         {
             _code = code;
-            _input = input;
+            _initialInput = initialInput;
         }
 
-        public int Part1()
+        public int? Part1()
         {
-            var computer = new IntcodeComputer(_code);
-            return computer.Run(_input);
+            var computer = new IntcodeComputer(new Intcode.Program(_code, _initialInput));
+            return computer.Run();
         }
 
-        public int Part2()
+        public int? Part2()
         {
-            var computer = new IntcodeComputer(_code);
-            return computer.Run(_input);
+            var computer = new IntcodeComputer(new Intcode.Program(_code, _initialInput));
+            return computer.Run();
         }
     }
 }
