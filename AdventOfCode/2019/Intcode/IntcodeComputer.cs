@@ -14,19 +14,21 @@ namespace AdventOfCode._2019.Intcode
 
         public int Run(int input)
         {
-            var positionPointer = 0;
-            var operationFactory = new OperationFactory(input, _code, ref positionPointer);
+            var positionPointer = new PositionPointer();
+            var operationFactory = new OperationFactory(input, _code, positionPointer);
             var operation = operationFactory.Create();
 
             var output = 0;
-            while ((OpCode) _code[positionPointer] != OpCode.HaltProgram)
+            while ((OpCode) _code[positionPointer.Position] != OpCode.HaltProgram)
             {
                 if (operation == null)
                 {
                     break;
                 }
 
-                operation.Execute(ref positionPointer, ref output);
+                var position = positionPointer.Position;
+                operation.Execute(ref position, ref output);
+                positionPointer.Position = position;
 
                 if (output == -1)
                 {

@@ -5,19 +5,19 @@ namespace AdventOfCode._2019.Intcode.Operations
     public class OperationFactory
     {
         private readonly IList<int> _code;
-        private readonly int _positionPointer;
+        private readonly PositionPointer _pointer;
         private readonly int _input;
 
-        public OperationFactory(in int input, IList<int> code, ref int positionPointer)
+        public OperationFactory(in int input, IList<int> code, PositionPointer pointer)
         {
             _input = input;
             _code = code;
-            _positionPointer = positionPointer;
+            _pointer = pointer;
         }
 
         public IOperation Create()
         {
-            var instruction = _code[_positionPointer];
+            var instruction = _code[_pointer.Position];
             var opCode = instruction % 100;
             var nounImmediateModeCode = instruction / 100 % 10;
             var verbImmediateModeCode = instruction / 1000 % 10;
@@ -25,9 +25,9 @@ namespace AdventOfCode._2019.Intcode.Operations
             var nounImmediate = nounImmediateModeCode == 1;
             var verbImmediate = verbImmediateModeCode == 1;
 
-            var arg1 = new Argument(_code, nounImmediate, _positionPointer + 1);
-            var arg2 = new Argument(_code, verbImmediate, _positionPointer + 2);
-            var arg3 = new Argument(_code, false, _positionPointer + 3);
+            var arg1 = new Argument(_code, nounImmediate, _pointer.Position + 1);
+            var arg2 = new Argument(_code, verbImmediate, _pointer.Position + 2);
+            var arg3 = new Argument(_code, false, _pointer.Position + 3);
 
             return (OpCode) opCode switch
             {
