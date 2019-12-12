@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,18 +18,15 @@ namespace AdventOfCode._2019.Intcode
         public long Run()
         {
             var operationFactory = new OperationFactory(Program);
-            var operation = operationFactory.Create();
+            var operation = operationFactory.Next();
 
-            while (true)
+            while (Program.CurrentInteger() != (int) OpCode.HaltProgram)
             {
-                if (Program.CurrentInteger() == (int) OpCode.HaltProgram)
-                {
-                    return Program.Output.Last();
-                }
-                
                 operation.Execute();
-                operation = operationFactory.Create();
+                operation = operationFactory.Next();
             }
+
+            return Program.CurrentOutput;
         }
     }
 }

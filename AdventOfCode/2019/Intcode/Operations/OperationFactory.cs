@@ -11,7 +11,7 @@ namespace AdventOfCode._2019.Intcode.Operations
             _program = program;
         }
 
-        public BaseOperation Create()
+        public BaseOperation Next()
         {
             var instruction = _program.CurrentInteger();
             var opCode = instruction % 100;

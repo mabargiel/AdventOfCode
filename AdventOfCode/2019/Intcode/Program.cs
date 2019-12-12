@@ -9,7 +9,7 @@ namespace AdventOfCode._2019.Intcode
         public IList<long> Instructions { get; }
         public int Pointer { get; set; }
         public BlockingCollection<long> IO { get; } = new BlockingCollection<long>();
-        public Queue<long> Output { get; } = new Queue<long>();
+        public long CurrentOutput { get; private set; }
 
         public Program(IList<long> instructions)
         {
@@ -30,6 +30,14 @@ namespace AdventOfCode._2019.Intcode
         public object Clone()
         {
             return new Program(new List<long>(Instructions));
+        }
+
+        public event Action<long> OnOutput;
+
+        public void SetOutput(in long value)
+        {
+            CurrentOutput = value;
+            OnOutput?.Invoke(value);
         }
     }
 }
