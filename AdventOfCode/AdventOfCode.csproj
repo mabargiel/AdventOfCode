@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Combinatorics" Version="1.1.0.19" />
       <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1" />
     </ItemGroup>
 

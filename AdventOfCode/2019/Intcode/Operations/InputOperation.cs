@@ -13,7 +13,7 @@ namespace AdventOfCode._2019.Intcode.Operations
 
         public override void Execute()
         {
-            _arg1.Set(_program.IO.Dequeue());
+            _arg1.Set(_program.IO.Take());
             base.Execute();
         }
     }

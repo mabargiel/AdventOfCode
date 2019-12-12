@@ -11,7 +11,7 @@ namespace AdventOfCode._2019.Intcode.Operations
             _program = program;
         }
 
-        public BaseOperation Create()
+        public BaseOperation Next()
         {
             var instruction = _program.CurrentInteger();
             var opCode = instruction % 100;
@@ -21,9 +21,9 @@ namespace AdventOfCode._2019.Intcode.Operations
             var nounImmediate = nounImmediateModeCode == 1;
             var verbImmediate = verbImmediateModeCode == 1;
 
-            var arg1 = new Argument(_program.Code, nounImmediate, _program.Pointer + 1);
-            var arg2 = new Argument(_program.Code, verbImmediate, _program.Pointer + 2);
-            var arg3 = new Argument(_program.Code, false, _program.Pointer + 3);
+            var arg1 = new Argument(_program.Instructions, nounImmediate, _program.Pointer + 1);
+            var arg2 = new Argument(_program.Instructions, verbImmediate, _program.Pointer + 2);
+            var arg3 = new Argument(_program.Instructions, false, _program.Pointer + 3);
 
             return (OpCode) opCode switch
             {
