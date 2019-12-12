@@ -32,10 +32,8 @@ namespace AdventOfCode._2019._8
 
         public string Part2()
         {
-            Console.WriteLine(string.Join(string.Empty, _layers.Select(x => new string(x.ToArray()))));
-            Console.WriteLine("__________________");
             var size = _layers.First().Length;
-            var drillJobs = Enumerable.Range(0, size - 1).Select(pixelIndex => Task.Run(() => DrillThroughLayers(pixelIndex)));
+            var drillJobs = Enumerable.Range(0, size).Select(pixelIndex => Task.Run(() => DrillThroughLayers(pixelIndex)));
 
             var password = Task.WhenAll(drillJobs).Result;
             return new string(password);
