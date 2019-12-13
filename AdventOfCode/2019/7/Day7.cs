@@ -12,7 +12,7 @@ namespace AdventOfCode._2019._7
         private readonly int _input;
         private readonly Intcode.Program _program;
 
-        public Day7(IList<long> code, int input)
+        public Day7(Dictionary<long, long> code, int input)
         {
             _input = input;
             _program = new Intcode.Program(code);
@@ -38,7 +38,9 @@ namespace AdventOfCode._2019._7
                 return await pipe.ExecuteAsync();
             }
 
-            return new Permutations<int>(Enumerable.Range(5, 5).ToArray()).Select(x => GetOutput(x).Result).Max();
+            var permutations = new Permutations<int>(Enumerable.Range(5, 5).ToArray());
+            var result = permutations.Select(x => GetOutput(x).Result).ToArray();
+            return result.Any() ? result.Max() : -1;
         }
     }
     
@@ -64,9 +66,9 @@ namespace AdventOfCode._2019._7
                 var program = (Intcode.Program) _program.Clone();
                 var intCode = new IntcodeComputer(program);
                 
-                program.IO.Add(phase);
-                program.IO.Add(currentOutput);
-                currentOutput = intCode.Run();
+                program.Buffer.Add(phase);
+                program.Buffer.Add(currentOutput);
+                currentOutput = intCode.Run().First();
             }
 
             return currentOutput;
@@ -93,7 +95,7 @@ namespace AdventOfCode._2019._7
             var amplifierThreads = amplifiers.Select(amplifier => Task.Run(amplifier.Run));
             var results = await Task.WhenAll(amplifierThreads);
 
-            return results[^1];
+            return results[^1].FirstOrDefault();
         }
 
         private IEnumerable<IntcodeComputer> ConfigureAmplifiers()
@@ -101,7 +103,7 @@ namespace AdventOfCode._2019._7
             var amplifiers = new LinkedList<IntcodeComputer>(_phases.Select(phase =>
             {
                 var program = (Intcode.Program) _program.Clone();
-                program.IO.Add(phase);
+                program.Buffer.Add(phase);
                 return new IntcodeComputer(program);
             }));
 
@@ -110,10 +112,15 @@ namespace AdventOfCode._2019._7
                 var current = amplifiers.Find(amplifier);
                 var next = current?.Next ?? amplifiers.First;
                 if(current != null)
-                    current.Value.Program.OnOutput += output => next.Value.Program.IO.Add(output);
+                    current.Value.Program.OnOutput += output =>
+                    {
+                        if (next.Value.Program.Memory != null)
+                            next.Value.Program.Buffer.Add(output);
+                        else current.Value.Program.Buffer.Add(output);
+                    };
             }
 
-            amplifiers.First.Value.Program.IO.Add(_input);
+            amplifiers.First.Value.Program.Buffer.Add(_input);
             return amplifiers;
         }
     }

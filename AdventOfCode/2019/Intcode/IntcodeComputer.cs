@@ -15,7 +15,7 @@ namespace AdventOfCode._2019.Intcode
             Program = program;
         }
 
-        public long Run()
+        public long[] Run()
         {
             var operationFactory = new OperationFactory(Program);
             var operation = operationFactory.Next();
@@ -26,7 +26,8 @@ namespace AdventOfCode._2019.Intcode
                 operation = operationFactory.Next();
             }
 
-            return Program.CurrentOutput;
+            Program.Kill();
+            return Program.Buffer.ToArray();
         }
     }
 }

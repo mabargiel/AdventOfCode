@@ -10,6 +10,7 @@ namespace AdventOfCode._2019.Intcode
         JumpIfFalse,
         LessThan,
         Equals,
+        IncrementRelativeBase,
         HaltProgram = 99
     }
 }

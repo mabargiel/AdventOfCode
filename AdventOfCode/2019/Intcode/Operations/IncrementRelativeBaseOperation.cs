@@ -2,12 +2,12 @@ using AdventOfCode._2019.Intcode.Arguments;
 
 namespace AdventOfCode._2019.Intcode.Operations
 {
-    public class InputOperation : BaseOperation
+    public class IncrementRelativeBaseOperation : BaseOperation
     {
         private readonly Program _program;
         private readonly ArgumentMode _arg1;
 
-        public InputOperation(Program program, ArgumentMode arg1) : base(program, 2)
+        public IncrementRelativeBaseOperation(Program program, ArgumentMode arg1) : base(program, 2)
         {
             _program = program;
             _arg1 = arg1;
@@ -15,7 +15,7 @@ namespace AdventOfCode._2019.Intcode.Operations
 
         public override void Execute()
         {
-            _arg1.Set(_program.Buffer.Take());
+            _program.IncrementRelativeBase(_arg1.Value);
             base.Execute();
         }
     }
