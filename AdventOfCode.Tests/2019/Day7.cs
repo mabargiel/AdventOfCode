@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using AdventOfCode._2019._7;
 using AdventOfCode._2019.Intcode;
@@ -15,7 +16,8 @@ namespace AdventOfCode.Tests._2019
             1002,33,7,33,1,33,31,31,1,32,31,31,4,31,99,0,0,0}, 65210)]
         public void Part1(long[] code, int expectedOutput)
         {
-            var d7 = new AdventOfCode._2019._7.Day7(code, 0);
+            var instructions = code.Select((x, i) => (x, (long) i)).ToDictionary(x => x.Item2, x => x.x);
+            var d7 = new AdventOfCode._2019._7.Day7(instructions, 0);
             
             Assert.AreEqual(expectedOutput, d7.Part1());
         }
@@ -29,7 +31,8 @@ namespace AdventOfCode.Tests._2019
             53,1001,56,-1,56,1005,56,6,99,0,0,0,0,10}, 0, 18216)]
         public void Part2(long[] code, int input, int expectedOutput)
         {
-            var d7 = new AdventOfCode._2019._7.Day7(code, input);
+            var instructions = code.Select((x, i) => (x, (long) i)).ToDictionary(x => x.Item2, x => x.x);
+            var d7 = new AdventOfCode._2019._7.Day7(instructions, input);
             
             Assert.AreEqual(expectedOutput, d7.Part2());
         }

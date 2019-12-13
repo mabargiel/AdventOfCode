@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 
 namespace AdventOfCode.Tests._2019
@@ -5,12 +6,13 @@ namespace AdventOfCode.Tests._2019
     public class Day5
     {
         [Test]
-        [TestCase(new long[] { 1002, 4, 3, 4, 33 }, null, 0)]
+        [TestCase(new long[] { 1002, 4, 3, 4, 33 }, null, null)]
         [TestCase(new long[] { 3, 0, 4, 0, 99 }, 10, 10)]
         [TestCase(new long[] { 4, 3, 99, 80 }, null, 80)]
         public void Part1(long[] code, int? input, long output)
         {
-            var d5 = new AdventOfCode._2019._5.Day5(code, input);
+            var instructions = code.Select((x, i) => (x, (long) i)).ToDictionary(x => x.Item2, x => x.x);
+            var d5 = new AdventOfCode._2019._5.Day5(instructions, input);
 
             Assert.AreEqual(output, d5.Part1());
         }
@@ -45,7 +47,8 @@ namespace AdventOfCode.Tests._2019
         }, 9, 1001)]
         public void Part2(long[] code, int input, int output)
         {
-            var d5 = new AdventOfCode._2019._5.Day5(code, input);
+            var instructions = code.Select((x, i) => (x, (long) i)).ToDictionary(x => x.Item2, x => x.x);
+            var d5 = new AdventOfCode._2019._5.Day5(instructions, input);
 
             Assert.AreEqual(output, d5.Part2());
         }

@@ -1,4 +1,5 @@
 using System;
+using AdventOfCode._2019.Intcode.Arguments;
 
 namespace AdventOfCode._2019.Intcode.Operations
 {
@@ -15,15 +16,13 @@ namespace AdventOfCode._2019.Intcode.Operations
         {
             var instruction = _program.CurrentInteger();
             var opCode = instruction % 100;
-            var nounImmediateModeCode = instruction / 100 % 10;
-            var verbImmediateModeCode = instruction / 1000 % 10;
+            var arg1Mode = instruction / 100 % 10;
+            var arg2Mode = instruction / 1000 % 10;
+            var arg3Mode = instruction / 10000 % 10;
 
-            var nounImmediate = nounImmediateModeCode == 1;
-            var verbImmediate = verbImmediateModeCode == 1;
-
-            var arg1 = new Argument(_program.Instructions, nounImmediate, _program.Pointer + 1);
-            var arg2 = new Argument(_program.Instructions, verbImmediate, _program.Pointer + 2);
-            var arg3 = new Argument(_program.Instructions, false, _program.Pointer + 3);
+            var arg1 = GetArgumentMode((ArgModes) arg1Mode, _program.Pointer + 1);
+            var arg2 = GetArgumentMode((ArgModes) arg2Mode, _program.Pointer + 2);
+            var arg3 = GetArgumentMode((ArgModes) arg3Mode, _program.Pointer + 3);
 
             return (OpCode) opCode switch
             {
@@ -35,9 +34,25 @@ namespace AdventOfCode._2019.Intcode.Operations
                 OpCode.JumpIfFalse => new JumpIfFalseOperation(_program, arg1, arg2),
                 OpCode.LessThan => new LessThanOperation(_program, arg1, arg2, arg3),
                 OpCode.Equals => new EqualsOperation(_program, arg1, arg2, arg3),
+                OpCode.IncrementRelativeBase => new IncrementRelativeBaseOperation(_program, arg1),
                 OpCode.HaltProgram => null,
                 _ => throw new ArgumentOutOfRangeException($"Could not process opcode: {opCode}")
             };
+        }
+
+        private ArgumentMode GetArgumentMode(ArgModes argMode, int relativePosition)
+        {
+            switch (argMode)
+            {
+                case ArgModes.Position:
+                    return new PositionMode(_program.Memory, relativePosition);
+                case ArgModes.Immediate:
+                    return new ImmediateMode(_program.Memory, relativePosition);
+                case ArgModes.Relative:
+                    return new RelativeMode(_program.Memory, relativePosition, _program.RelativeBase);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(argMode), argMode, null);
+            }
         }
     }
 }
