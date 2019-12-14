@@ -75,7 +75,7 @@ namespace AdventOfCode._2019._10
                 var topSplit = top.Split(edgePoint).ToArray();
 
                 return new[] {edgePoint}.Concat(topSplit[1]).Concat(right).Concat(bottom).Concat(left)
-                    .Concat(topSplit[0]).ToArray();
+                    .Concat(topSplit[0].Reverse()).ToArray();
             }
         }
 
