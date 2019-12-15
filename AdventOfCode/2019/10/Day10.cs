@@ -31,8 +31,7 @@ namespace AdventOfCode._2019._10
             var station = CalculateVisibility(_asteroids).MaxBy(x => x.Value).First().Key;
             var asteroids = _asteroids.Except(new[] {station}).ToList();
             var originPoint = station.Point;
-            var edgePoint = new Point(station.Point.X, 0);
-            var edgePoints = new LinkedList<Point>(GenerateEdgePoints());
+            
             var laseredCount = 0;
 
             Asteroid current = null;
@@ -62,27 +61,11 @@ namespace AdventOfCode._2019._10
                 return -1;
             
             return 100 * current.Point.X + current.Point.Y;
-
-            Point[] GenerateEdgePoints()
-            {
-                var cornerX = _asteroids.Select(x => x.Point.X).Max();
-                var cornerY = _asteroids.Select(x => x.Point.Y).Max();
-
-                var top = Enumerable.Range(0, cornerX).Select(x => new Point(x, 0));
-                var right = Enumerable.Range(0, cornerY).Select(y => new Point(cornerX, y));
-                var bottom = Enumerable.Range(cornerX, 0).Select(x => new Point(x, cornerY));
-                var left = Enumerable.Range(cornerY, 0).Select(x => new Point(0, cornerY));
-                var topSplit = top.Split(edgePoint).ToArray();
-
-                return new[] {edgePoint}.Concat(topSplit[1]).Concat(right).Concat(bottom).Concat(left)
-                    .Concat(topSplit[0].Reverse()).ToArray();
-            }
         }
 
-        private static void RotateLaser(LinkedList<Point> edgePoints, ref Point edgePoint)
+        private static void RotateLaser()
         {
-            var linkedListNode = edgePoints.Find(edgePoint);
-            edgePoint = linkedListNode?.Next?.Value ?? edgePoints.First.Value;
+            
         }
 
         private static Dictionary<Asteroid, int> CalculateVisibility(Asteroid[] asteroids)

@@ -52,10 +52,30 @@ namespace AdventOfCode.Tests._2019
 ##...##.#####..##
 ##...#...#.#####.
 ..#.....#...###..
-..#.#.....#....##", 1403)]
-        public void Part2(string asteroidsMap, int expected200ThAsteroidCoordinates)
+..#.#.....#....##", 36, 1403)]
+        [TestCase(@".#..##.###...#######
+                                ##.############..##.
+                                .#.######.########.#
+                                .###.#######.####.#.
+                                #####.##.#.##.###.##
+                                ..#####..#.#########
+                                ####################
+                                #.####....###.#.#.##
+                                ##.#################
+                                #####.##.###..####..
+                                ..######..##.#######
+                                ####.##.####...##..#
+                                .#####..#.######.###
+                                ##...#.##########...
+                                #.##########.#######
+                                .####.#.###.###.#.##
+                                ....##.##.###..#####
+                                .#.#.###########.###
+                                #.#.#.#####.####.###
+                                ###.##.####.##.#..##", 200, 802)]
+        public void Part2(string asteroidsMap, int bet, int expected200ThAsteroidCoordinates)
         {
-            var d9 = new AdventOfCode._2019._10.Day10(asteroidsMap, 9);
+            var d9 = new AdventOfCode._2019._10.Day10(asteroidsMap, bet);
             Assert.AreEqual(expected200ThAsteroidCoordinates, d9.Part2());
         }
     }
