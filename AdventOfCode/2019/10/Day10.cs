@@ -29,59 +29,56 @@ namespace AdventOfCode._2019._10
         public int Part2()
         {
             var station = CalculateVisibility(_asteroids).MaxBy(x => x.Value).First().Key;
-            var asteroids = _asteroids.Except(new[] {station}).ToList();
-            var originPoint = station.Point;
-            
-            var laseredCount = 0;
+            var asteroids = _asteroids.Except(new[] { station }).ToList();
 
-            Asteroid current = null;
+            var possibleLaserVectors = new LinkedList<Vector2>(asteroids.Select(asteroid => Vector2.Normalize(new Vector2(asteroid.Point.X - station.Point.X, asteroid.Point.Y - station.Point.Y)))
+                .OrderBy(Angle).ToList()); //TODO Vectors must be distinct
+
+            var currentLaser = possibleLaserVectors.First;
             
-            while (laseredCount < _bet)
+            while (true)
             {
-                var asteroidsOnLaser = asteroids.Where(a => IsBetween(originPoint,
-                    edgePoint,
-                    a.Point
-                )).ToArray();
+                var currentAsteroid = currentLaser.Value;
+                var wasVaporized = asteroids.Where(asteroid => //TODO CROSS = 0).MnBy;
+                //TODO Calculate cross, if 0 then point in line, then get the closest one and vaporize
 
-                    if (asteroidsOnLaser.Any())
+                if (wasVaporized)
+                {
+                    possibleLaserVectors.Remove(currentAsteroid);
+
+                    if (_asteroids.Length - possibleLaserVectors.Count == _bet + 1)
                     {
-                        var closest = asteroidsOnLaser.MinBy(asteroid =>
-                                new Vector2(asteroid.Point.X - originPoint.X, asteroid.Point.Y - originPoint.Y)
-                                    .Length())
-                            .First();
-                        asteroids.Remove(closest);
-                        current = closest;
-                        laseredCount++;
+                        return 100 * currentAsteroid.Point.X + currentAsteroid.Point.Y;
                     }
+                }
 
-                    RotateLaser(edgePoints, ref edgePoint);
+                currentLaser = currentLaser.Next ?? possibleLaserVectors.First;
             }
 
-            if (current == null)
-                return -1;
-            
-            return 100 * current.Point.X + current.Point.Y;
-        }
-
-        private static void RotateLaser()
-        {
-            
+            static double Angle(Vector2 v)
+            {
+                var u = new Vector2(0, -1);
+                var relativeRadians = Math.Atan2(v.Y, v.X) - Math.Atan2(u.Y, u.X);
+                return relativeRadians >= 0 ? relativeRadians : 2 * Math.PI + relativeRadians;
+            }
         }
 
         private static Dictionary<Asteroid, int> CalculateVisibility(Asteroid[] asteroids)
         {
             var combinations = new Combinations<Asteroid>(asteroids.ToList(), 2, GenerateOption.WithoutRepetition);
             var visibilityMap = asteroids.ToDictionary(x => x, x => 0);
-        
+
             foreach (var pair in combinations)
             {
                 if (asteroids.Except(pair).Any(asteroid => IsBetween(pair[0].Point, pair[1].Point, asteroid.Point)))
+                {
                     continue;
-        
+                }
+
                 visibilityMap[pair[0]]++;
                 visibilityMap[pair[1]]++;
             }
-        
+
             return visibilityMap;
         }
 
@@ -90,12 +87,8 @@ namespace AdventOfCode._2019._10
             var xy = new Vector2(b.X - a.X, b.Y - a.Y);
             var zy = new Vector2(b.X - p.X, b.Y - p.Y);
 
-            return IsSameDirection(xy, zy);
-        }
-
-        private static bool IsSameDirection(Vector2 xy, Vector2 zy)
-        {
-            return zy.Length() < xy.Length() && Math.Abs(Vector2.Normalize(zy).X - Vector2.Normalize(xy).X) < 0.001 && Math.Abs(Vector2.Normalize(zy).Y - Vector2.Normalize(xy).Y) < 0.00001;
+            return zy.Length() < xy.Length() && Math.Abs(Vector2.Normalize(zy).X - Vector2.Normalize(xy).X) < 0.001 &&
+                   Math.Abs(Vector2.Normalize(zy).Y - Vector2.Normalize(xy).Y) < 0.001;
         }
 
         private static IEnumerable<Asteroid> ParseAsteroidsMap(string asteroidsMap)
@@ -110,34 +103,6 @@ namespace AdventOfCode._2019._10
                     yield return new Asteroid(point.Index, i);
                 }
             }
-        }
-    }
-
-    public class Asteroid : IEquatable<Asteroid>
-    {
-        public Point Point { get; }
-
-        public Asteroid(in int x, in int y)
-        {
-            Point = new Point(x, y);
-        }
-
-        public bool Equals(Asteroid other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            return ReferenceEquals(this, other) || Point.Equals(other.Point);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((Asteroid) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return Point.GetHashCode();
         }
     }
 }
