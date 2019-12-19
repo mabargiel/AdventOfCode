@@ -13,7 +13,7 @@ namespace AdventOfCode
     {
         private static async Task Main(string[] args)
         {
-            var input = @".##.#.#....#.#.#..##..#.#.
+            const string input = @".##.#.#....#.#.#..##..#.#.
 #.##.#..#.####.##....##.#.
 ###.##.##.#.#...#..###....
 ####.##..###.#.#...####..#
@@ -40,11 +40,11 @@ namespace AdventOfCode
 .###..#.#..#...###..###.#.
 #..#..#######..#.#..#..#.#";
             
-            var d9 = new Day10(input, 200);
+            var d9 = new Day10(input);
 
-            var result = d9.Part2();
+            var result = d9.Part2().Skip(199).Take(1).First();
 
-            Console.WriteLine(result);
+            Console.WriteLine(100 * result.X + result.Y);
         }
     }
 }
