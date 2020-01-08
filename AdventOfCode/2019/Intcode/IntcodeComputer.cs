@@ -6,7 +6,7 @@ using AdventOfCode._2019.Intcode.Operations;
 
 namespace AdventOfCode._2019.Intcode
 {
-    public class IntcodeComputer
+    public class IntcodeComputer : IIntcodeComputer
     {
         public Program Program { get; }
 
@@ -28,6 +28,16 @@ namespace AdventOfCode._2019.Intcode
 
             Program.Kill();
             return Program.Buffer.ToArray();
+        }
+
+        public void Input(long value)
+        {
+            this.Program.Buffer.Add(value);
+        }
+
+        public Task RunAsync()
+        {
+            return Task.Run(Run);
         }
     }
 }
