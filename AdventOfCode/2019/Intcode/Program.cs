@@ -35,7 +35,7 @@ namespace AdventOfCode._2019.Intcode
 
         public event Action<long> OnOutput;
 
-        public void SetOutput(in long value)
+        public void Output(in long value)
         {
             Buffer.Add(value);
             OnOutput?.Invoke(Buffer.Take());
