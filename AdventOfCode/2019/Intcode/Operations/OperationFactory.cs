@@ -42,17 +42,13 @@ namespace AdventOfCode._2019.Intcode.Operations
 
         private ArgumentMode GetArgumentMode(ArgModes argMode, int relativePosition)
         {
-            switch (argMode)
+            return argMode switch
             {
-                case ArgModes.Position:
-                    return new PositionMode(_program.Memory, relativePosition);
-                case ArgModes.Immediate:
-                    return new ImmediateMode(_program.Memory, relativePosition);
-                case ArgModes.Relative:
-                    return new RelativeMode(_program.Memory, relativePosition, _program.RelativeBase);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(argMode), argMode, null);
-            }
+                ArgModes.Position => (ArgumentMode) new PositionMode(_program.Memory, relativePosition),
+                ArgModes.Immediate => new ImmediateMode(_program.Memory, relativePosition),
+                ArgModes.Relative => new RelativeMode(_program.Memory, relativePosition, _program.RelativeBase),
+                _ => throw new ArgumentOutOfRangeException(nameof(argMode), argMode, null)
+            };
         }
     }
 }
