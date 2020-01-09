@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -6,18 +7,34 @@ namespace AdventOfCode._2019._12
 {
     public class Moon : ICloneable, IEquatable<Moon>
     {
-        public Moon(Point3 position)
+        public Moon(long x, long y, long z)
         {
-            Position = position;
-            Velocity = new Vector3(0, 0, 0);
+            Position = new Dictionary<char, long> { { 'X', x }, { 'Y', y }, { 'Z', z } };
+            Velocity = new Dictionary<char, long> { { 'X', 0 }, { 'Y', 0 }, { 'Z', 0 } };
         }
 
-        public Point3 Position { get; set; }
-        public Vector3 Velocity { get; set; }
+        public Dictionary<char, long> Position { get; }
+        public Dictionary<char, long> Velocity { get; }
 
         public object Clone()
         {
-            return new Moon((Point3) Position.Clone());
+            return new Moon(Position['X'], Position['Y'], Position['Z']);
+        }
+
+        public void ApplyVelocity(char[] dimensions)
+        {
+            foreach (var dimension in dimensions)
+            {
+                Position[dimension] += Velocity[dimension];
+            }
+        }
+
+        public long GetEnergy()
+        {
+            var potentialEnergy = Position.Sum(pair => Math.Abs(pair.Value));
+            var kineticEnergy = Velocity.Sum(pair => Math.Abs(pair.Value));
+
+            return potentialEnergy * kineticEnergy;
         }
 
         public bool Equals(Moon other)
@@ -32,24 +49,7 @@ namespace AdventOfCode._2019._12
                 return true;
             }
 
-            return Position.Equals(other.Position) && Velocity.Equals(other.Velocity);
-        }
-
-        public void ApplyVelocity(string[] dimensions)
-        {
-            var positionX = dimensions.Contains("X") ? Position.X + (int) Velocity.X : Position.X;
-            var positionY = dimensions.Contains("Y") ? Position.Y + (int) Velocity.Y : Position.Y;
-            var positionZ = dimensions.Contains("Z") ? Position.Z + (int) Velocity.Z : Position.Z;
-
-            Position = new Point3(positionX, positionY, positionZ);
-        }
-
-        public int GetEnergy()
-        {
-            var potentialEnergy = Math.Abs(Position.X) + Math.Abs(Position.Y) + Math.Abs(Position.Z);
-            var kineticEnergy = (int) (Math.Abs(Velocity.X) + Math.Abs(Velocity.Y) + Math.Abs(Velocity.Z));
-
-            return potentialEnergy * kineticEnergy;
+            return Position.All(pair => other.Position[pair.Key] == pair.Value) && Velocity.All(pair => other.Velocity[pair.Key] == pair.Value);
         }
 
         public override bool Equals(object obj)
@@ -69,7 +69,7 @@ namespace AdventOfCode._2019._12
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Position, Velocity);
+            return HashCode.Combine(Position.Values, Velocity.Values);
         }
     }
 }

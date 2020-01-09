@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using Combinatorics.Collections;
 
 namespace AdventOfCode._2019._12
@@ -17,7 +16,7 @@ namespace AdventOfCode._2019._12
 
         private readonly Moon[] _moons;
 
-        public void MoveTime(string[] dimensions = null)
+        public void MoveTime(char[] dimensions = null)
         {
             foreach (var pair in _moonPairs)
             {
@@ -36,31 +35,21 @@ namespace AdventOfCode._2019._12
         public long MoveTimeUntilRepeat()
         {
             var initialMoons = _moons.Select(x => x.Clone()).ToArray();
-            var timeDimensions = new long[] { 0, 0, 0 };
+            var timeDimensions = new Dictionary<char, long> { { 'X', 0 }, { 'Y', 0 }, { 'Z', 0 } };
 
-            foreach (var dimension in new[] { "X", "Y", "Z" })
+            //for each dimension separately
+            foreach (var dimension in timeDimensions.Keys.ToArray())
             {
                 do
                 {
                     MoveTime(new[] { dimension });
-                    switch (dimension)
-                    {
-                        case "X":
-                            timeDimensions[0]++;
-                            break;
-                        case "Y":
-                            timeDimensions[1]++;
-                            break;
-                        case "Z":
-                            timeDimensions[2]++;
-                            break;
-                    }
-                } while (NotSame());
+                    timeDimensions[dimension]++;
+                } while (NotAtStart());
             }
 
-            return Lcm(timeDimensions);
+            return LeastCommonMultiple(timeDimensions.Values);
 
-            bool NotSame()
+            bool NotAtStart()
             {
                 for (var i = initialMoons.Length - 1; i >= 0; i--)
                 {
@@ -74,65 +63,37 @@ namespace AdventOfCode._2019._12
             }
         }
 
-        private static long Lcm(IEnumerable<long> dimensions)
+        private static long LeastCommonMultiple(IEnumerable<long> dimensions)
         {
-            return dimensions.Aggregate(Lcm);
+            return dimensions.Aggregate(LeastCommonMultiple);
         }
 
-        private static long Lcm(long a, long b)
+        private static long LeastCommonMultiple(long a, long b)
         {
             if (b == 0)
             {
                 return 0;
             }
 
-            return a * b / Gcd(a, b);
+            return a * b / GreatestCommonDivisor(a, b);
         }
 
-        private static long Gcd(long a, long b)
+        private static long GreatestCommonDivisor(long a, long b)
         {
-            return b == 0 ? a : Gcd(b, a % b);
+            return b == 0 ? a : GreatestCommonDivisor(b, a % b);
         }
 
-        private static void ApplyGravity(Moon m1, Moon m2, string[] dimensions)
+        private static void ApplyGravity(Moon m1, Moon m2, char[] dimensions)
         {
-            var xChange = m1.Position.X.CompareTo(m2.Position.X);
-            var yChange = m1.Position.Y.CompareTo(m2.Position.Y);
-            var zChange = m1.Position.Z.CompareTo(m2.Position.Z);
-
-            var x1 = (int) m1.Velocity.X;
-            var y1 = (int) m1.Velocity.Y;
-            var z1 = (int) m1.Velocity.Z;
-            var x2 = (int) m2.Velocity.X;
-            var y2 = (int) m2.Velocity.Y;
-            var z2 = (int) m2.Velocity.Z;
-
-            if (xChange != 0 && dimensions.Contains("X"))
+            foreach (var dimension in dimensions)
             {
-                var change = xChange > 0 ? -1 : 1;
-                x1 += change;
-                x2 -= change;
+                var change = m1.Position[dimension].CompareTo(m2.Position[dimension]);
+                m1.Velocity[dimension] -= change;
+                m2.Velocity[dimension] += change;
             }
-
-            if (yChange != 0 && dimensions.Contains("Y"))
-            {
-                var change = yChange > 0 ? -1 : 1;
-                y1 += change;
-                y2 -= change;
-            }
-
-            if (zChange != 0 && dimensions.Contains("Z"))
-            {
-                var change = zChange > 0 ? -1 : 1;
-                z1 += change;
-                z2 -= change;
-            }
-
-            m1.Velocity = new Vector3(x1, y1, z1);
-            m2.Velocity = new Vector3(x2, y2, z2);
         }
 
-        public int TotalEnergy()
+        public long TotalEnergy()
         {
             return _moons.Sum(x => x.GetEnergy());
         }
