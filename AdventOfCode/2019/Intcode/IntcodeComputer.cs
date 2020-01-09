@@ -26,7 +26,6 @@ namespace AdventOfCode._2019.Intcode
                 operation = operationFactory.Next();
             }
 
-            Program.Kill();
             return Program.Buffer.ToArray();
         }
 
@@ -35,9 +34,9 @@ namespace AdventOfCode._2019.Intcode
             this.Program.Buffer.Add(value);
         }
 
-        public Task RunAsync()
+        public async Task<long[]> RunAsync()
         {
-            return Task.Run(Run);
+            return await Task.Run(Run);
         }
     }
 }

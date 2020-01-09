@@ -7,6 +7,6 @@ namespace AdventOfCode._2019.Intcode
         Program Program { get; }
         long[] Run();
         void Input(long value);
-        Task RunAsync();
+        Task<long[]> RunAsync();
     }
 }

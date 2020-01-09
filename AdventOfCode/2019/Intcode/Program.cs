@@ -46,7 +46,7 @@ namespace AdventOfCode._2019.Intcode
             this.RelativeBase += incrementValue;
         }
 
-        public void Kill()
+        public void Reset()
         {
             Memory = null;
             Pointer = 0;

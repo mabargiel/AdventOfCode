@@ -22,7 +22,13 @@ namespace AdventOfCode._2019._7
         {
             var amplifiers = ConfigureAmplifiers();
 
-            var amplifierThreads = amplifiers.Select(amplifier => Task.Run(amplifier.Run));
+            var amplifierThreads = amplifiers.Select(amplifier => Task.Run(() =>
+            {
+                var result = amplifier.Run();
+                amplifier.Program.Reset();
+                return result;
+            }));
+            
             var results = await Task.WhenAll(amplifierThreads);
 
             return results[^1].FirstOrDefault();
