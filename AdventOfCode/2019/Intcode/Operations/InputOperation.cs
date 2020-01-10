@@ -15,7 +15,7 @@ namespace AdventOfCode._2019.Intcode.Operations
 
         public override void Execute()
         {
-            _arg1.Set(_program.Buffer.Take());
+            _arg1.Set(_program.OnInput());
             base.Execute();
         }
     }

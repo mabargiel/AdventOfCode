@@ -5,52 +5,34 @@ using System.Collections.Generic;
 
 namespace AdventOfCode._2019.Intcode
 {
-    public class Program : ICloneable
+    public class Program
     {
+        public Func<long> OnInput { get; }
+        public Action<long> OnOutput { get; set; }
         public ProgramMemory Memory { get; private set; }
         public int Pointer { get; set; }
-        public BlockingCollection<long> Buffer { get; } = new BlockingCollection<long>();
         public long RelativeBase { get; private set; }
 
-        public Program(IDictionary<long, long> instructions)
+        public Program(IDictionary<long, long> instructions, BlockingCollection<long> input)
         {
             Memory = new ProgramMemory(instructions);
-        }
-
-        public Program(IDictionary<long, long> instructions, long? input) : this(instructions)
-        {
-            if(input.HasValue)
-                Buffer.Add(input.Value);
+            OnInput += input.Take;
         }
 
         public long CurrentInteger()
         {
             return Memory[Pointer];
         }
-
-        public object Clone()
-        {
-            return new Program(new Dictionary<long, long>(Memory));
-        }
-
-        public event Action<long> OnOutput;
-
-        public void Output(in long value)
-        {
-            Buffer.Add(value);
-            OnOutput?.Invoke(Buffer.Take());
-        }
-
+        
         public void IncrementRelativeBase(long incrementValue)
         {
-            this.RelativeBase += incrementValue;
+            RelativeBase += incrementValue;
         }
 
         public void Reset()
         {
             Memory = null;
             Pointer = 0;
-            OnOutput = null;
         }
     }
 

@@ -15,9 +15,7 @@ namespace AdventOfCode.Tests._2019
         public void Part1(long[] outputs, int expectedResult)
         {
             var intcodeComputer = Substitute.For<IIntcodeComputer>();
-            var program = new Program(new Dictionary<long, long>());
-            intcodeComputer.Program.Returns(program);
-            intcodeComputer.RunAsync().Returns(Task.FromResult(outputs));
+            intcodeComputer.StartAsync().Returns(Task.FromResult(outputs));
             
             var d13 = new AdventOfCode._2019._13.Day13(intcodeComputer);
             

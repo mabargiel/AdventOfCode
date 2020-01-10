@@ -7,57 +7,46 @@ namespace AdventOfCode._2019._7
 {
     public class AmplifiersPipe
     {
-        private readonly Intcode.Program _program;
+        private readonly long[] _code;
         private readonly int[] _phases;
         private readonly int _input;
 
-        public AmplifiersPipe(Intcode.Program program, int[] phases, int input)
+        public AmplifiersPipe(long[] code, int[] phases, int input)
         {
-            _program = program;
+            _code = code;
             _phases = phases;
             _input = input;
         }
 
         public async Task<long> ExecuteAsync()
         {
-            var amplifiers = ConfigureAmplifiers();
-
-            var amplifierThreads = amplifiers.Select(amplifier => Task.Run(() =>
-            {
-                var result = amplifier.Run();
-                amplifier.Program.Reset();
-                return result;
-            }));
-            
-            var results = await Task.WhenAll(amplifierThreads);
-
-            return results[^1].FirstOrDefault();
-        }
-
-        private IEnumerable<IntcodeComputer> ConfigureAmplifiers()
-        {
             var amplifiers = new LinkedList<IntcodeComputer>(_phases.Select(phase =>
             {
-                var program = (Intcode.Program) _program.Clone();
-                program.Buffer.Add(phase);
-                return new IntcodeComputer(program);
+                var intcodeComputer = new IntcodeComputer(_code);
+                intcodeComputer.Input(phase);
+                return intcodeComputer;
             }));
+            
+            var currentOutput = 0L;
 
             foreach (var amplifier in amplifiers)
             {
                 var current = amplifiers.Find(amplifier);
                 var next = current?.Next ?? amplifiers.First;
                 if(current != null)
-                    current.Value.Program.OnOutput += output =>
+                    current.Value.OnOutput += output =>
                     {
                         if (next.Value.Program.Memory != null)
-                            next.Value.Program.Buffer.Add(output);
-                        else current.Value.Program.Buffer.Add(output);
+                            next.Value.Input(output);
+
+                        currentOutput = output;
                     };
             }
 
-            amplifiers.First.Value.Program.Buffer.Add(_input);
-            return amplifiers;
+            amplifiers.First.Value.Input(_input);
+            await Task.WhenAll(amplifiers.Select(amplifier => amplifier.StartAsync()));
+
+            return currentOutput;
         }
     }
 }

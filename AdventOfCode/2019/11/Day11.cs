@@ -11,37 +11,33 @@ namespace AdventOfCode._2019._11
 {
     public class Day11 : IAdventDay<int, bool[][]>
     {
-        private readonly Dictionary<long, long> _robotCode;
+        private readonly IEnumerable<long> _robotCode;
 
         public Day11(IEnumerable<long> robotCode)
         {
-            _robotCode = robotCode.Select((x, i) => (x, (long) i)).ToDictionary(x => x.Item2, x => x.x);
+            _robotCode = robotCode;
         }
         
         public int Part1()
         {
-            var program = new Intcode.Program(_robotCode);
-            program.Buffer.Add(0);
-            
-            return RunHullRobot(program).Count;
+            return RunHullRobot(_robotCode.ToArray(), 0).Count;
         }
 
         public bool[][] Part2()
         {
-            var program = new Intcode.Program(_robotCode);
-            program.Buffer.Add(1);
-            
-            var paintArea = RunHullRobot(program);
+            var paintArea = RunHullRobot(_robotCode.ToArray(), 1);
 
             return ToNumpyArray(paintArea);
         }
 
-        private static Dictionary<Point, bool> RunHullRobot(Intcode.Program program)
+        private Dictionary<Point, bool> RunHullRobot(long[] code, long input)
         {
             var paintArea = new Dictionary<Point, bool>();
-            var robot = new HullPaintingRobot(new IntcodeComputer(program), paintArea);
+            var intcodeComputer = new IntcodeComputer(_robotCode);
+            intcodeComputer.Input(input);
+            var robot = new HullPaintingRobot(intcodeComputer, paintArea);
 
-            robot.Run().Wait();
+            robot.RunAsync().Wait();
 
             return paintArea;
         }

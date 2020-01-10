@@ -24,9 +24,9 @@ namespace AdventOfCode._2019._11
             _moveMode = false;
         }
 
-        public async Task Run()
+        public async Task RunAsync()
         {
-            _boardComputer.Program.OnOutput += output =>
+            _boardComputer.OnOutput += output =>
             {
                 if (_moveMode)
                 {
@@ -48,7 +48,7 @@ namespace AdventOfCode._2019._11
                 _moveMode = !_moveMode;
             };
 
-            await _boardComputer.RunAsync();
+            await _boardComputer.StartAsync();
         }
 
         private void Move()

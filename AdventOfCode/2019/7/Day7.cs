@@ -8,20 +8,20 @@ namespace AdventOfCode._2019._7
 {
     public class Day7 : IAdventDay<long, long>
     {
+        private readonly long[] _code;
         private readonly int _input;
-        private readonly Intcode.Program _program;
 
-        public Day7(IDictionary<long, long> code, int input)
+        public Day7(long[] code, int input)
         {
+            _code = code;
             _input = input;
-            _program = new Intcode.Program(code);
         }
 
         public long Part1()
         {
             Task<long> GetOutput(IEnumerable<int> phases)
             {
-                var pipe = new AmplifiersPipe(_program, phases.ToArray(), _input);
+                var pipe = new AmplifiersPipe(_code, phases.ToArray(), _input);
                 return pipe.ExecuteAsync();
             }
 
@@ -32,7 +32,7 @@ namespace AdventOfCode._2019._7
         {
             async Task<long> GetOutput(IEnumerable<int> phases)
             {
-                var pipe = new AmplifiersPipe(_program, phases.ToArray(), _input);
+                var pipe = new AmplifiersPipe(_code, phases.ToArray(), _input);
                 return await pipe.ExecuteAsync();
             }
 

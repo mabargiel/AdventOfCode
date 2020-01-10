@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -20,14 +22,14 @@ namespace AdventOfCode.Tests._2019
         {
             var paintArea = new Dictionary<Point, bool>();
             var intcodeComputer = Substitute.For<IIntcodeComputer>();
-            var program = new Program(new Dictionary<long, long>());
-            intcodeComputer.Program.Returns(program);
             var hullRobot = new HullPaintingRobot(intcodeComputer, paintArea);
             
-            var task = hullRobot.Run();
-            
-            output.ForEach(o => intcodeComputer.Program.Output(o));
-            
+            var task = hullRobot.RunAsync();
+            foreach (var o in output)
+            {
+                //simulate intcode outputs
+                intcodeComputer.OnOutput += Raise.Event<Action<long>>((long) o);
+            }
             await task;
 
             Assert.AreEqual(expectedResult, paintArea.Count);

@@ -12,8 +12,7 @@ namespace AdventOfCode.Tests._2019
         [TestCase(new[] {104, 1125899906842624, 99}, new[] {1125899906842624})]
         public void Part1Part2(long[] code, long[] expectedOutput)
         {
-            var instructions = code.Select((x, i) => (x, (long) i)).ToDictionary(x => x.Item2, x => x.x);
-            var d9 = new AdventOfCode._2019._9.Day9(instructions);
+            var d9 = new AdventOfCode._2019._9.Day9(code);
             CollectionAssert.AreEqual(expectedOutput, d9.Part1());
         }
     }

@@ -8,10 +8,10 @@ namespace AdventOfCode._2019._2
 {
     public class Day2 : IAdventDay<long, long>
     {
-        private readonly Dictionary<long, long> _input;
+        private readonly IEnumerable<long> _input;
         private readonly int _part2Target;
 
-        public Day2(Dictionary<long, long> input, int part2Target = 0)
+        public Day2(IEnumerable<long> input, int part2Target = 0)
         {
             _part2Target = part2Target;
             _input = input;
@@ -19,26 +19,31 @@ namespace AdventOfCode._2019._2
 
         public long Part1()
         {
-            new IntcodeComputer(new Intcode.Program(_input, 0)).Run();
+            var intcodeComputer = new IntcodeComputer(_input);
+            intcodeComputer.Input(0);
+            intcodeComputer.StartAsync().Wait();
 
-            return _input[0];
+            return intcodeComputer.Program.Memory[0];
         }
 
         public long Part2()
         {
-            var combinations = new Combinations<int>(Enumerable.Range(0, _input.Count).ToList(), 2,
+            var combinations = new Combinations<int>(Enumerable.Range(0, _input.Count()).ToList(), 2,
                 GenerateOption.WithRepetition);
+
+            var input = _input.ToArray();
 
             foreach (var combination in combinations)
             {
-                var input = new Dictionary<long, long>(_input);
-                var computer = new IntcodeComputer(new Intcode.Program(input, 0));
-                computer.Run();
+                var code = (long[]) input.Clone();
+                var computer = new IntcodeComputer(code);
+                computer.Input(0);
+                computer.StartAsync().Wait();
 
-                if (input[0] == _part2Target) return 100 * _input[1] + _input[2];
+                if (computer.Program.Memory[0] == _part2Target) return 100 * input[1] + input[2];
                 
-                _input[1] = combination[0];
-                _input[2] = combination[1];
+                input[1] = combination[0];
+                input[2] = combination[1];
             }
 
             throw new ArgumentException("Could not find a noun and a verb to achieve the expected result");

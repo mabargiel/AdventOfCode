@@ -82,8 +82,7 @@ namespace AdventOfCode
                 33, 43, 30, 29, 34, 22, 23, 98, 20, 90, 14, 77, 27, 89, 39, 13, 3, 77, 47, 462045
             };
 
-            var instructions = input.Select((x, i) => (x, (long) i)).ToDictionary(x => x.Item2, x => x.x);
-            var d9 = new Day13(new IntcodeComputer(new _2019.Intcode.Program(instructions)));
+            var d9 = new Day13(new IntcodeComputer(input));
 
             var result = d9.Part2();
             

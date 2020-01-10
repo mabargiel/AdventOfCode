@@ -33,37 +33,30 @@ namespace AdventOfCode._2019._13
             var arcade = new ArcadeCabinet(_intcodeComputer);
             var win = false;
 
-            Task.Run(() =>
+            while (true)
             {
-                while(true)
-                {
-                    arcade.GenerateTiles();
+                arcade.SetJoystick(0);
+                arcade.GenerateTiles();
 
-                    var (board, scoreTile) = CreateBoard(arcade.Tiles);
-                    DrawBoard(board, scoreTile.Value);
+                var (board, scoreTile) = CreateBoard(arcade.Tiles);
+                DrawBoard(board, scoreTile.Value);
 
-                    Task.Delay(500);
-                }
-            });
-
-            while (!win)
-            {
-                var key = Console.ReadKey();
-                switch (key.Key)
-                {
-                    case ConsoleKey.RightArrow:
-                        arcade.SetJoystick(1);
-                        break;
-                    case ConsoleKey.UpArrow:
-                        arcade.SetJoystick(0);
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        arcade.SetJoystick(-1);
-                        break;
-                    case ConsoleKey.Q:
-                        win = true;
-                        break;
-                }
+                Task.Delay(500);
+                // switch (key.Key)
+                // {
+                //     case ConsoleKey.RightArrow:
+                //         arcade.SetJoystick(1);
+                //         break;
+                //     case ConsoleKey.UpArrow:
+                //         arcade.SetJoystick(0);
+                //         break;
+                //     case ConsoleKey.LeftArrow:
+                //         arcade.SetJoystick(-1);
+                //         break;
+                //     case ConsoleKey.Q:
+                //         win = true;
+                //         break;
+                // }
             }
 
             return 0;
@@ -82,6 +75,8 @@ namespace AdventOfCode._2019._13
                 
                 Console.WriteLine();
             }
+            
+            Console.WriteLine($"Score: {score}");
         }
 
         private static (char[][] board, KeyValuePair<PointF, long> scoreTile) CreateBoard(Dictionary<PointF, long> tiles)
@@ -99,10 +94,10 @@ namespace AdventOfCode._2019._13
                 board[i] = new char[width];
             }
 
-            foreach (var tile in drawableTiles)
+            foreach (var (key, value) in drawableTiles)
             {
                 char c;
-                switch ((TileId) tile.Value)
+                switch ((TileId) value)
                 {
                     case TileId.Wall:
                         c = '@';
@@ -121,7 +116,7 @@ namespace AdventOfCode._2019._13
                         break;
                 }
 
-                board[(long) tile.Key.Y][(long) tile.Key.X] = c;
+                board[(long) key.Y][(long) key.X] = c;
             }
 
             return (board, scoreTile);
@@ -142,44 +137,21 @@ namespace AdventOfCode._2019._13
         public void GenerateTiles()
         {
             var outputs = new BlockingCollection<long>(3);
-
-            _intcodeComputer.Program.OnOutput += l => outputs.Add(l);
-            
-            var game = _intcodeComputer.RunAsync();
+            _intcodeComputer.OnOutput += l => outputs.Add(l);
+            var game = _intcodeComputer.StartAsync();
 
             while (!game.IsCompleted)
             {
                 var x = outputs.Take();
                 var y = outputs.Take();
                 var tileId = outputs.Take();
-                
                 Tiles[new PointF(x, y)] = tileId;
             }
-
-            foreach (var args in game.Result.Batch(3))
-            {
-                var arr = args.ToArray();
-                Tiles[new PointF(arr[0], arr[1])] = arr[2];
-            }
-
-            _intcodeComputer.Program.Pointer = 0;
         }
 
-        public void SetJoystick(in int movement)
+        public void SetJoystick(int movement)
         {
             _intcodeComputer.Input(movement);
-        }
-    }
-
-    public class Tile
-    {
-        public PointF Position { get; }
-        public long TileId { get; }
-
-        public Tile(PointF position, long tileId)
-        {
-            Position = position;
-            TileId = tileId;
         }
     }
 

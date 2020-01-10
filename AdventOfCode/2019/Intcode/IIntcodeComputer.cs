@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace AdventOfCode._2019.Intcode
@@ -5,8 +6,8 @@ namespace AdventOfCode._2019.Intcode
     public interface IIntcodeComputer
     {
         Program Program { get; }
-        long[] Run();
-        void Input(long value);
-        Task<long[]> RunAsync();
+        Task StartAsync();
+        event Action<long> OnOutput;
+        public void Input(in long value);
     }
 }
