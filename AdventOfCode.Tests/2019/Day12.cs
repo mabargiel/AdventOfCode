@@ -15,11 +15,11 @@ namespace AdventOfCode.Tests._2019
 <x=9, y=-8, z=-3>", 100, 1940)]
         public void Part1(string input, int timesteps, int expectedResult)
         {
-            var day12 = new AdventOfCode._2019._12.Day12(input, timesteps);
-            
+            var day12 = new Days._2019._12.Day12(input, timesteps);
+
             Assert.AreEqual(expectedResult, day12.Part1());
         }
-        
+
         [Test]
         [TestCase(@"<x=-1, y=0, z=2>
 <x=2, y=-10, z=-7>
@@ -31,8 +31,8 @@ namespace AdventOfCode.Tests._2019
 <x=9, y=-8, z=-3>", 4686774924)]
         public void Part2(string input, long expectedResult)
         {
-            var day12 = new AdventOfCode._2019._12.Day12(input);
-            
+            var day12 = new Days._2019._12.Day12(input);
+
             Assert.AreEqual(expectedResult, day12.Part2());
         }
     }

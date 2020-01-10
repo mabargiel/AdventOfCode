@@ -13,7 +13,7 @@ namespace AdventOfCode.Tests._2019
             new object[] { "U98", "R91", "D20", "R16", "D67", "R40", "U7", "R15", "U6", "R7" }, 135)]
         public void Part1(object[] wire1, object[] wire2, int expectedDistance)
         {
-            var d3 = new AdventOfCode._2019._3.Day3(wire1.Cast<string>().ToArray(), wire2.Cast<string>().ToArray());
+            var d3 = new Days._2019._3.Day3(wire1.Cast<string>().ToArray(), wire2.Cast<string>().ToArray());
 
             Assert.AreEqual(expectedDistance, d3.Part1());
         }
@@ -26,7 +26,7 @@ namespace AdventOfCode.Tests._2019
             new object[] { "U98", "R91", "D20", "R16", "D67", "R40", "U7", "R15", "U6", "R7" }, 410)]
         public void Part2(object[] wire1, object[] wire2, int expectedDistance)
         {
-            var d3 = new AdventOfCode._2019._3.Day3(wire1.Cast<string>().ToArray(), wire2.Cast<string>().ToArray());
+            var d3 = new Days._2019._3.Day3(wire1.Cast<string>().ToArray(), wire2.Cast<string>().ToArray());
 
             Assert.AreEqual(expectedDistance, d3.Part2());
         }

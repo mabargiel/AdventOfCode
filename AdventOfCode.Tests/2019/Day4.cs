@@ -11,7 +11,7 @@ namespace AdventOfCode.Tests._2019
         [TestCase(353096, 843212, 579)]
         public void Part1(int start, int end, int expectedPossibilities)
         {
-            var d4 = new AdventOfCode._2019._4.Day4(start, end);
+            var d4 = new Days._2019._4.Day4(start, end);
 
             Assert.AreEqual(expectedPossibilities, d4.Part1());
         }
@@ -23,7 +23,7 @@ namespace AdventOfCode.Tests._2019
         [TestCase(353096, 843212, 358)]
         public void Part2(int start, int end, int expectedPossibilities)
         {
-            var d4 = new AdventOfCode._2019._4.Day4(start, end);
+            var d4 = new Days._2019._4.Day4(start, end);
 
             Assert.AreEqual(expectedPossibilities, d4.Part2());
         }

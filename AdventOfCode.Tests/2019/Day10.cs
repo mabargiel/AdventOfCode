@@ -43,10 +43,9 @@ namespace AdventOfCode.Tests._2019
                                 .#.#.###########.###
                                 #.#.#.#####.####.###
                                 ###.##.####.##.#..##", 210)]
-        
         public void Part1(string asteroidsMap, int expectedDetectedAsteroids)
         {
-            var d9 = new AdventOfCode._2019._10.Day10(asteroidsMap);
+            var d9 = new Days._2019._10.Day10(asteroidsMap);
             Assert.AreEqual(expectedDetectedAsteroids, d9.Part1());
         }
 
@@ -58,7 +57,7 @@ namespace AdventOfCode.Tests._2019
                                 ..#.#.....#....##")]
         public void Part2_1(string asteroidsMap)
         {
-            var d9 = new AdventOfCode._2019._10.Day10(asteroidsMap);
+            var d9 = new Days._2019._10.Day10(asteroidsMap);
             var vaporizedAsteroids = d9.Part2().ToArray();
 
             vaporizedAsteroids.ShouldBe(new[]
@@ -73,7 +72,7 @@ namespace AdventOfCode.Tests._2019
                 new Point { X = 14, Y = 3 }
             });
         }
-        
+
         [Test]
         [TestCase(@".#..##.###...#######
                                 ##.############..##.
@@ -97,7 +96,7 @@ namespace AdventOfCode.Tests._2019
                                 ###.##.####.##.#..##")]
         public void Part2_2(string asteroidsMap)
         {
-            var d9 = new AdventOfCode._2019._10.Day10(asteroidsMap);
+            var d9 = new Days._2019._10.Day10(asteroidsMap);
             var selectedVaporizedAsteroids = d9.Part2().Where((point, i) => new[] { 1, 2, 3, 10, 20, 50, 100, 199, 200, 201, 299 }.Contains(i + 1)).ToArray();
 
             selectedVaporizedAsteroids.ShouldBe(new[]
