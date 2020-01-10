@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Combinatorics" Version="1.1.0.19" />
+      <PackageReference Include="morelinq" Version="3.3.2" />
+      <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1" />
+    </ItemGroup>
+
+</Project>

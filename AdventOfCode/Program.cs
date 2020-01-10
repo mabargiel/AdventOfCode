@@ -1,15 +1,7 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using AdventOfCode._2019._10;
-using AdventOfCode._2019._11;
-using AdventOfCode._2019._12;
-using AdventOfCode._2019._13;
-using AdventOfCode._2019._8;
-using AdventOfCode._2019._9;
-using AdventOfCode._2019.Intcode;
-using MoreLinq.Extensions;
+using AdventOfCode.Days._2019._13;
+using AdventOfCode.Days._2019.Intcode;
 
 namespace AdventOfCode
 {
@@ -85,7 +77,7 @@ namespace AdventOfCode
             var d9 = new Day13(new IntcodeComputer(input));
 
             var result = d9.Part2();
-            
+
             Console.WriteLine(result);
         }
     }

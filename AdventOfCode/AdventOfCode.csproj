@@ -6,24 +6,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="2019\2\input.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="2019\3\input.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
       <None Update="2019\6\input.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="2019\8\input.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Combinatorics" Version="1.1.0.19" />
-      <PackageReference Include="morelinq" Version="3.2.0" />
+      <PackageReference Include="morelinq" Version="3.3.2" />
       <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AdventOfCode.Days\AdventOfCode.Days.csproj" />
     </ItemGroup>
 
 </Project>
