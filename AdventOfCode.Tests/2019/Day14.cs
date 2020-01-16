@@ -6,22 +6,6 @@ namespace AdventOfCode.Tests._2019
 {
     public class Day14
     {
-        [Test]
-        [TestCase(@"10 ORE => 10 A
-1 ORE => 1 B
-7 A, 1 B => 1 C")]
-        public void ParseInput(string input)
-        {
-            var nanofactory = new Nanofactory(input);
-            var reactions = nanofactory.Reactions;
-
-            reactions[0].Product.Name.ShouldBe("A");
-            reactions[1].Product.Name.ShouldBe("B");
-            reactions[2].Product.Name.ShouldBe("C");
-            reactions[0].Parts.ShouldBe(new[] { (new Ore() as Chemical, 10) });
-            reactions[1].Parts.ShouldBe(new[] { (new Ore() as Chemical, 1) });
-            reactions[2].Parts.ShouldBe(new[] { (new Chemical("A"), 7), (new Chemical("B"), 1) });
-        }
 
         [Test]
         [TestCase(@"10 ORE => 10 A
