@@ -1,13 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <TargetFramework>netcoreapp5.0</TargetFramework>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Combinatorics" Version="1.1.0.19" />
       <PackageReference Include="morelinq" Version="3.3.2" />
       <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="2020\1\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
