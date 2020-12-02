@@ -13,7 +13,7 @@ namespace AdventOfCode.Days._2020._1
         {
             _input = input;
         }
-        
+
         public int Part1()
         {
             return MultipleMatchingValues(2);
@@ -28,17 +28,18 @@ namespace AdventOfCode.Days._2020._1
         {
             if (valuesCount < 1)
                 throw new ArgumentException("Value cannot be less than 1", nameof(valuesCount));
-            
+
             var topMinimums = (from number in _input
-                orderby number ascending 
+                orderby number
                 select number).Distinct().Take(valuesCount - 1);
-            
+
             var max = 2020 - topMinimums.Sum();
             var possibleValues = _input.Where(v => v <= max).ToList();
 
             var siblings = new Combinations<int>(possibleValues, valuesCount);
 
-            return siblings.First(x => x.Sum() == 2020).Aggregate(1, (a, b) => a * b);;
+            return siblings.First(x => x.Sum() == 2020).Aggregate(1, (a, b) => a * b);
+            ;
         }
     }
 }
