@@ -27,8 +27,7 @@ namespace AdventOfCode.Days._2020._2
             {
                 var lowIndexChar = entry.Password[entry.Min - 1];
                 var highIndexChar = entry.Password[entry.Max - 1];
-                return lowIndexChar != highIndexChar &&
-                       (lowIndexChar == entry.PolicyCharacter || highIndexChar == entry.PolicyCharacter);
+                return (lowIndexChar == entry.PolicyCharacter) ^ (highIndexChar == entry.PolicyCharacter);
             }).Count();
         }
 
