@@ -6,6 +6,7 @@
         <IsPackable>false</IsPackable>
 
         <LangVersion>9</LangVersion>
+        <DebugType>portable</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
