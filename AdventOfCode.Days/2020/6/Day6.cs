@@ -16,16 +16,17 @@ namespace AdventOfCode.Days._2020._6
         
         public int Part1()
         {
-            return _groups.Sum(group => Regex.Matches(group, @"[a-z]").DistinctBy(c => c.Value).Count());
+            return _groups.Sum(group => TrimWhiteCharacters(group).GroupBy(c => c).Count());
         }
 
         public int Part2()
         {
-            return (from @group in _groups
-                let pplCount = @group.Split('\n').Length
-                select Regex.Matches(@group, @"[a-z]").DistinctBy(c => c.Value)
-                    .Select(c => @group.Count(c2 => c.Value[0] == c2))
-                    .Count(o => o == pplCount)).Sum();
+            return _groups.Sum(s => s.GroupBy(c => c).Count(c => c.Count() == s.Split(Environment.NewLine).Length));
+        }
+
+        private static string TrimWhiteCharacters(string s)
+        {
+            return Regex.Replace(s, @"\s", string.Empty);
         }
     }
 }
