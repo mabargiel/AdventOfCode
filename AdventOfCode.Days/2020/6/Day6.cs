@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using MoreLinq;
 
 namespace AdventOfCode.Days._2020._6
 {

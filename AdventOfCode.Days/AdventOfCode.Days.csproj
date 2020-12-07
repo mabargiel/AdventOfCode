@@ -8,6 +8,7 @@
     <ItemGroup>
       <PackageReference Include="Combinatorics" Version="1.1.0.19" />
       <PackageReference Include="morelinq" Version="3.3.2" />
+      <PackageReference Include="Sprache" Version="2.3.1" />
       <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1" />
     </ItemGroup>
 
@@ -29,6 +30,9 @@
       </None>
       <None Update="2020\6\input.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="2020\7\input.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 
