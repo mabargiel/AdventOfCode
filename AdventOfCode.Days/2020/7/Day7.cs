@@ -36,14 +36,11 @@ namespace AdventOfCode.Days._2020._7
 
         private int TotalBagsInsideIncludeSelf(Bag bag)
         {
-            int sum = 0;
-            foreach (var insideBag in bag.Bags)
-            {
-                Bag? topBag = _bags.FirstOrDefault(bag1 => bag1.Shade == insideBag.Shade && bag1.Color == insideBag.Color);
-                if (topBag != null) sum += insideBag.Qty * TotalBagsInsideIncludeSelf(topBag);
-            }
-
-            return bag.Qty + sum;
+            return bag.Qty + (from insideBag in bag.Bags
+                let topBag =
+                    _bags.FirstOrDefault(bag1 => bag1.Shade == insideBag.Shade && bag1.Color == insideBag.Color)
+                where topBag != null
+                select insideBag.Qty * TotalBagsInsideIncludeSelf(topBag)).Sum();
         }
     }
 }
