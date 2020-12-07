@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using AdventOfCode.Tests.Helpers;
+﻿using AdventOfCode.Tests.Helpers;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using Shouldly;
 
 namespace AdventOfCode.Tests._2020
 {
     public class Day7
     {
-        private static readonly object[] Part2Source= new[]
+        private static readonly object[] Part2Source =
         {
             new object[]
             {
@@ -37,7 +34,7 @@ namespace AdventOfCode.Tests._2020
                 126
             }
         };
-        
+
         [Test]
         public void Part1()
         {
@@ -51,18 +48,19 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.";
 
-            var d7 = new AdventOfCode.Days._2020._7.Day7(input);
+            var d7 = new Days._2020._7.Day7(input);
             var result = d7.Part1();
-            
+
             result.ShouldBe(4);
         }
 
-        [Test, TestCaseSource(nameof(Part2Source))]
+        [Test]
+        [TestCaseSource(nameof(Part2Source))]
         public void Part2(string input, int expected)
         {
-            var d7 = new AdventOfCode.Days._2020._7.Day7(input);
+            var d7 = new Days._2020._7.Day7(input);
             var result = d7.Part2();
-            
+
             result.ShouldBe(expected);
         }
     }
