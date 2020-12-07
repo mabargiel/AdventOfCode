@@ -5,10 +5,9 @@ using Sprache;
 
 namespace AdventOfCode.Days._2020._7
 {
-    public class BagsParser
+    internal static class BagsParser
     {
         private static readonly Parser<string> BagSeparator = Parse.String(", ").Text();
-        private static readonly Parser<string> NewLine = Parse.String(Environment.NewLine).Text();
         private static readonly Parser<char> SpaceCharacter = Parse.Char(' ');
 
         private static readonly Parser<string> ContentSeparator =
@@ -17,36 +16,36 @@ namespace AdventOfCode.Days._2020._7
             from trailing in SpaceCharacter
             select indicator;
 
-        private static readonly Parser<(string, string, int)> Bag =
-            from qty in Parse.Digit.Optional()
-            from s1 in SpaceCharacter.Optional()
+        private static readonly Parser<(string, string)> Bag =
             from shade in Parse.Letter.Many().Text()
-            from s2 in SpaceCharacter
+            from _ in SpaceCharacter
             from color in Parse.Letter.Many().Text()
-            from s3 in SpaceCharacter
+            from __ in SpaceCharacter
             from bags in Parse.String("bag")
             from sc in Parse.Char('s').Optional()
-            select (shade, color, qty.IsDefined ? (int) char.GetNumericValue(qty.Get()) : 1);
+            select (shade, color);
+            
+        private static readonly Parser<(int, string, string)> BagWithQty =
+            from qty in Parse.Digit
+            from _ in SpaceCharacter
+            from bag in Bag
+            select ((int) char.GetNumericValue(qty), bag.Item1, bag.Item2);
 
-        private static readonly Parser<List<(string, string, int)>> Bags =
-            from leading in Bag
-            from rest in BagSeparator.Optional().Then(_ => Bag).Many()
-            select Cons(leading, rest).ToList();
-
-        private static readonly Parser<Bag> BagWithContent =
-            from main in Bag
-            from content in ContentSeparator.Then(_ =>
-                Parse.String("no other bags").Text().Return(new List<(string, string, int)>()).Or(Bags))
-            from end in Parse.Char('.')
-            select new Bag(main.Item1, main.Item2, main.Item3,
-                content.Select(bag => new Bag(bag.Item1, bag.Item2, bag.Item3)).ToList());
+        private static readonly Parser<List<(int, string, string)>> BagContent =
+            Parse.String("no other bags").Return(new List<(int, string, string)>()).Or(from leading in BagWithQty
+                from rest in BagSeparator.Optional().Then(_ => BagWithQty).Many()
+                select Cons(leading, rest.ToList()).ToList());
 
         private static readonly Parser<List<Bag>> AllBags =
-            from leading in BagWithContent
-            from rest in NewLine.Then(_ => BagWithContent).Many().Optional()
-            select Cons(leading, rest.Get()).ToList();
+            from bags in (from main in Bag
+                    from separator in ContentSeparator
+                    from content in BagContent
+                    select new Bag(main.Item1, main.Item2, 1,
+                        content.Select(bag => new Bag(bag.Item2, bag.Item3, bag.Item1)).ToList()))
+                .DelimitedBy(Parse.Char('.').Then(_ => Parse.LineEnd))
+            select bags.ToList();
 
-        public List<Bag> ParseInput(string input)
+        public static List<Bag> ParseInput(string input)
         {
             return AllBags.Parse(input);
         }

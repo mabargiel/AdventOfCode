@@ -9,8 +9,7 @@ namespace AdventOfCode.Days._2020._7
 
         public Day7(string input)
         {
-            var parser = new BagsParser();
-            _bags = parser.ParseInput(input);
+            _bags = BagsParser.ParseInput(input);
         }
 
         public int Part1()
@@ -37,11 +36,14 @@ namespace AdventOfCode.Days._2020._7
 
         private int TotalBagsInsideIncludeSelf(Bag bag)
         {
-            return bag.Qty + (from insideBag in bag.Bags
-                let topBag =
-                    _bags.FirstOrDefault(bag1 => bag1.Shade == insideBag.Shade && bag1.Color == insideBag.Color)
-                where topBag != null
-                select insideBag.Qty * TotalBagsInsideIncludeSelf(topBag)).Sum();
+            int sum = 0;
+            foreach (var insideBag in bag.Bags)
+            {
+                Bag? topBag = _bags.FirstOrDefault(bag1 => bag1.Shade == insideBag.Shade && bag1.Color == insideBag.Color);
+                if (topBag != null) sum += insideBag.Qty * TotalBagsInsideIncludeSelf(topBag);
+            }
+
+            return bag.Qty + sum;
         }
     }
 }
