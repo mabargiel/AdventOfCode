@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using AdventOfCode.Days._2020._7;
-using AdventOfCode.Days._2020._8;
+using AdventOfCode.Days._2020._9;
 
 namespace AdventOfCode
 {
@@ -10,11 +9,11 @@ namespace AdventOfCode
     {
         private static async Task Main(string[] args)
         {
-            var input = await File.ReadAllTextAsync("2020/8/input.txt");
+            var input = await File.ReadAllTextAsync("2020/9/input.txt");
 
-            var d8 = new Day8(input);
+            var d9 = new Day9(input, 25);
 
-            var result = d8.Part2();
+            var result = d9.Part2();
 
             Console.WriteLine(result);
         }
