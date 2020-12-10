@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Combinatorics.Collections;
 
 namespace AdventOfCode.Days._2020._10
 {
     public class Day10 : IAdventDay<int, long>
     {
-        private readonly List<int> _adapters;
+        private readonly IReadOnlyList<int> _adapters;
 
         public Day10(string input)
         {
