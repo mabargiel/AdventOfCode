@@ -34,7 +34,7 @@ namespace AdventOfCode.Days._2020._10
 
         public long Part2()
         {
-            var totalCount = 1L;
+            var result = 1L;
 
             var fullAdaptersList = new List<int>(_adapters);
             fullAdaptersList.Insert(0, 0);
@@ -50,14 +50,14 @@ namespace AdventOfCode.Days._2020._10
                     continue;
                 }
 
-                totalCount *= fullAdaptersList[i + subsetCount + 1] - currentNumber > 4
+                result *= fullAdaptersList[i + subsetCount + 1] - currentNumber > 4
                     ? (int) Math.Pow(2, subsetCount - 1)
                     : (int) Math.Pow(2, subsetCount) - 1;
 
                 i += subsetCount;
             }
 
-            return totalCount;
+            return result;
         }
     }
 }
