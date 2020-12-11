@@ -7,7 +7,7 @@ namespace AdventOfCode.Days._2020._11
 {
     public class Day11 : IAdventDay<int, int>
     {
-        private readonly Dictionary<(int, int), char> _seatsMap;
+        private readonly SeatsMap _seatsMap;
 
         public Day11(string input)
         {
@@ -26,21 +26,21 @@ namespace AdventOfCode.Days._2020._11
                 }
             }
 
-            _seatsMap = seatsMap;
+            _seatsMap = new SeatsMap(seatsMap);
         }
 
         public int Part1()
         {
             var curr = new Dictionary<(int, int), char>(_seatsMap);
-            Dictionary<(int, int), char> prev;
+            SeatsMap prev;
 
             do
             {
-                prev = new Dictionary<(int, int), char>(curr);
+                prev = new SeatsMap(curr);
                 Parallel.ForEach(prev.ToList(), item =>
                 {
                     var ((x, y), value) = item;
-                    var adjacentSeats = GetAdjacentSeats(prev, (x, y));
+                    var adjacentSeats = prev.GetAdjacentSeats(x, y);
 
                     curr[(x, y)] = value switch
                     {
@@ -57,17 +57,15 @@ namespace AdventOfCode.Days._2020._11
         public int Part2()
         {
             var curr = new Dictionary<(int, int), char>(_seatsMap);
-            Dictionary<(int, int), char> prev;
-            var maxX = curr.Max(it => it.Key.Item1);
-            var maxY = curr.Max(it => it.Key.Item2);
+            SeatsMap prev;
 
             do
             {
-                prev = new Dictionary<(int, int), char>(curr);
+                prev = new SeatsMap(curr);
                 Parallel.ForEach(prev.ToList(), item =>
                 {
                     var ((x, y), value) = item;
-                    var adjacentSeats = GetFirstVisibleSeats(prev, (x, y), maxX, maxY).ToList();
+                    var adjacentSeats = prev.GetFirstVisibleSeats(x, y).ToList();
 
                     curr[(x, y)] = value switch
                     {
@@ -79,54 +77,6 @@ namespace AdventOfCode.Days._2020._11
             } while (curr.Any(it => prev[it.Key] != it.Value));
 
             return curr.Count(it => it.Value == '#');
-        }
-
-        private static IEnumerable<char> GetFirstVisibleSeats(IReadOnlyDictionary<(int, int), char> prev,
-            (int, int) pos, int maxX, int maxY)
-        {
-            var (x, y) = pos;
-            var seen = new bool[8];
-
-            for (var distance = 1; seen.Any(it => !it); distance++)
-            {
-                if (x + distance > maxX && x - distance < 0 && y + distance > maxY &&
-                    y - distance < 0)
-                    break;
-                
-                var n8directions = new[]
-                {
-                    (x + distance, y),
-                    (x - distance, y),
-                    (x, y + distance),
-                    (x, y - distance),
-                    (x - distance, y + distance),
-                    (x + distance, y - distance),
-                    (x + distance, y + distance),
-                    (x - distance, y - distance)
-                };
-
-                for (var i = 0; i < n8directions.Length; i++)
-                {
-                    if (seen[i] || !prev.TryGetValue(n8directions[i], out var v))
-                        continue;
-
-                    seen[i] = true;
-                    yield return v;
-                }
-            }
-        }
-
-        private static IEnumerable<char> GetAdjacentSeats(IReadOnlyDictionary<(int, int), char> prev, (int, int) pos)
-        {
-            var (x, y) = pos;
-
-            for (var dx = -1; dx <= 1; dx++)
-            for (var dy = -1; dy <= 1; dy++)
-            {
-                if (dx == 0 && dy == 0) continue;
-                if (prev.TryGetValue((x + dx, y + dy), out var v))
-                    yield return v;
-            }
         }
     }
 }
