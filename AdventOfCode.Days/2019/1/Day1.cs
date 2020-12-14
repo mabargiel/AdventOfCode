@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2019._1
 {
-    public class Day1 : IAdventDay<int, int>
+    public class Day1 : AdventDay<int, int>
     {
         private readonly IEnumerable<int> _input;
 
@@ -12,12 +12,12 @@ namespace AdventOfCode.Days._2019._1
             _input = input;
         }
 
-        public int Part1()
+        public override int Part1()
         {
             return _input.Sum(CalculateFuel);
         }
 
-        public int Part2()
+        public override int Part2()
         {
             return _input.Sum(mass =>
             {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode.Days._2020._11
 {
-    public class Day11 : IAdventDay<int, int>
+    public class Day11 : AdventDay<int, int>
     {
         private readonly SeatsMap _seatsMap;
 
@@ -29,7 +29,7 @@ namespace AdventOfCode.Days._2020._11
             _seatsMap = new SeatsMap(seatsMap);
         }
 
-        public int Part1()
+        public override int Part1()
         {
             var curr = new Dictionary<(int, int), char>(_seatsMap);
             SeatsMap prev;
@@ -54,7 +54,7 @@ namespace AdventOfCode.Days._2020._11
             return curr.Count(it => it.Value == '#');
         }
 
-        public int Part2()
+        public override int Part2()
         {
             var curr = new Dictionary<(int, int), char>(_seatsMap);
             SeatsMap prev;

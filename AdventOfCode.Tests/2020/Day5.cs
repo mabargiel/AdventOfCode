@@ -14,7 +14,7 @@ BBFFBBFRLL";
 
             var d5 = new Days._2020._5.Day5(input);
             var result = d5.Part1();
-            
+
             result.ShouldBe(820);
         }
     }

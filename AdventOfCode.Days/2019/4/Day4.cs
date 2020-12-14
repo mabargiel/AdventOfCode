@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2019._4
 {
-    public class Day4 : IAdventDay<int, int>
+    public class Day4 : AdventDay<int, int>
     {
         private readonly int[] _digits;
         private readonly int _end;
@@ -14,13 +14,13 @@ namespace AdventOfCode.Days._2019._4
             _end = end;
         }
 
-        public int Part1()
+        public override int Part1()
         {
             var password = new Part1Password(_digits);
             return CountPasswordPossibilities(password);
         }
 
-        public int Part2()
+        public override int Part2()
         {
             var password = new Part2Password(_digits);
             return CountPasswordPossibilities(password);

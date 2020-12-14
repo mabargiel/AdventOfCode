@@ -13,7 +13,7 @@ namespace AdventOfCode.Days._2019.Intcode.Operations
             _arg1 = arg1;
         }
 
-        public override void Execute()
+        public void Execute()
         {
             _program.IncrementRelativeBase(_arg1.Value);
             base.Execute();

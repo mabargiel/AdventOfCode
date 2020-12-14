@@ -5,7 +5,7 @@ using Combinatorics.Collections;
 
 namespace AdventOfCode.Days._2020._1
 {
-    public class Day1 : IAdventDay<int, int>
+    public class Day1 : AdventDay<int, int>
     {
         private readonly IEnumerable<int> _input;
 
@@ -14,12 +14,12 @@ namespace AdventOfCode.Days._2020._1
             _input = input;
         }
 
-        public int Part1()
+        public override int Part1()
         {
             return MultipleMatchingValues(2);
         }
 
-        public int Part2()
+        public override int Part2()
         {
             return MultipleMatchingValues(3);
         }

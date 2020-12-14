@@ -6,7 +6,7 @@ using AdventOfCode.Days._2019.Intcode;
 
 namespace AdventOfCode.Days._2019._11
 {
-    public class Day11 : IAdventDay<int, bool[][]>
+    public class Day11 : AdventDay<int, bool[][]>
     {
         private readonly IEnumerable<long> _robotCode;
 
@@ -15,12 +15,12 @@ namespace AdventOfCode.Days._2019._11
             _robotCode = robotCode;
         }
 
-        public int Part1()
+        public override int Part1()
         {
             return RunHullRobot(_robotCode.ToArray(), 0).Count;
         }
 
-        public bool[][] Part2()
+        public override bool[][] Part2()
         {
             var paintArea = RunHullRobot(_robotCode.ToArray(), 1);
 

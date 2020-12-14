@@ -32,7 +32,7 @@ namespace AdventOfCode.Tests._2020
         {
             var d9 = new AdventOfCode.Days._2020._9.Day9(_input, 5);
             var result = d9.Part1();
-            
+
             result.ShouldBe(127);
         }
 
@@ -41,7 +41,7 @@ namespace AdventOfCode.Tests._2020
         {
             var d9 = new AdventOfCode.Days._2020._9.Day9(_input, 5);
             var result = d9.Part2();
-            
+
             result.ShouldBe(62);
         }
     }

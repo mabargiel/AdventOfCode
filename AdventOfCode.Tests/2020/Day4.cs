@@ -16,7 +16,7 @@ hcl:#cfa07d byr:1929
 
             result.ShouldBe(0);
         }
-        
+
         [Test]
         public void Part1_Example_2ShouldBeInvalid()
         {
@@ -33,7 +33,7 @@ hgt:179cm
 
 hcl:#cfa07d eyr:2025 pid:166559648
 iyr:2011 ecl:brn hgt:59in";
-            
+
             var d4 = new AdventOfCode.Days._2020._4.Day4(input);
             var result = d4.Part1();
 
@@ -56,13 +56,13 @@ ecl:brn hgt:182cm pid:021572410 eyr:2020 byr:1992 cid:277
 hgt:59cm ecl:zzz
 eyr:2038 hcl:74454a iyr:2023
 pid:3556412378 byr:2007";
-            
+
             var d4 = new AdventOfCode.Days._2020._4.Day4(input);
             var result = d4.Part2();
 
             result.ShouldBe(0);
         }
-        
+
         [Test]
         public void Part2_4ValidPassports_Returns4()
         {
@@ -78,31 +78,31 @@ pid:545766238 ecl:hzl
 eyr:2022
 
 iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719";
-            
+
             var d4 = new AdventOfCode.Days._2020._4.Day4(input);
             var result = d4.Part2();
 
             result.ShouldBe(4);
         }
-        
+
         [Test]
         public void Part2_InvalidPid_Returns0()
         {
             const string input = @"pid:08749970445 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2f";
-            
+
             var d4 = new AdventOfCode.Days._2020._4.Day4(input);
             var result = d4.Part2();
 
             result.ShouldBe(0);
         }
-        
+
         [Test]
         public void Part2_InvalidHcl_Returns0()
         {
             const string input = @"pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2fd";
-            
+
             var d4 = new AdventOfCode.Days._2020._4.Day4(input);
             var result = d4.Part2();
 

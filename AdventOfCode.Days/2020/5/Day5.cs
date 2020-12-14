@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2020._5
 {
-    public class Day5 : IAdventDay<int,int>
+    public class Day5 : AdventDay<int,int>
     {
         private readonly int _rows;
         private readonly int _cols;
@@ -17,12 +17,12 @@ namespace AdventOfCode.Days._2020._5
             _boardingPasses = input.Split(Environment.NewLine).ToList();
         }
 
-        public int Part1()
+        public override int Part1()
         {
             return Decode(.._rows, .._cols).Max();
         }
 
-        public int Part2()
+        public override int Part2()
         {
            var sorted = Decode(.._rows, .._cols).OrderBy(seatId => seatId).ToList();
 
@@ -44,7 +44,7 @@ namespace AdventOfCode.Days._2020._5
 
                 return GetId(row, col);
             });
-            
+
             return ids;
         }
 
@@ -52,7 +52,7 @@ namespace AdventOfCode.Days._2020._5
         {
             var lowIndex = range.Start.Value;
             var highIndex = range.End.Value - 1;
-            
+
             foreach (var op in s)
             {
                 switch (op)
@@ -67,7 +67,7 @@ namespace AdventOfCode.Days._2020._5
                         break;
                 }
             }
-            
+
             return highIndex;
         }
 

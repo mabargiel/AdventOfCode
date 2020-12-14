@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2020._7
 {
-    public class Day7 : IAdventDay<int, int>
+    public class Day7 : AdventDay<int, int>
     {
         private readonly List<Bag> _bags;
 
@@ -12,12 +12,12 @@ namespace AdventOfCode.Days._2020._7
             _bags = BagsParser.ParseInput(input);
         }
 
-        public int Part1()
+        public override int Part1()
         {
             return _bags.Count(AtLeastOneShinyGoldBag);
         }
 
-        public int Part2()
+        public override int Part2()
         {
             return _bags.Where(bag => bag.Shade == "shiny" && bag.Color == "gold").Sum(TotalBagsInsideIncludeSelf) - 1;
         }

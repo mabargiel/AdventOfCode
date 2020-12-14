@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2019._3
 {
-    public class Day3 : IAdventDay<int, int>
+    public class Day3 : AdventDay<int, int>
     {
         private static readonly Point CentralPort = new Point(0, 0);
         private readonly string[] _wire1;
@@ -17,7 +17,7 @@ namespace AdventOfCode.Days._2019._3
             _wire2 = wire2;
         }
 
-        public int Part1()
+        public override int Part1()
         {
             int ManhattanDistance(Point point)
             {
@@ -32,7 +32,7 @@ namespace AdventOfCode.Days._2019._3
             return intersectionPoints.Select(ManhattanDistance).Min();
         }
 
-        public int Part2()
+        public override int Part2()
         {
             var wire1Segments = new Wire(_wire1);
             var wire2Segments = new Wire(_wire2);

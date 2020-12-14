@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2020._10
 {
-    public class Day10 : IAdventDay<int, long>
+    public class Day10 : AdventDay<int, long>
     {
         private readonly IReadOnlyList<int> _adapters;
 
@@ -12,8 +12,8 @@ namespace AdventOfCode.Days._2020._10
         {
             _adapters = input.Split(Environment.NewLine).Select(int.Parse).OrderBy(it => it).ToList();
         }
-        
-        public int Part1()
+
+        public override int Part1()
         {
             var differences = new Dictionary<int, int>
             {
@@ -32,13 +32,13 @@ namespace AdventOfCode.Days._2020._10
             return differences[1] * differences[3];
         }
 
-        public long Part2()
+        public override long Part2()
         {
             var result = 1L;
 
             var fullAdaptersList = new List<int>(_adapters);
             fullAdaptersList.Insert(0, 0);
-            
+
             for (var i = 0; i < fullAdaptersList.Count - 1; i++)
             {
                 var currentNumber = fullAdaptersList[i];

@@ -8,7 +8,7 @@ using MoreLinq.Extensions;
 
 namespace AdventOfCode.Days._2019._10
 {
-    public class Day10 : IAdventDay<int, IEnumerable<Point>>
+    public class Day10 : AdventDay<int, IEnumerable<Point>>
     {
         private readonly Asteroid[] _asteroids;
 
@@ -31,14 +31,14 @@ namespace AdventOfCode.Days._2019._10
             }
         }
 
-        public int Part1()
+        public override int Part1()
         {
             var visibilityMap = CalculateVisibility(_asteroids);
 
             return visibilityMap.Values.Max();
         }
 
-        public IEnumerable<Point> Part2()
+        public override IEnumerable<Point> Part2()
         {
             var station = CalculateVisibility(_asteroids).MaxBy(x => x.Value).First().Key;
             var asteroids = _asteroids.Except(new[] { station }).ToList();

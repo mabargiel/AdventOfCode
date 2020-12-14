@@ -15,7 +15,7 @@ namespace AdventOfCode.Days._2019.Intcode.Operations
             _arg2 = arg2;
         }
 
-        public override void Execute()
+        public void Execute()
         {
             var shouldJump = _arg1.Value == 0;
 

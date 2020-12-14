@@ -7,7 +7,7 @@ using AdventOfCode.Days._2019.Intcode;
 
 namespace AdventOfCode.Days._2019._13
 {
-    public class Day13 : IAdventDay<List<long>, long>
+    public class Day13 : AdventDay<List<long>, long>
     {
         private readonly IIntcodeComputer _intcodeComputer;
 
@@ -18,7 +18,7 @@ namespace AdventOfCode.Days._2019._13
 
         public (TileId[][] board, KeyValuePair<PointF, long> scoreTile) Board { get; private set; }
 
-        public List<long> Part1()
+        public override List<long> Part1()
         {
             var arcade = new ArcadeCabinet(_intcodeComputer);
 
@@ -31,7 +31,7 @@ namespace AdventOfCode.Days._2019._13
             return tiles;
         }
 
-        public long Part2()
+        public override long Part2()
         {
             _intcodeComputer.Program.Memory[0] = 2;
             var cabinet = new ArcadeCabinet(_intcodeComputer);

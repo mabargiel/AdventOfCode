@@ -5,7 +5,7 @@ using Combinatorics.Collections;
 
 namespace AdventOfCode.Days._2019._7
 {
-    public class Day7 : IAdventDay<long, long>
+    public class Day7 : AdventDay<long, long>
     {
         private readonly long[] _code;
         private readonly int _input;
@@ -16,7 +16,7 @@ namespace AdventOfCode.Days._2019._7
             _input = input;
         }
 
-        public long Part1()
+        public override long Part1()
         {
             Task<long> GetOutput(IEnumerable<int> phases)
             {
@@ -27,7 +27,7 @@ namespace AdventOfCode.Days._2019._7
             return new Permutations<int>(Enumerable.Range(0, 5).ToArray()).Select(x => GetOutput(x).Result).Max();
         }
 
-        public long Part2()
+        public override long Part2()
         {
             async Task<long> GetOutput(IEnumerable<int> phases)
             {

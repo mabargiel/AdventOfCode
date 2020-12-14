@@ -13,7 +13,7 @@ namespace AdventOfCode.Days._2019.Intcode.Operations
             _arg1 = arg1;
         }
 
-        public override void Execute()
+        public void Execute()
         {
             _arg1.Set(_program.OnInput());
             base.Execute();

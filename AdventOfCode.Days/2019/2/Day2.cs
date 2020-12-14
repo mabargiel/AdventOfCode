@@ -6,7 +6,7 @@ using Combinatorics.Collections;
 
 namespace AdventOfCode.Days._2019._2
 {
-    public class Day2 : IAdventDay<long, long>
+    public class Day2 : AdventDay<long, long>
     {
         private readonly IEnumerable<long> _input;
         private readonly int _part2Target;
@@ -17,7 +17,7 @@ namespace AdventOfCode.Days._2019._2
             _input = input;
         }
 
-        public long Part1()
+        public override long Part1()
         {
             var intcodeComputer = new IntcodeComputer(_input);
             intcodeComputer.Input(0);
@@ -26,7 +26,7 @@ namespace AdventOfCode.Days._2019._2
             return intcodeComputer.Program.Memory[0];
         }
 
-        public long Part2()
+        public override long Part2()
         {
             var combinations = new Combinations<int>(Enumerable.Range(0, _input.Count()).ToList(), 2, GenerateOption.WithRepetition);
 

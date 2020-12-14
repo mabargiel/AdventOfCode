@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Days._2020._8
 {
-    public class Day8 : IAdventDay<int, int>
+    public class Day8 : AdventDay<int, int>
     {
         private readonly Process _process;
 
@@ -40,7 +40,7 @@ namespace AdventOfCode.Days._2020._8
             _process = new Process(operations);
         }
 
-        public int Part1()
+        public override int Part1()
         {
             var visitedInstructions = new HashSet<Instruction>();
             var acc = 0;
@@ -54,7 +54,7 @@ namespace AdventOfCode.Days._2020._8
             return acc;
         }
 
-        public int Part2()
+        public override int Part2()
         {
             var visitedInstructions = new HashSet<Instruction>();
             var process = _process;

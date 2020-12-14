@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Days._2020._6
 {
-    public class Day6 : IAdventDay<int, int>
+    public class Day6 : AdventDay<int, int>
     {
         private readonly string[] _groups;
 
@@ -12,13 +12,13 @@ namespace AdventOfCode.Days._2020._6
         {
             _groups = input.Split(Environment.NewLine + Environment.NewLine);
         }
-        
-        public int Part1()
+
+        public override int Part1()
         {
             return _groups.Sum(group => TrimWhiteCharacters(group).GroupBy(c => c).Count());
         }
 
-        public int Part2()
+        public override int Part2()
         {
             return _groups.Sum(s => s.GroupBy(c => c).Count(c => c.Count() == s.Split(Environment.NewLine).Length));
         }

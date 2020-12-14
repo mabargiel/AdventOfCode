@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Days._2019._12
 {
-    public class Day12 : IAdventDay<long, long>
+    public class Day12 : AdventDay<long, long>
     {
         private readonly JupiterSpace _jupiterSpace;
         private readonly int _timesteps;
@@ -15,7 +15,7 @@ namespace AdventOfCode.Days._2019._12
             _jupiterSpace = new JupiterSpace(ParseMoons(input).ToArray());
         }
 
-        public long Part1()
+        public override long Part1()
         {
             for (var i = 0; i < _timesteps; i++)
             {
@@ -25,7 +25,7 @@ namespace AdventOfCode.Days._2019._12
             return _jupiterSpace.TotalEnergy();
         }
 
-        public long Part2()
+        public override long Part2()
         {
             return _jupiterSpace.MoveTimeUntilRepeat();
         }

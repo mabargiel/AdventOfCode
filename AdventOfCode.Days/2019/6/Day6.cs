@@ -4,7 +4,7 @@ using Wintellect.PowerCollections;
 
 namespace AdventOfCode.Days._2019._6
 {
-    public class Day6 : IAdventDay<int, int>
+    public class Day6 : AdventDay<int, int>
     {
         private readonly OribitngObject[] _map;
 
@@ -13,7 +13,7 @@ namespace AdventOfCode.Days._2019._6
             _map = BuildMapTree(mapRepresentation);
         }
 
-        public int Part1()
+        public override int Part1()
         {
             var count = 0;
             foreach (var oribitngObject in _map)
@@ -30,7 +30,7 @@ namespace AdventOfCode.Days._2019._6
             return count;
         }
 
-        public int Part2()
+        public override int Part2()
         {
             var meObjectOrbit = _map.First(x => x.Name == "YOU").OrbitsOn;
             var santaOrbitObject = _map.First(x => x.Name == "SAN").OrbitsOn;

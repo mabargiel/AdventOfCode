@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Days._2020._2
 {
-    public class Day2 : IAdventDay<int, int>
+    public class Day2 : AdventDay<int, int>
     {
         private readonly PasswordsDatabase _database;
 
@@ -13,7 +13,7 @@ namespace AdventOfCode.Days._2020._2
             _database = ParseInput(input);
         }
 
-        public int Part1()
+        public override int Part1()
         {
             return (from policy in _database
                 let characterCount = policy.Password.Count(c => c == policy.PolicyCharacter)
@@ -21,7 +21,7 @@ namespace AdventOfCode.Days._2020._2
                 select policy.Password).Count();
         }
 
-        public int Part2()
+        public override int Part2()
         {
             return _database.Where(entry =>
             {

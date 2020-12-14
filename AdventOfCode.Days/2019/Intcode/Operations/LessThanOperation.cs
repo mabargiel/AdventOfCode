@@ -15,7 +15,7 @@ namespace AdventOfCode.Days._2019.Intcode.Operations
             _arg3 = arg3;
         }
 
-        public override void Execute()
+        public void Execute()
         {
             var shouldStoreValue = _arg1.Value < _arg2.Value;
 

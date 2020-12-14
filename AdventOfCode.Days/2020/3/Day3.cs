@@ -4,7 +4,7 @@ using MoreLinq;
 
 namespace AdventOfCode.Days._2020._3
 {
-    public class Day3 : IAdventDay<int, int>
+    public class Day3 : AdventDay<int, int>
     {
         private readonly char[,] _map;
 
@@ -24,19 +24,19 @@ namespace AdventOfCode.Days._2020._3
             _map = map;
         }
 
-        public int Part1()
+        public override int Part1()
         {
             var trees = CalculateTreeCount(3, 1);
             return trees;
         }
 
-        public int Part2()
+        public override int Part2()
         {
             return new[]
             {
-                CalculateTreeCount(1, 1), 
-                CalculateTreeCount(3, 1), 
-                CalculateTreeCount(5, 1), 
+                CalculateTreeCount(1, 1),
+                CalculateTreeCount(3, 1),
+                CalculateTreeCount(5, 1),
                 CalculateTreeCount(7, 1),
                 CalculateTreeCount(1, 2)
             }.Aggregate(1, (prev, curr) => prev * curr);
@@ -54,7 +54,7 @@ namespace AdventOfCode.Days._2020._3
 
                 col += right;
                 row += down;
-                
+
                 if (col > _map.GetLength(1) - 1)
                 {
                     col -= _map.GetLength(1);

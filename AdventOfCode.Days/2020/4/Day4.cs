@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Days._2020._4
 {
-    public class Day4 : IAdventDay<int, int>
+    public class Day4 : AdventDay<int, int>
     {
         private readonly List<Dictionary<string, string>> _batchFiles;
 
@@ -21,22 +21,22 @@ namespace AdventOfCode.Days._2020._4
             }
         }
 
-        public int Part1()
+        public override int Part1()
         {
             var validPassports = PreValidate();
             return validPassports.Count();
         }
 
-        public int Part2()
+        public override int Part2()
         {
-            var validPasswords = PreValidate().Where(passport => 
+            var validPasswords = PreValidate().Where(passport =>
                 int.Parse(passport["byr"]) is >= 1920 and <= 2002 &&
                 int.Parse(passport["iyr"]) is >= 2010 and <= 2020 &&
                 int.Parse(passport["eyr"]) is >= 2020 and <= 2030 &&
                 (passport["hgt"].EndsWith("cm") && int.Parse(passport["hgt"].Substring(0, passport["hgt"].Length - 2)) is >= 150 and <= 193 ||
                  passport["hgt"].EndsWith("in") && int.Parse(passport["hgt"].Substring(0, passport["hgt"].Length - 2)) is >= 59 and <= 76) &&
                 Regex.IsMatch(passport["hcl"], @"^\#[a-f0-9]{6}$") &&
-                new[] {"amb", "blu", "brn", "gry", "grn", "hzl", "oth"}.Contains(passport["ecl"]) && 
+                new[] {"amb", "blu", "brn", "gry", "grn", "hzl", "oth"}.Contains(passport["ecl"]) &&
                 Regex.IsMatch(passport["pid"], @"^\d{9}$"));
 
             return validPasswords.Count();

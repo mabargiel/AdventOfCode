@@ -6,7 +6,7 @@ using MoreLinq.Extensions;
 
 namespace AdventOfCode.Days._2019._8
 {
-    public class Day8 : IAdventDay<int, string>
+    public class Day8 : AdventDay<int, string>
     {
         private readonly IEnumerable<char[]> _layers;
 
@@ -21,7 +21,7 @@ namespace AdventOfCode.Days._2019._8
             _layers = imageData.Batch((int) (width * height)).Select(x => x.ToArray());
         }
 
-        public int Part1()
+        public override int Part1()
         {
             var leastZerosLayer = _layers.MinBy(layer => layer.Count(c => c == '0')).First().ToArray();
 
@@ -31,7 +31,7 @@ namespace AdventOfCode.Days._2019._8
             return onesCount * twosCount;
         }
 
-        public string Part2()
+        public override string Part2()
         {
             var size = _layers.First().Length;
             var drillJobs = Enumerable.Range(0, size).Select(pixelIndex => Task.Run(() => DrillThroughLayers(pixelIndex)));

@@ -2,7 +2,7 @@ using AdventOfCode.Days._2019.Intcode;
 
 namespace AdventOfCode.Days._2019._5
 {
-    public class Day5 : IAdventDay<long, long>
+    public class Day5 : AdventDay<long, long>
     {
         private readonly long[] _code;
         private readonly long _initialInput;
@@ -13,7 +13,7 @@ namespace AdventOfCode.Days._2019._5
             _initialInput = initialInput;
         }
 
-        public long Part1()
+        public override long Part1()
         {
             var computer = new IntcodeComputer(_code);
             computer.Input(_initialInput);
@@ -25,7 +25,7 @@ namespace AdventOfCode.Days._2019._5
             return result;
         }
 
-        public long Part2()
+        public override long Part2()
         {
             return Part1();
         }

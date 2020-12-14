@@ -28,7 +28,7 @@ b";
 
             result.ShouldBe(11);
         }
-        
+
         [Test]
         public void Part2()
         {

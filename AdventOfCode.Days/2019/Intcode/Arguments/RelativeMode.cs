@@ -11,7 +11,7 @@ namespace AdventOfCode.Days._2019.Intcode.Arguments
 
         public override long Value => Memory[Memory[RelativePosition] + _relativeBase];
 
-        public override void Set(long value)
+        public void Set(long value)
         {
             Memory[Memory[RelativePosition] + _relativeBase] = value;
         }

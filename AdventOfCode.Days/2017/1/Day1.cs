@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2017._1
 {
-    public class Day1 : IAdventDay<int, int>
+    public class Day1 : AdventDay<int, int>
     {
         private readonly string _input;
 
@@ -12,7 +12,7 @@ namespace AdventOfCode.Days._2017._1
             _input = input;
         }
 
-        public int Part1()
+        public override int Part1()
         {
             var digits = _input.Select(x => (int) char.GetNumericValue(x)).ToList();
 
@@ -31,7 +31,7 @@ namespace AdventOfCode.Days._2017._1
             return result;
         }
 
-        public int Part2()
+        public override int Part2()
         {
             throw new NotImplementedException();
         }
