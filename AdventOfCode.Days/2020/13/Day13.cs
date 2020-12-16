@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using MoreLinq;
@@ -36,43 +37,81 @@ namespace AdventOfCode.Days._2020._13
 
 		public override long Part2()
 		{
-			var buses = _buses.Select((i, v) => new BusValue(i + 1, v)).Where(it => it.InitialValue > 0).ToList();
+			var buses = new Buses(_buses.Select(b => new Bus(b)));
 
-			do
+			long multiplier = buses.First().Initial;
+			for (var i = 1; i < buses.Count; i++)
 			{
-				foreach (var bus in buses)
+				var current = buses[i];
+				
+				if(current.Initial == 0)
+					continue;
+				
+				var (prev, offset) = buses.Prev(i);
+				
+				while(current.MinutesArrived - offset != prev.MinutesArrived)
 				{
-					bus.CurrentValue += bus.InitialValue;
+					current.MinutesArrived += current.Initial;
+					
+					while (prev.MinutesArrived + multiplier < current.MinutesArrived)
+					{
+						foreach (var bus in buses.AllPrev(i))
+						{
+							bus.MinutesArrived += multiplier;
+						}
+					}
 				}
-			} while (!AreValid());
 
-			return buses.First().CurrentValue;
+				multiplier *= current.Initial;
+			}
 
-			bool AreValid()
+			return buses.First().MinutesArrived;
+		}
+	}
+
+	public class Buses : List<Bus>
+	{
+		public Buses(IEnumerable<Bus> buses)
+		{
+			foreach (var bus in buses)
 			{
-				for (var i = 0; i < buses.Count - 1; i ++)
-				{
-					if (buses[i + 1].CurrentValue != buses[i].CurrentValue + buses[i + 1].Constraint - buses[i].Constraint)
-						return false;
-				}
+				Add(bus);
+			}
+		}
 
-				return true;
+		public (Bus, int Offset) Prev(int index)
+		{
+			var offset = 1;
+			for (var i = index - 1; i >= 0; i--)
+			{
+				if (this[i].Initial != 0) 
+					return (this[i], offset);
+				
+				offset++;
+			}
+
+			throw new InvalidOperationException();
+		}
+
+		public IEnumerable<Bus> AllPrev(int index)
+		{
+			for (var i = index - 1; i >= 0; i--)
+			{
+				if (this[i].Initial != 0) 
+					yield return this[i];
 			}
 		}
 	}
 
-	public class BusValue
+	public class Bus
 	{
-		public int Constraint { get; }
-		public int InitialValue { get; }
-
-		public long CurrentValue { get; set; }
-
-		public BusValue(int constraint, in int initialValue)
+		public Bus(int initial)
 		{
-			Constraint = constraint;
-			InitialValue = initialValue;
-			CurrentValue = initialValue;
+			Initial = initial;
+			MinutesArrived = initial;
 		}
+		
+		public int Initial { get; }
+		public long MinutesArrived { get; set; }
 	}
 }
