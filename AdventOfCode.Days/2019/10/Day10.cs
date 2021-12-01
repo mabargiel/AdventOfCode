@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using Combinatorics.Collections;
-using MoreLinq.Extensions;
 
 namespace AdventOfCode.Days._2019._10
 {
@@ -40,7 +39,7 @@ namespace AdventOfCode.Days._2019._10
 
         public IEnumerable<Point> Part2()
         {
-            var station = CalculateVisibility(_asteroids).MaxBy(x => x.Value).First().Key;
+            var station = CalculateVisibility(_asteroids).MaxBy(pair => pair.Value).Key;
             var asteroids = _asteroids.Except(new[] { station }).ToList();
 
             var possibleLaserVectors = new LinkedList<Vector2>(asteroids

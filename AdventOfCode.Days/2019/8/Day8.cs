@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MoreLinq.Extensions;
+using AdventOfCode.Days.Common;
 
 namespace AdventOfCode.Days._2019._8
 {
@@ -23,7 +23,7 @@ namespace AdventOfCode.Days._2019._8
 
         public int Part1()
         {
-            var leastZerosLayer = _layers.MinBy(layer => layer.Count(c => c == '0')).First().ToArray();
+            var leastZerosLayer = _layers.MinBy(layer => layer.Count(c => c == '0'))?.ToArray() ?? Array.Empty<char>();
 
             var onesCount = leastZerosLayer.Count(c => c == '1');
             var twosCount = leastZerosLayer.Count(c => c == '2');

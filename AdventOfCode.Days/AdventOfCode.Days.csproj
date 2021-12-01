@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <LangVersion>9</LangVersion>
+        <Nullable>warnings</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Combinatorics" Version="1.1.0.19" />
-      <PackageReference Include="morelinq" Version="3.3.2" />
+      <PackageReference Include="Combinatorics" Version="2.0.0" />
       <PackageReference Include="Sprache" Version="2.3.1" />
       <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1" />
     </ItemGroup>
@@ -44,6 +44,9 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
       <None Update="2020\11\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="2021\1\input.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>

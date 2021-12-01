@@ -2,8 +2,9 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <LangVersion>9</LangVersion>
+        <Nullable>warnings</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,8 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Combinatorics" Version="1.1.0.19" />
-      <PackageReference Include="morelinq" Version="3.3.2" />
+      <PackageReference Include="Combinatorics" Version="2.0.0" />
       <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1" />
     </ItemGroup>
 
