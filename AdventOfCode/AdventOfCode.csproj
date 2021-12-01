@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <PackageReference Include="Combinatorics" Version="2.0.0" />
+      <PackageReference Include="CommandLineParser" Version="2.8.0" />
       <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1" />
     </ItemGroup>
 
