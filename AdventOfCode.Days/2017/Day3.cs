@@ -17,21 +17,21 @@ namespace AdventOfCode.Days._2017
             {
                 return 0;
             }
-            
+
             var pathLength = 1;
             var (x, y) = (0, 0);
             var factors = new[] { 1, 0, -1, 0 };
             var xFactorIndex = 0;
             var yFactorIndex = 3;
             var currentValue = 1;
-            
+
             while (true)
             {
                 for (var j = 0; j < 2; j++)
                 {
                     var xVect = factors[xFactorIndex];
                     var yVect = factors[yFactorIndex];
-                    
+
                     for (var i = 0; i < pathLength; i++)
                     {
                         currentValue++;
@@ -68,12 +68,12 @@ namespace AdventOfCode.Days._2017
             while (true)
             {
                 int[] neighbourValues = new int[4];
-                
+
                 for (var j = 0; j < 2; j++)
                 {
                     var xVect = factors[xFactorIndex];
                     var yVect = factors[yFactorIndex];
-                    
+
                     for (var i = 0; i < pathLength; i++)
                     {
                         x += xVect;
@@ -81,12 +81,12 @@ namespace AdventOfCode.Days._2017
 
                         spiral.TryGetValue((x - xVect, y - yVect), out neighbourValues[0]);
                         spiral.TryGetValue((x - (xVect + yVect), y + (xVect - yVect)), out neighbourValues[2]);
-                        spiral.TryGetValue((x - yVect, y +xVect), out neighbourValues[1]);
+                        spiral.TryGetValue((x - yVect, y + xVect), out neighbourValues[1]);
                         spiral.TryGetValue((x + (xVect - yVect), y + xVect + yVect), out neighbourValues[3]);
 
                         spiral[(x, y)] = neighbourValues.Sum();
 
-                        if (spiral[(x, y)] > input) 
+                        if (spiral[(x, y)] > input)
                         {
                             return spiral[(x, y)];
                         }

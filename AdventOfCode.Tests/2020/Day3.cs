@@ -19,13 +19,13 @@ namespace AdventOfCode.Tests._2020
 #.##...#...
 #...##....#
 .#..#...#.#";
-            
-            var d3 = new AdventOfCode.Days._2020._3.Day3(input);
+
+            var d3 = new Days._2020._3.Day3(input);
             var result = d3.Part1();
-            
+
             result.ShouldBe(7);
         }
-        
+
         [Test]
         public void Part1_TraversesMapMultipleTimesAsExpected_ReturnsMultipliedResult()
         {
@@ -40,10 +40,10 @@ namespace AdventOfCode.Tests._2020
 #.##...#...
 #...##....#
 .#..#...#.#";
-            
-            var d3 = new AdventOfCode.Days._2020._3.Day3(input);
+
+            var d3 = new Days._2020._3.Day3(input);
             var result = d3.Part2();
-            
+
             result.ShouldBe(336);
         }
     }

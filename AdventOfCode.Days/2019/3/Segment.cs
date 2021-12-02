@@ -16,7 +16,8 @@ namespace AdventOfCode.Days._2019._3
 
         public Point? GetIntersection(Segment segment)
         {
-            if (Equals(segment) || Start.Equals(segment.End) || End.Equals(segment.Start) || Start.Equals(segment.Start) || End.Equals(segment.End))
+            if (Equals(segment) || Start.Equals(segment.End) || End.Equals(segment.Start) ||
+                Start.Equals(segment.Start) || End.Equals(segment.End))
             {
                 return null;
             }
@@ -42,8 +43,8 @@ namespace AdventOfCode.Days._2019._3
                 return null;
             }
 
-            var ua = (dx2 * (ab.Start.Y - cd.Start.Y) - dy2 * (ab.Start.X - cd.Start.X)) / (double) denom;
-            var ub = (dx1 * (ab.Start.Y - cd.Start.Y) - dy1 * (ab.Start.X - cd.Start.X)) / (double) denom;
+            var ua = (dx2 * (ab.Start.Y - cd.Start.Y) - dy2 * (ab.Start.X - cd.Start.X)) / (double)denom;
+            var ub = (dx1 * (ab.Start.Y - cd.Start.Y) - dy1 * (ab.Start.X - cd.Start.X)) / (double)denom;
 
             if (ua < 0 || ua > 1 || ub < 0 || ub > 1)
             {
@@ -53,7 +54,7 @@ namespace AdventOfCode.Days._2019._3
             var ix = ab.Start.X + ua * (ab.End.X - ab.Start.X);
             var iy = ab.Start.Y + ua * (ab.End.Y - ab.Start.Y);
 
-            return new Point((int) Math.Round(ix), (int) Math.Round(iy));
+            return new Point((int)Math.Round(ix), (int)Math.Round(iy));
         }
     }
 }

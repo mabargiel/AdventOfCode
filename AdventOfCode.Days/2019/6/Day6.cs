@@ -45,7 +45,8 @@ namespace AdventOfCode.Days._2019._6
             {
                 var u = vertexes.RemoveFirst();
                 var neighbours = vertexes.Where(x =>
-                    (x.OribitngObject.OrbitsOn.Equals(u.OribitngObject) || x.OribitngObject.Equals(u.OribitngObject.OrbitsOn)) && u.Cost + 1 < x.Cost).ToList();
+                    (x.OribitngObject.OrbitsOn.Equals(u.OribitngObject) ||
+                     x.OribitngObject.Equals(u.OribitngObject.OrbitsOn)) && u.Cost + 1 < x.Cost).ToList();
 
                 if (u.OribitngObject.Equals(santaOrbitObject))
                 {
@@ -71,14 +72,16 @@ namespace AdventOfCode.Days._2019._6
                 var split = representation.Split(')');
                 var right = split[1];
 
-                var newObject = map.FirstOrDefault(x => x.Name == right) ?? CreateObject(map, mapRepresentation, representation);
+                var newObject = map.FirstOrDefault(x => x.Name == right) ??
+                                CreateObject(map, mapRepresentation, representation);
                 map.Add(newObject);
             }
 
             return map.ToArray();
         }
 
-        private static OribitngObject CreateObject(HashSet<OribitngObject> map, string[] mapRepresentation, string representation)
+        private static OribitngObject CreateObject(HashSet<OribitngObject> map, string[] mapRepresentation,
+            string representation)
         {
             if (representation == null)
             {
@@ -87,7 +90,9 @@ namespace AdventOfCode.Days._2019._6
 
             var split = representation.Split(')');
             var (left, right) = (split[0], split[1]);
-            var directOribitingObject = mapRepresentation.FirstOrDefault(x => x.Substring(x.LastIndexOf(')') + 1) == left && x != representation);
+            var directOribitingObject =
+                mapRepresentation.FirstOrDefault(
+                    x => x.Substring(x.LastIndexOf(')') + 1) == left && x != representation);
 
             var newObject = map.FirstOrDefault(x => x.Name == right);
 

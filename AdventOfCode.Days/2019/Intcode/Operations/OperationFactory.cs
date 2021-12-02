@@ -20,13 +20,13 @@ namespace AdventOfCode.Days._2019.Intcode.Operations
             var arg2Mode = instruction / 1000 % 10;
             var arg3Mode = instruction / 10000 % 10;
 
-            var arg1 = GetArgumentMode((ArgModes) arg1Mode, _program.Pointer + 1);
-            var arg2 = GetArgumentMode((ArgModes) arg2Mode, _program.Pointer + 2);
-            var arg3 = GetArgumentMode((ArgModes) arg3Mode, _program.Pointer + 3);
+            var arg1 = GetArgumentMode((ArgModes)arg1Mode, _program.Pointer + 1);
+            var arg2 = GetArgumentMode((ArgModes)arg2Mode, _program.Pointer + 2);
+            var arg3 = GetArgumentMode((ArgModes)arg3Mode, _program.Pointer + 3);
 
-            return (OpCode) opCode switch
+            return (OpCode)opCode switch
             {
-                OpCode.Add => (BaseOperation) new AddOperation(_program, arg1, arg2, arg3),
+                OpCode.Add => new AddOperation(_program, arg1, arg2, arg3),
                 OpCode.Multiply => new MultiplyOperation(_program, arg1, arg2, arg3),
                 OpCode.Input => new InputOperation(_program, arg1),
                 OpCode.Output => new OutputOperation(_program, arg1),
@@ -44,7 +44,7 @@ namespace AdventOfCode.Days._2019.Intcode.Operations
         {
             return argMode switch
             {
-                ArgModes.Position => (ArgumentMode) new PositionMode(_program.Memory, relativePosition),
+                ArgModes.Position => new PositionMode(_program.Memory, relativePosition),
                 ArgModes.Immediate => new ImmediateMode(_program.Memory, relativePosition),
                 ArgModes.Relative => new RelativeMode(_program.Memory, relativePosition, _program.RelativeBase),
                 _ => throw new ArgumentOutOfRangeException(nameof(argMode), argMode, null)

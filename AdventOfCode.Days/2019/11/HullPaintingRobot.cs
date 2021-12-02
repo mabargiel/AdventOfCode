@@ -8,7 +8,9 @@ namespace AdventOfCode.Days._2019._11
 {
     public class HullPaintingRobot
     {
-        private readonly LinkedList<Direction> _allDirections = new LinkedList<Direction>(new[] { Direction.Up, Direction.Right, Direction.Bottom, Direction.Left });
+        private readonly LinkedList<Direction> _allDirections =
+            new(new[] { Direction.Up, Direction.Right, Direction.Bottom, Direction.Left });
+
         private readonly IIntcodeComputer _boardComputer;
         private readonly Dictionary<Point, bool> _paintArea;
         private Point _currentPosition;

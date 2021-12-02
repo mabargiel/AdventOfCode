@@ -7,7 +7,7 @@ namespace AdventOfCode.Days._2019._3
 {
     public class Day3 : IAdventDay<int, int>
     {
-        private static readonly Point CentralPort = new Point(0, 0);
+        private static readonly Point CentralPort = new(0, 0);
         private readonly string[] _wire1;
         private readonly string[] _wire2;
 
@@ -44,7 +44,7 @@ namespace AdventOfCode.Days._2019._3
                 let w2Dist = GetDistance(wire2Segments, point)
                 select w1Dist + w2Dist;
 
-            return (int) distances.Min();
+            return (int)distances.Min();
         }
 
         private static double GetDistance(Wire wire, Point point)
@@ -88,7 +88,8 @@ namespace AdventOfCode.Days._2019._3
                     var bX = pointA.X;
                     var bY = pointA.Y;
 
-                    var (direction, distance) = (Enum.Parse<Direction>(wirePoint[0].ToString()), int.Parse(wirePoint.Substring(1, wirePoint.Length - 1)));
+                    var (direction, distance) = (Enum.Parse<Direction>(wirePoint[0].ToString()),
+                        int.Parse(wirePoint.Substring(1, wirePoint.Length - 1)));
 
                     switch (direction)
                     {
@@ -121,7 +122,8 @@ namespace AdventOfCode.Days._2019._3
 
             public IEnumerable<Point> GetIntersects(Wire wire)
             {
-                var intersectingSegments = Segments.SelectMany(x => wire.Segments.Select(y => y.GetIntersection(x))).Where(x => x != null).Cast<Point>();
+                var intersectingSegments = Segments.SelectMany(x => wire.Segments.Select(y => y.GetIntersection(x)))
+                    .Where(x => x != null).Cast<Point>();
                 return intersectingSegments;
             }
 

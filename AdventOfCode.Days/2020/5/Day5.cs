@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2020._5
 {
-    public class Day5 : IAdventDay<int,int>
+    public class Day5 : IAdventDay<int, int>
     {
-        private readonly int _rows;
-        private readonly int _cols;
         private readonly List<string> _boardingPasses;
+        private readonly int _cols;
+        private readonly int _rows;
 
         public Day5(string input)
         {
@@ -24,15 +24,17 @@ namespace AdventOfCode.Days._2020._5
 
         public int Part2()
         {
-           var sorted = Decode(.._rows, .._cols).OrderBy(seatId => seatId).ToList();
+            var sorted = Decode(.._rows, .._cols).OrderBy(seatId => seatId).ToList();
 
-           for (var i = 1; i < sorted.Count; i++)
-           {
-               if (sorted[i] - sorted[i - 1] == 2)
-                   return sorted[i] - 1;
-           }
+            for (var i = 1; i < sorted.Count; i++)
+            {
+                if (sorted[i] - sorted[i - 1] == 2)
+                {
+                    return sorted[i] - 1;
+                }
+            }
 
-           throw new InvalidOperationException();
+            throw new InvalidOperationException();
         }
 
         private IEnumerable<int> Decode(Range rowsRange, Range colsRange)
@@ -44,7 +46,7 @@ namespace AdventOfCode.Days._2020._5
 
                 return GetId(row, col);
             });
-            
+
             return ids;
         }
 
@@ -52,7 +54,7 @@ namespace AdventOfCode.Days._2020._5
         {
             var lowIndex = range.Start.Value;
             var highIndex = range.End.Value - 1;
-            
+
             foreach (var op in s)
             {
                 switch (op)
@@ -67,7 +69,7 @@ namespace AdventOfCode.Days._2020._5
                         break;
                 }
             }
-            
+
             return highIndex;
         }
 

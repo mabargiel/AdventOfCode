@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 
 namespace AdventOfCode.Days._2017
@@ -7,7 +6,7 @@ namespace AdventOfCode.Days._2017
     {
         public override int[] ParseRawInput(string rawInput)
         {
-            return rawInput.Select(x => (int) char.GetNumericValue(x)).ToArray();
+            return rawInput.Select(x => (int)char.GetNumericValue(x)).ToArray();
         }
 
         public override int Part1(int[] input)

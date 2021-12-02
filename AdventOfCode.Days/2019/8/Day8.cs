@@ -15,10 +15,11 @@ namespace AdventOfCode.Days._2019._8
             var imageSize = width * height;
             if (imageData.Length < imageSize || imageData.Length % imageSize > 0)
             {
-                throw new ArgumentException("The image data is corrupted and cannot be parsed to layers", nameof(imageData));
+                throw new ArgumentException("The image data is corrupted and cannot be parsed to layers",
+                    nameof(imageData));
             }
 
-            _layers = imageData.Batch((int) (width * height)).Select(x => x.ToArray());
+            _layers = imageData.Batch((int)(width * height)).Select(x => x.ToArray());
         }
 
         public int Part1()
@@ -34,7 +35,8 @@ namespace AdventOfCode.Days._2019._8
         public string Part2()
         {
             var size = _layers.First().Length;
-            var drillJobs = Enumerable.Range(0, size).Select(pixelIndex => Task.Run(() => DrillThroughLayers(pixelIndex)));
+            var drillJobs = Enumerable.Range(0, size)
+                .Select(pixelIndex => Task.Run(() => DrillThroughLayers(pixelIndex)));
 
             var password = Task.WhenAll(drillJobs).Result;
             return new string(password);

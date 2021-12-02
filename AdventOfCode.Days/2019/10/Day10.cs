@@ -43,7 +43,8 @@ namespace AdventOfCode.Days._2019._10
             var asteroids = _asteroids.Except(new[] { station }).ToList();
 
             var possibleLaserVectors = new LinkedList<Vector2>(asteroids
-                .Select(asteroid => new Vector2(asteroid.Point.X - station.Point.X, asteroid.Point.Y - station.Point.Y)).DistinctBy(Vector2.Normalize).OrderBy(Angle)
+                .Select(asteroid => new Vector2(asteroid.Point.X - station.Point.X, asteroid.Point.Y - station.Point.Y))
+                .DistinctBy(Vector2.Normalize).OrderBy(Angle)
                 .ToList());
 
             var vaporizedAsteroids = new Queue<Asteroid>();
@@ -60,9 +61,10 @@ namespace AdventOfCode.Days._2019._10
                 var laser = currentLaser.Value;
                 var toBeVaporized = asteroids.FirstOrDefault(asteroid =>
                 {
-                    var asteroidLineOfView = new Vector2(asteroid.Point.X - station.Point.X, asteroid.Point.Y - station.Point.Y);
+                    var asteroidLineOfView = new Vector2(asteroid.Point.X - station.Point.X,
+                        asteroid.Point.Y - station.Point.Y);
                     return IsOnLaserLine(laser, asteroidLineOfView) && asteroids.Except(new[] { station, asteroid })
-                               .All(asteroid1 => !IsBetween(station.Point, asteroid.Point, asteroid1.Point));
+                        .All(asteroid1 => !IsBetween(station.Point, asteroid.Point, asteroid1.Point));
                 });
 
                 if (toBeVaporized != null && !vaporizedAsteroids.Contains(toBeVaporized))
@@ -86,8 +88,8 @@ namespace AdventOfCode.Days._2019._10
             {
                 var u = new Vector2(0, -1);
                 var vNorm = Vector2.Normalize(v);
-                var relativeRadians = (float) Math.Atan2(vNorm.Y, vNorm.X) - (float) Math.Atan2(u.Y, u.X);
-                return relativeRadians >= 0 ? relativeRadians : 2 * (float) Math.PI + relativeRadians;
+                var relativeRadians = (float)Math.Atan2(vNorm.Y, vNorm.X) - (float)Math.Atan2(u.Y, u.X);
+                return relativeRadians >= 0 ? relativeRadians : 2 * (float)Math.PI + relativeRadians;
             }
 
             static bool IsOnLaserLine(Vector2 laser, Vector2 v)

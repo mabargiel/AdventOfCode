@@ -27,7 +27,9 @@ namespace AdventOfCode.Days._2020._1
         private int MultipleMatchingValues(int valuesCount)
         {
             if (valuesCount < 1)
+            {
                 throw new ArgumentException("Value cannot be less than 1", nameof(valuesCount));
+            }
 
             var topMinimums = (from number in _input
                 orderby number
