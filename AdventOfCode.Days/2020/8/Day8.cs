@@ -68,9 +68,14 @@ namespace AdventOfCode.Days._2020._8
                 var acc = process.ExecuteNext();
 
                 if (process.RanToCompletion)
+                {
                     return acc;
+                }
 
-                if (!visitedInstructions.Contains(process.CurrentInstruction)) continue;
+                if (!visitedInstructions.Contains(process.CurrentInstruction))
+                {
+                    continue;
+                }
 
                 var newProgram = new List<Instruction>(_process.LoadedProgram);
                 var opToReplace = operationsToTest.Dequeue();

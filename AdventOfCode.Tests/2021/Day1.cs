@@ -14,7 +14,7 @@ namespace AdventOfCode.Tests._2021
 
             input.ShouldBe(new[] { 100, 101, 110, 900 });
         }
-        
+
         [Test]
         public void Part1_WithExampleInput_ShouldIncrease7Times()
         {
@@ -22,10 +22,10 @@ namespace AdventOfCode.Tests._2021
             var day = new Days._2021.Day1();
 
             var result = day.Part1(input);
-            
+
             result.ShouldBe(7);
         }
-        
+
         [Test]
         public void Part2_WithExampleInput_ShouldIncrease5Times()
         {
@@ -33,7 +33,7 @@ namespace AdventOfCode.Tests._2021
             var day = new Days._2021.Day1();
 
             var result = day.Part2(input);
-            
+
             result.ShouldBe(5);
         }
     }

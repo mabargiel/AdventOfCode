@@ -34,7 +34,7 @@ namespace AdventOfCode.Days._2019._10
                 return true;
             }
 
-            return obj.GetType() == GetType() && Equals((Asteroid) obj);
+            return obj.GetType() == GetType() && Equals((Asteroid)obj);
         }
 
         public override int GetHashCode()

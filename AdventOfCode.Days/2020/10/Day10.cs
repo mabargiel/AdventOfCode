@@ -12,7 +12,7 @@ namespace AdventOfCode.Days._2020._10
         {
             _adapters = input.Split(Environment.NewLine).Select(int.Parse).OrderBy(it => it).ToList();
         }
-        
+
         public int Part1()
         {
             var differences = new Dictionary<int, int>
@@ -38,7 +38,7 @@ namespace AdventOfCode.Days._2020._10
 
             var fullAdaptersList = new List<int>(_adapters);
             fullAdaptersList.Insert(0, 0);
-            
+
             for (var i = 0; i < fullAdaptersList.Count - 1; i++)
             {
                 var currentNumber = fullAdaptersList[i];
@@ -51,8 +51,8 @@ namespace AdventOfCode.Days._2020._10
                 }
 
                 result *= fullAdaptersList[i + subsetCount + 1] - currentNumber > 4
-                    ? (int) Math.Pow(2, subsetCount - 1)
-                    : (int) Math.Pow(2, subsetCount) - 1;
+                    ? (int)Math.Pow(2, subsetCount - 1)
+                    : (int)Math.Pow(2, subsetCount) - 1;
 
                 i += subsetCount;
             }

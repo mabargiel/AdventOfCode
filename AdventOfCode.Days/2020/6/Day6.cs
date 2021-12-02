@@ -12,7 +12,7 @@ namespace AdventOfCode.Days._2020._6
         {
             _groups = input.Split(Environment.NewLine + Environment.NewLine);
         }
-        
+
         public int Part1()
         {
             return _groups.Sum(group => TrimWhiteCharacters(group).GroupBy(c => c).Count());

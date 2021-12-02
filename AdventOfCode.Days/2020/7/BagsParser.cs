@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Sprache;
 
@@ -24,12 +23,12 @@ namespace AdventOfCode.Days._2020._7
             from bags in Parse.String("bag")
             from sc in Parse.Char('s').Optional()
             select (shade, color);
-            
+
         private static readonly Parser<(int, string, string)> BagWithQty =
             from qty in Parse.Digit
             from _ in SpaceCharacter
             from bag in Bag
-            select ((int) char.GetNumericValue(qty), bag.Item1, bag.Item2);
+            select ((int)char.GetNumericValue(qty), bag.Item1, bag.Item2);
 
         private static readonly Parser<List<(int, string, string)>> BagContent =
             Parse.String("no other bags").Return(new List<(int, string, string)>()).Or(from leading in BagWithQty
@@ -54,7 +53,9 @@ namespace AdventOfCode.Days._2020._7
         {
             yield return head;
             foreach (var item in rest ?? new List<T>())
+            {
                 yield return item;
+            }
         }
     }
 }

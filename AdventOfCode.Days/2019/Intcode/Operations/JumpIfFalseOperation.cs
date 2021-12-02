@@ -25,7 +25,7 @@ namespace AdventOfCode.Days._2019.Intcode.Operations
             }
             else
             {
-                _program.Pointer = (int) _arg2.Value;
+                _program.Pointer = (int)_arg2.Value;
             }
         }
     }
