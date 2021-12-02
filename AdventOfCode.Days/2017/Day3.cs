@@ -18,29 +18,40 @@ namespace AdventOfCode.Days._2017
                 return 0;
             }
             
-            var directionFactor = 1;
-            var halfCycles = Math.Sqrt(input);
-            var restMovements = input % (int) halfCycles;
+            var pathLength = 1;
             var (x, y) = (0, 0);
-
-            for (var i = 1; i <= (int) halfCycles; i++)
-            { 
-                x += i * directionFactor;
-                y -= i * directionFactor;
-                directionFactor *= -1;
-            }
-
-            switch (restMovements)
+            var factors = new[] { 1, 0, -1, 0 };
+            var xFactorIndex = 0;
+            var yFactorIndex = 3;
+            var currentValue = 1;
+            
+            while (true)
             {
-                case > 0 when halfCycles - (int) halfCycles > 0.5:
-                    x += restMovements * directionFactor;
-                    break;
-                case > 0:
-                    y += restMovements * directionFactor;
-                    break;
-            }
+                for (var j = 0; j < 2; j++)
+                {
+                    var xVect = factors[xFactorIndex];
+                    var yVect = factors[yFactorIndex];
+                    
+                    for (var i = 0; i < pathLength; i++)
+                    {
+                        currentValue++;
+                        x += xVect;
+                        y += yVect;
 
-            return Math.Abs(x) + Math.Abs(y) - 1;
+                        if (currentValue == input)
+                        {
+                            return Math.Abs(x) + Math.Abs(y);
+                        }
+                    }
+
+                    xFactorIndex++;
+                    yFactorIndex++;
+                    xFactorIndex %= 4;
+                    yFactorIndex %= 4;
+                }
+
+                pathLength++;
+            }
         }
 
         public override int Part2(int input)
@@ -48,55 +59,47 @@ namespace AdventOfCode.Days._2017
             Dictionary<(int x, int y), int> spiral = new();
             var pathLength = 1;
             var (x, y) = (0, 0);
-            var directionFactor = 1;
             spiral[(0, 0)] = 1;
+
+            var factors = new[] { 1, 0, -1, 0 };
+            var xFactorIndex = 0;
+            var yFactorIndex = 3;
 
             while (true)
             {
                 int[] neighbourValues = new int[4];
-                for (var i = 0; i < pathLength; i++)
-                {
-                    x += directionFactor;
-
-                    spiral.TryGetValue((x - directionFactor, y), out neighbourValues[0]);
-                    spiral.TryGetValue((x - directionFactor, y + directionFactor), out neighbourValues[1]);
-                    spiral.TryGetValue((x, y + directionFactor), out neighbourValues[2]);
-                    spiral.TryGetValue((x + directionFactor, y + directionFactor), out neighbourValues[3]);
-
-                    spiral[(x, y)] = neighbourValues.Sum();
-
-                    if (spiral[(x, y)] > input)
-                    {
-                        return spiral[(x, y)];
-                    }
-                }
                 
-                for (var i = 0; i < pathLength; i++)
+                for (var j = 0; j < 2; j++)
                 {
-                    y += directionFactor;
-
-                    spiral.TryGetValue((x, y - directionFactor), out neighbourValues[0]);
-                    spiral.TryGetValue((x - directionFactor, y - directionFactor), out neighbourValues[1]);
-                    spiral.TryGetValue((x - directionFactor, y), out neighbourValues[2]);
-                    spiral.TryGetValue((x - directionFactor, y + directionFactor), out neighbourValues[3]);
+                    var xVect = factors[xFactorIndex];
+                    var yVect = factors[yFactorIndex];
                     
-                    spiral[(x, y)] = neighbourValues.Sum();
-                    
-                    if (spiral[(x, y)] > input)
+                    for (var i = 0; i < pathLength; i++)
                     {
-                        return spiral[(x, y)];
+                        x += xVect;
+                        y += yVect;
+
+                        spiral.TryGetValue((x - xVect, y - yVect), out neighbourValues[0]);
+                        spiral.TryGetValue((x - (xVect + yVect), y + (xVect - yVect)), out neighbourValues[2]);
+                        spiral.TryGetValue((x - yVect, y +xVect), out neighbourValues[1]);
+                        spiral.TryGetValue((x + (xVect - yVect), y + xVect + yVect), out neighbourValues[3]);
+
+                        spiral[(x, y)] = neighbourValues.Sum();
+
+                        if (spiral[(x, y)] > input) 
+                        {
+                            return spiral[(x, y)];
+                        }
                     }
+
+                    xFactorIndex++;
+                    yFactorIndex++;
+                    xFactorIndex %= 4;
+                    yFactorIndex %= 4;
                 }
 
                 pathLength++;
-                directionFactor *= -1;
             }
-        }
-
-        private enum Side
-        {
-            BottomRightCorner,
-            TopLeftCorner
         }
     }
 }
