@@ -10,22 +10,26 @@ namespace AdventOfCode
     public class Options
     {
         private readonly string _inputFile;
+        private string _input;
         private readonly int _year;
         private readonly int _day;
         private readonly bool _part1;
         private readonly bool _part2;
 
-        public Options(string inputFile, int year, int day, bool part1, bool part2)
+        public Options(string inputFile, string input, int year, int day, bool part1, bool part2)
         {
             _inputFile = inputFile;
+            _input = input;
             _year = year;
             _day = day;
             _part1 = part1;
             _part2 = part2;
         }
 
-        [Option("file", Required = true)]
+        [Option("file")]
         public string InputFile => _inputFile;
+
+        [Option("input")] public string Input => _input;
 
         [Option("year", Required = true)]
         public int Year => _year;
@@ -42,8 +46,9 @@ namespace AdventOfCode
         [Usage(ApplicationAlias = "AdventOfCode")]
         public static IEnumerable<Example> Examples =>
             new List<Example>() {
-                new("Run Part 1 of Day 1 2018", new Options("/path/to/file.txt", 2018, 1, true, false)),
-                new("Run Both Parts of Day 10 2021", new Options("/path/to/file.txt", 2021, 10, true, true))
+                new("Run Part 1 of Day 1 2018", new Options("/path/to/file.txt", string.Empty, 2018, 1, true, false)),
+                new("Run Both Parts of Day 10 2021", new Options("/path/to/file.txt", string.Empty, 2021, 10, true, true)),
+                new("Run Both Parts of Day 10 2021 with input instead of file", new Options(string.Empty, "100", 2021, 10, true, true))
             };
     }
     
@@ -70,8 +75,18 @@ namespace AdventOfCode
                 Console.WriteLine("Select at least one part to be executed");
                 return 1;
             }
+
+            if (string.IsNullOrEmpty(options.Input) && string.IsNullOrEmpty(options.InputFile))
+            {
+                Console.WriteLine("No input or input file provided");
+            }
             
-            var text = await File.ReadAllTextAsync(options.InputFile);
+            if (!string.IsNullOrEmpty(options.Input) && !string.IsNullOrEmpty(options.InputFile))
+            {
+                Console.WriteLine("Provide either input or input file. Not both.");
+            }
+            
+            var text = string.IsNullOrEmpty(options.Input) ? await File.ReadAllTextAsync(options.InputFile) : options.Input;
             var adventDay = AdventFactory.CreateDay(options.Year, options.Day);
 
             if (options.Part1)
