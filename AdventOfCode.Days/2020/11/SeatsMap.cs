@@ -3,18 +3,18 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2020._11
 {
-    internal class SeatsMap : Dictionary<(int, int),char>
+    internal class SeatsMap : Dictionary<(int, int), char>
     {
         private readonly int _maxX;
         private readonly int _maxY;
 
         public SeatsMap(IDictionary<(int, int), char> seatsMap)
-            :base(seatsMap)
+            : base(seatsMap)
         {
             _maxX = seatsMap.Max(it => it.Key.Item1);
             _maxY = seatsMap.Max(it => it.Key.Item2);
         }
-        
+
         public IEnumerable<char> GetFirstVisibleSeats(int x, int y)
         {
             var seen = new bool[8];
@@ -23,8 +23,10 @@ namespace AdventOfCode.Days._2020._11
             {
                 if (x + distance > _maxX && x - distance < 0 && y + distance > _maxY &&
                     y - distance < 0)
+                {
                     break;
-                
+                }
+
                 var n8directions = new[]
                 {
                     (x + distance, y),
@@ -40,7 +42,9 @@ namespace AdventOfCode.Days._2020._11
                 for (var i = 0; i < n8directions.Length; i++)
                 {
                     if (seen[i] || !TryGetValue(n8directions[i], out var v))
+                    {
                         continue;
+                    }
 
                     seen[i] = true;
                     yield return v;
@@ -53,9 +57,15 @@ namespace AdventOfCode.Days._2020._11
             for (var dx = -1; dx <= 1; dx++)
             for (var dy = -1; dy <= 1; dy++)
             {
-                if (dx == 0 && dy == 0) continue;
+                if (dx == 0 && dy == 0)
+                {
+                    continue;
+                }
+
                 if (TryGetValue((x + dx, y + dy), out var v))
+                {
                     yield return v;
+                }
             }
         }
     }

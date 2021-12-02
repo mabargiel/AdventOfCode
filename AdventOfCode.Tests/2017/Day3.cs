@@ -1,4 +1,3 @@
-using AdventOfCode.Days;
 using NUnit.Framework;
 using Shouldly;
 
@@ -13,14 +12,14 @@ namespace AdventOfCode.Tests._2017
         {
             _day = new Days._2017.Day3();
         }
-        
+
         [Test]
         public void ParseRawInput_IntoInt()
         {
             const string rawInput = "999";
 
             var input = _day.ParseRawInput(rawInput);
-            
+
             input.ShouldBe(999);
         }
 
@@ -32,15 +31,15 @@ namespace AdventOfCode.Tests._2017
         public void Part1_CalculateDistanceInSpiral(int input, int expectedResult)
         {
             var result = _day.Part1(input);
-            
+
             result.ShouldBe(expectedResult);
         }
-        
+
         [Test]
         public void Part2_CalculateFirstLargerValueThenInputInSpiral()
         {
             var result = _day.Part2(748);
-            
+
             result.ShouldBe(806);
         }
     }

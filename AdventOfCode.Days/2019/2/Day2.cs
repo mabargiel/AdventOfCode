@@ -28,13 +28,14 @@ namespace AdventOfCode.Days._2019._2
 
         public long Part2()
         {
-            var combinations = new Combinations<int>(Enumerable.Range(0, _input.Count()).ToList(), 2, GenerateOption.WithRepetition);
+            var combinations = new Combinations<int>(Enumerable.Range(0, _input.Count()).ToList(), 2,
+                GenerateOption.WithRepetition);
 
             var input = _input.ToArray();
 
             foreach (var combination in combinations)
             {
-                var code = (long[]) input.Clone();
+                var code = (long[])input.Clone();
                 var computer = new IntcodeComputer(code);
                 computer.Input(0);
                 computer.StartAsync().Wait();

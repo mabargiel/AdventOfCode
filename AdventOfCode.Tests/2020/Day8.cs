@@ -36,14 +36,14 @@ namespace AdventOfCode.Tests._2020
                 104
             }
         };
-        
+
         [Test]
         [TestCaseSource(nameof(Codes))]
         public void Part1(string input, int expected)
         {
-            var d8 = new AdventOfCode.Days._2020._8.Day8(input);
+            var d8 = new Days._2020._8.Day8(input);
             var result = d8.Part1();
-            
+
             result.ShouldBe(expected);
         }
 
@@ -59,12 +59,11 @@ namespace AdventOfCode.Tests._2020
                     acc +1
                     jmp -4
                     acc +6".TrimIndent();
-            
-            var d8 = new AdventOfCode.Days._2020._8.Day8(input);
+
+            var d8 = new Days._2020._8.Day8(input);
             var result = d8.Part2();
-            
+
             result.ShouldBe(8);
-            
         }
     }
 }

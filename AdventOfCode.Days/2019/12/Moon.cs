@@ -32,7 +32,8 @@ namespace AdventOfCode.Days._2019._12
                 return true;
             }
 
-            return Position.All(pair => other.Position[pair.Key] == pair.Value) && Velocity.All(pair => other.Velocity[pair.Key] == pair.Value);
+            return Position.All(pair => other.Position[pair.Key] == pair.Value) &&
+                   Velocity.All(pair => other.Velocity[pair.Key] == pair.Value);
         }
 
         public void ApplyVelocity(char[] dimensions)
@@ -63,7 +64,7 @@ namespace AdventOfCode.Days._2019._12
                 return true;
             }
 
-            return obj.GetType() == GetType() && Equals((Moon) obj);
+            return obj.GetType() == GetType() && Equals((Moon)obj);
         }
 
         public override int GetHashCode()

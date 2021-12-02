@@ -22,7 +22,7 @@
         string Part1(string rawInput);
         string Part2(string rawInput);
     }
-    
+
     public interface IAdventDay<out TOut1, out TOut2>
     {
         TOut1 Part1();

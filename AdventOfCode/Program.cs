@@ -9,49 +9,40 @@ namespace AdventOfCode
 {
     public class Options
     {
-        private readonly string _inputFile;
-        private string _input;
-        private readonly int _year;
-        private readonly int _day;
-        private readonly bool _part1;
-        private readonly bool _part2;
-
         public Options(string inputFile, string input, int year, int day, bool part1, bool part2)
         {
-            _inputFile = inputFile;
-            _input = input;
-            _year = year;
-            _day = day;
-            _part1 = part1;
-            _part2 = part2;
+            InputFile = inputFile;
+            Input = input;
+            Year = year;
+            Day = day;
+            Part1 = part1;
+            Part2 = part2;
         }
 
-        [Option("file")]
-        public string InputFile => _inputFile;
+        [Option("file")] public string InputFile { get; }
 
-        [Option("input")] public string Input => _input;
+        [Option("input")] public string Input { get; }
 
-        [Option("year", Required = true)]
-        public int Year => _year;
-        
-        [Option("day", Required = true)]
-        public int Day => _day;
+        [Option("year", Required = true)] public int Year { get; }
 
-        [Option("part1")]
-        public bool Part1 => _part1;
+        [Option("day", Required = true)] public int Day { get; }
 
-        [Option("part2")]
-        public bool Part2 => _part2;
-        
+        [Option("part1")] public bool Part1 { get; }
+
+        [Option("part2")] public bool Part2 { get; }
+
         [Usage(ApplicationAlias = "AdventOfCode")]
         public static IEnumerable<Example> Examples =>
-            new List<Example>() {
+            new List<Example>
+            {
                 new("Run Part 1 of Day 1 2018", new Options("/path/to/file.txt", string.Empty, 2018, 1, true, false)),
-                new("Run Both Parts of Day 10 2021", new Options("/path/to/file.txt", string.Empty, 2021, 10, true, true)),
-                new("Run Both Parts of Day 10 2021 with input instead of file", new Options(string.Empty, "100", 2021, 10, true, true))
+                new("Run Both Parts of Day 10 2021",
+                    new Options("/path/to/file.txt", string.Empty, 2021, 10, true, true)),
+                new("Run Both Parts of Day 10 2021 with input instead of file",
+                    new Options(string.Empty, "100", 2021, 10, true, true))
             };
     }
-    
+
     internal class Program
     {
         private static async Task Main(string[] args)
@@ -80,13 +71,15 @@ namespace AdventOfCode
             {
                 Console.WriteLine("No input or input file provided");
             }
-            
+
             if (!string.IsNullOrEmpty(options.Input) && !string.IsNullOrEmpty(options.InputFile))
             {
                 Console.WriteLine("Provide either input or input file. Not both.");
             }
-            
-            var text = string.IsNullOrEmpty(options.Input) ? await File.ReadAllTextAsync(options.InputFile) : options.Input;
+
+            var text = string.IsNullOrEmpty(options.Input)
+                ? await File.ReadAllTextAsync(options.InputFile)
+                : options.Input;
             var adventDay = AdventFactory.CreateDay(options.Year, options.Day);
 
             if (options.Part1)
@@ -100,10 +93,10 @@ namespace AdventOfCode
                 {
                     result = "Not yet implemented";
                 }
-                
+
                 Console.WriteLine($"PART1= {result}");
             }
-            
+
             if (options.Part2)
             {
                 string result;
@@ -115,7 +108,7 @@ namespace AdventOfCode
                 {
                     result = "Not yet implemented";
                 }
-                
+
                 Console.WriteLine($"PART2= {result}");
             }
 

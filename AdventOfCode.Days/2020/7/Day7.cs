@@ -25,7 +25,9 @@ namespace AdventOfCode.Days._2020._7
         private bool AtLeastOneShinyGoldBag(Bag bag)
         {
             if (bag.Bags.Any(insideBag => insideBag.Shade == "shiny" && insideBag.Color == "gold"))
+            {
                 return true;
+            }
 
             return bag.Bags
                 .Select(insideBag =>

@@ -59,24 +59,24 @@ namespace AdventOfCode.Tests._2020
                 22 * 10, 19_208
             }
         };
-        
+
         [Test]
         [TestCaseSource(nameof(Examples))]
         public void Part1(string input, int expected, int _)
         {
-            var d10 = new AdventOfCode.Days._2020._10.Day10(input);
+            var d10 = new Days._2020._10.Day10(input);
             var result = d10.Part1();
-            
+
             result.ShouldBe(expected);
         }
-        
+
         [Test]
         [TestCaseSource(nameof(Examples))]
         public void Part2(string input, int _, int expected)
         {
-            var d10 = new AdventOfCode.Days._2020._10.Day10(input);
+            var d10 = new Days._2020._10.Day10(input);
             var result = d10.Part2();
-            
+
             result.ShouldBe(expected);
         }
     }

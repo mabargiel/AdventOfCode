@@ -20,7 +20,9 @@ namespace AdventOfCode.Days._2020._11
                 for (var j = 0; j < row.Length; j++)
                 {
                     if (row[j] == '.')
+                    {
                         continue;
+                    }
 
                     seatsMap[(i, j)] = row[j];
                 }

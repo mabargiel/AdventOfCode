@@ -6,7 +6,7 @@ namespace AdventOfCode.Days._2019._4
 
         protected Password(int[] digits)
         {
-            var clone = (int[]) digits.Clone();
+            var clone = (int[])digits.Clone();
 
             for (var i = 0; i < clone.Length - 1; i++)
             {

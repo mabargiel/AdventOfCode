@@ -9,7 +9,7 @@ namespace AdventOfCode.Days._2019._4
 
         public Day4(in int start, in int end)
         {
-            _digits = start.ToString().Select(c => (int) char.GetNumericValue(c)).ToArray();
+            _digits = start.ToString().Select(c => (int)char.GetNumericValue(c)).ToArray();
             ;
             _end = end;
         }

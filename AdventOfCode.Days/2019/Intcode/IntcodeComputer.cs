@@ -9,11 +9,11 @@ namespace AdventOfCode.Days._2019.Intcode
 {
     public class IntcodeComputer : IIntcodeComputer
     {
-        private readonly BlockingCollection<long> _input = new BlockingCollection<long>();
+        private readonly BlockingCollection<long> _input = new();
 
         public IntcodeComputer(IEnumerable<long> code)
         {
-            var instructions = code.Select((x, i) => (x, (long) i)).ToDictionary(x => x.Item2, x => x.x);
+            var instructions = code.Select((x, i) => (x, (long)i)).ToDictionary(x => x.Item2, x => x.x);
             Program = new Program(instructions, _input);
             Program.OnOutput += l => { OnOutput?.Invoke(l); };
         }
@@ -28,7 +28,7 @@ namespace AdventOfCode.Days._2019.Intcode
 
             await Task.Run(() =>
             {
-                while (Program.CurrentInteger() != (int) OpCode.HaltProgram)
+                while (Program.CurrentInteger() != (int)OpCode.HaltProgram)
                 {
                     operation.Execute();
                     operation = operationFactory.Next();

@@ -23,7 +23,9 @@ namespace AdventOfCode.Days._2020._8
             Accumulator += increase;
 
             if (Position > LoadedProgram.Count - 1)
+            {
                 RanToCompletion = true;
+            }
 
             return Accumulator;
         }

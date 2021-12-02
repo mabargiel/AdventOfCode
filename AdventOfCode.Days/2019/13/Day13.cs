@@ -43,19 +43,19 @@ namespace AdventOfCode.Days._2019._13
             {
                 var (pointF, tileId) = tile;
 
-                if ((long) pointF.X == -1 && (long) pointF.Y == 0)
+                if ((long)pointF.X == -1 && (long)pointF.Y == 0)
                 {
                     score = tileId;
                 }
 
-                switch ((TileId) tileId)
+                switch ((TileId)tileId)
                 {
                     case TileId.Ball:
                         var joystickMode = pointF.X.CompareTo(paddlePositionX);
                         cabinet.SetJoystick(joystickMode);
                         break;
                     case TileId.HorizontalPaddle:
-                        paddlePositionX = (long) pointF.X;
+                        paddlePositionX = (long)pointF.X;
                         break;
                 }
             };

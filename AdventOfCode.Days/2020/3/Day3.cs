@@ -33,9 +33,9 @@ namespace AdventOfCode.Days._2020._3
         {
             return new[]
             {
-                CalculateTreeCount(1, 1), 
-                CalculateTreeCount(3, 1), 
-                CalculateTreeCount(5, 1), 
+                CalculateTreeCount(1, 1),
+                CalculateTreeCount(3, 1),
+                CalculateTreeCount(5, 1),
                 CalculateTreeCount(7, 1),
                 CalculateTreeCount(1, 2)
             }.Aggregate(1, (prev, curr) => prev * curr);
@@ -49,11 +49,13 @@ namespace AdventOfCode.Days._2020._3
             while (row < _map.GetLength(0))
             {
                 if (_map[row, col] == '#')
+                {
                     trees++;
+                }
 
                 col += right;
                 row += down;
-                
+
                 if (col > _map.GetLength(1) - 1)
                 {
                     col -= _map.GetLength(1);

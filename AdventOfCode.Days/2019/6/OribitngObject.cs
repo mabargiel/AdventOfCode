@@ -40,7 +40,7 @@ namespace AdventOfCode.Days._2019._6
                 return true;
             }
 
-            return obj.GetType() == GetType() && Equals((OribitngObject) obj);
+            return obj.GetType() == GetType() && Equals((OribitngObject)obj);
         }
 
         public override int GetHashCode()
