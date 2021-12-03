@@ -13,21 +13,7 @@ namespace AdventOfCode.Days._2017
 
         public override int Part1(IReadOnlyList<char> input)
         {
-            var (score, _) = GetScoreAndGarbageLength(input);
-            return score;
-        }
-
-        public override int Part2(IReadOnlyList<char> input)
-        {
-            
-            var (_, garbageLength) = GetScoreAndGarbageLength(input);
-            return garbageLength;
-        }
-
-        private static (int Score, int GarbageLength) GetScoreAndGarbageLength(IReadOnlyList<char> input)
-        {
             var score = 0;
-            var garbageLength = 0;
             var currentNesting = 1;
 
             var cleanedInput = RemoveIgnoredCharacters(input).ToArray();
@@ -47,14 +33,35 @@ namespace AdventOfCode.Days._2017
                     {
                         var closingTagIndex = Array.IndexOf(cleanedInput, '>', currentPos);
                         var distance = closingTagIndex - currentPos;
-                        garbageLength += distance - 1;
                         currentPos += distance;
                         break;
                     }
                 }
             }
 
-            return (score, garbageLength);
+            return score;
+        }
+
+        public override int Part2(IReadOnlyList<char> input)
+        {
+            var garbageLength = 0;
+
+            var cleanedInput = RemoveIgnoredCharacters(input).ToArray();
+
+            for (var currentPos = 0; currentPos < cleanedInput.Length; currentPos++)
+            {
+                if (cleanedInput[currentPos] != '<')
+                {
+                    continue;
+                }
+
+                var closingTagIndex = Array.IndexOf(cleanedInput, '>', currentPos);
+                var distance = closingTagIndex - currentPos;
+                garbageLength += distance - 1;
+                currentPos += distance;
+            }
+
+            return garbageLength;
         }
 
         private static IEnumerable<char> RemoveIgnoredCharacters(IReadOnlyList<char> input)
