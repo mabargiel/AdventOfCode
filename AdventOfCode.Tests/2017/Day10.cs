@@ -38,7 +38,7 @@ namespace AdventOfCode.Tests._2017
         public void Part2_CalculateHexadecimalHash(string input, string expectedResult)
         {
             var result = _day.Part2((input, 256));
-            
+
             result.ShouldBe(expectedResult);
         }
     }
