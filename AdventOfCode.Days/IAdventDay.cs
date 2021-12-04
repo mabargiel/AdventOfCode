@@ -2,12 +2,12 @@
 {
     public abstract class AdventDay<TIn, TOut1, TOut2> : IAdventDay
     {
-        public string Part1(string rawInput)
+        public string Part1ToString(string rawInput)
         {
             return Part1(ParseRawInput(rawInput)).ToString();
         }
 
-        public string Part2(string rawInput)
+        public string Part2ToString(string rawInput)
         {
             return Part2(ParseRawInput(rawInput)).ToString();
         }
@@ -19,8 +19,8 @@
 
     public interface IAdventDay
     {
-        string Part1(string rawInput);
-        string Part2(string rawInput);
+        string Part1ToString(string rawInput);
+        string Part2ToString(string rawInput);
     }
 
     public interface IAdventDay<out TOut1, out TOut2>

@@ -87,7 +87,7 @@ namespace AdventOfCode
                 string result;
                 try
                 {
-                    result = adventDay.Part1(text);
+                    result = adventDay.Part1ToString(text);
                 }
                 catch (NotImplementedException)
                 {
@@ -102,7 +102,7 @@ namespace AdventOfCode
                 string result;
                 try
                 {
-                    result = adventDay.Part2(text);
+                    result = adventDay.Part2ToString(text);
                 }
                 catch (NotImplementedException)
                 {
