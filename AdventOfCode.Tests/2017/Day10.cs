@@ -12,21 +12,33 @@ namespace AdventOfCode.Tests._2017
 
             var input = _day.ParseRawInput(rawInput);
 
-            input.ShouldBe(new[] { 256, 3, 4, 1, 5 });
+            input.ShouldBe(("3,4,1,5", 256));
         }
 
         [Test]
-        [TestCase(new[] { 5, 3, 4, 1, 5 }, 3 * 4)]
-        [TestCase(new[] { 5, 3, 4, 2, 2 }, 12)]
-        [TestCase(new[] { 10, 8, 10 }, 6)]
-        [TestCase(new[] { 11, 11 }, 90)]
-        [TestCase(new[] { 256, 120, 93, 0, 90, 5, 80, 129, 74, 1, 165, 204, 255, 254, 2, 50, 113 }, 826)]
-        [TestCase(new[] { 5, 1, 4 }, 0)]
-        [TestCase(new[] { 5, 3, 4, 0, 2 }, 12)]
-        public void Part1_TieAKnot_ReturnTwoFirstNumbersMultiplied(int[] input, int expectedResult)
+        [TestCase("3,4,1,5", 5, 3 * 4)]
+        [TestCase("3,4,2,2", 5, 12)]
+        [TestCase("8,10", 10, 6)]
+        [TestCase("11", 11, 90)]
+        [TestCase("120,93,0,90,5,80,129,74,1,165,204,255,254,2,50,113", 256, 826)]
+        [TestCase("1,4", 5, 0)]
+        [TestCase("3,4,0,2", 5, 12)]
+        public void Part1_TieAKnot_ReturnTwoFirstNumbersMultiplied(string input, int size, int expectedResult)
         {
-            var result = _day.Part1(input);
+            var result = _day.Part1((input, size));
 
+            result.ShouldBe(expectedResult);
+        }
+
+        [Test]
+        [TestCase("", "a2582a3a0e66e6e86e3812dcb672a272")]
+        [TestCase("AoC 2017", "33efeb34ea91902bb2f59c9920caa6cd")]
+        [TestCase("1,2,3", "3efbe78a8d82f29979031a4aa0b16a9d")]
+        [TestCase("1,2,4", "63960835bcdc130f0b66d7ff4f6a5a8e")]
+        public void Part2_CalculateHexadecimalHash(string input, string expectedResult)
+        {
+            var result = _day.Part2((input, 256));
+            
             result.ShouldBe(expectedResult);
         }
     }
