@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+
+namespace AdventOfCode.Days._2021._10
+{
+    public class BingoGame
+    {
+        public ImmutableArray<int> ChosenNumbers { get; }
+        private int _currentNumberPos;
+        public List<Board> Boards { get; }
+        public int LastMarkedValue { get; private set; } = -1;
+
+        public BingoGame(string input)
+        {
+            var segments = input.Trim().Split(Environment.NewLine + Environment.NewLine);
+
+            var randomNumbers = segments.First().Split(',').Select(int.Parse);
+            ChosenNumbers = randomNumbers.ToImmutableArray();
+
+            var boards = segments[1..].Select(boardString => new Board(boardString)).ToList();
+
+            Boards = boards;
+        }
+
+        public Board ExecuteRoundAndFindWinner(int number)
+        {
+            if (!Boards.Any())
+                return null;
+            
+            LastMarkedValue = number;
+            Board winner = null;
+            foreach (var board in Boards.ToArray())
+            {
+                board.MarkNumber(number);
+                if (board.IsBingo())
+                {
+                    winner ??= board;
+                    Boards.Remove(board);
+                }
+            }
+            
+            return winner;
+        }
+    }
+}
