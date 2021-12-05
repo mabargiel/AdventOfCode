@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace AdventOfCode.Days._2021._10
+namespace AdventOfCode.Days._2021.Day4
 {
     public class BingoGame
     {

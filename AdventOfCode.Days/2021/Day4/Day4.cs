@@ -1,6 +1,6 @@
 using System;
 
-namespace AdventOfCode.Days._2021._10
+namespace AdventOfCode.Days._2021.Day4
 {
     public class Day4 : AdventDay<BingoGame, int, int>
     {

@@ -1,17 +1,15 @@
-using System.Linq;
-using AdventOfCode.Days._2021;
-using AdventOfCode.Days._2021._10;
+using AdventOfCode.Days._2021.Day4;
 using NUnit.Framework;
 using Shouldly;
 
 namespace AdventOfCode.Tests._2021
 {
-    public class Day4 : AdventDayTest<Days._2021._10.Day4>
+    public class Day4 : AdventDayTest<Days._2021.Day4.Day4>
     {
         [Test]
         public override void ParseRawInputTest()
         {
-            var rawInput = @"7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
+            const string rawInput = @"7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
 
 22 13 17 11  0
  8  2 23  4 24
