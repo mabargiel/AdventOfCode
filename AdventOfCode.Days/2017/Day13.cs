@@ -18,7 +18,7 @@ namespace AdventOfCode.Days._2017
 
         public override int Part1(ImmutableDictionary<int, int> input)
         {
-            return input.Keys.Where(layer => layer % ((input[layer] - 1) * 2) == 0).Sum(layer => layer * input[layer]);
+            return input.Where(layer => layer.Key % ((layer.Value - 1) * 2) == 0).Sum(layer => layer.Key * layer.Value);
         }
 
         public override int Part2(ImmutableDictionary<int, int> input)
