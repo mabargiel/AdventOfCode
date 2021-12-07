@@ -14,7 +14,6 @@ namespace AdventOfCode.Tests
             _day = Activator.CreateInstance<T>();
         }
 
-        [Test]
         public abstract void ParseRawInputTest();
     }
 }

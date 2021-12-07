@@ -1,4 +1,7 @@
-﻿namespace AdventOfCode.Days
+﻿using System.Collections.Immutable;
+using AdventOfCode.Days._2021;
+
+namespace AdventOfCode.Days
 {
     public abstract class AdventDay<TIn, TOut1, TOut2> : IAdventDay
     {
