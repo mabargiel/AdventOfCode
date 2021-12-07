@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode.Days._2021
@@ -13,40 +12,25 @@ namespace AdventOfCode.Days._2021
 
         public override int Part1(int[] input)
         {
-            var minPos = input.Min();
-            var maxPos = input.Max();
+            var sorted = input.OrderBy(x => x).ToArray();
+            var position = sorted[input.Length / 2];
 
-            var totalFuels = new SortedSet<int>();
-
-            for (var i = minPos; i <= maxPos; i++)
-            {
-                var fuelUsed = input.Sum(x => Math.Abs(i - x));
-
-                totalFuels.Add(fuelUsed);
-            }
-
-            return totalFuels.Min();
+            return input.Sum(x => Math.Abs(position - x));
         }
 
         public override int Part2(int[] input)
         {
-            var minPos = input.Min();
-            var maxPos = input.Max();
+            var mean = input.Average();
+            var positions = new[] { Math.Floor(mean), Math.Ceiling(mean) };
 
-            var totalFuels = new SortedSet<int>();
-
-            for (var i = minPos; i <= maxPos; i++)
+            return positions.Min(p =>
             {
-                var fuelUsed = input.Sum(x =>
+                return input.Sum(x =>
                 {
-                    var count = Math.Abs(i - x);
+                    var count = Math.Abs(p - x);
                     return (int)((1 + count) / 2d * count);
                 });
-
-                totalFuels.Add(fuelUsed);
-            }
-
-            return totalFuels.Min();
+            });
         }
     }
 }
