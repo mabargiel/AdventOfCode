@@ -34,7 +34,7 @@ namespace AdventOfCode.Days._2017
 
             return delay;
         }
-
+        
         private static bool WouldBeDetected(KeyValuePair<int, int> layer, int delay = 0)
         {
             var (depth, range) = layer;
