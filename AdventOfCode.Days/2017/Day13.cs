@@ -18,7 +18,7 @@ namespace AdventOfCode.Days._2017
 
         public override int Part1(ImmutableDictionary<int, int> input)
         {
-            return input.Where(layer => layer.Key % ((layer.Value - 1) * 2) == 0).Sum(layer => layer.Key * layer.Value);
+            return input.Where(layer => WouldBeDetected(layer)).Sum(layer => layer.Key * layer.Value);
         }
 
         public override int Part2(ImmutableDictionary<int, int> input)
@@ -29,10 +29,16 @@ namespace AdventOfCode.Days._2017
             do
             {
                 delay++;
-                caught = input.Keys.Any(layer => (layer + delay) % ((input[layer] - 1) * 2) == 0);
+                caught = input.Any(layer => WouldBeDetected(layer, delay));
             } while (caught);
 
             return delay;
+        }
+        
+        private static bool WouldBeDetected(KeyValuePair<int, int> layer, int delay = 0)
+        {
+            var (depth, range) = layer;
+            return (depth + delay) % ((range - 1) * 2) == 0;
         }
     }
 }
