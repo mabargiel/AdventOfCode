@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using CommandLine;
@@ -82,19 +83,23 @@ namespace AdventOfCode
                 : options.Input;
             var adventDay = AdventFactory.CreateDay(options.Year, options.Day);
 
+            var watch = new Stopwatch();
+            
             if (options.Part1)
             {
                 string result;
                 try
                 {
+                    watch.Restart();
                     result = adventDay.Part1ToString(text);
+                    watch.Stop();
                 }
                 catch (NotImplementedException)
                 {
                     result = "Not yet implemented";
                 }
 
-                Console.WriteLine($"PART1= {result}");
+                Console.WriteLine($"PART1= {result} ({watch.ElapsedMilliseconds}ms)");
             }
 
             if (options.Part2)
@@ -102,14 +107,16 @@ namespace AdventOfCode
                 string result;
                 try
                 {
+                    watch.Restart();
                     result = adventDay.Part2ToString(text);
+                    watch.Stop();
                 }
                 catch (NotImplementedException)
                 {
                     result = "Not yet implemented";
                 }
 
-                Console.WriteLine($"PART2= {result}");
+                Console.WriteLine($"PART2= {result} ({watch.ElapsedMilliseconds}ms)");
             }
 
             return 0;
