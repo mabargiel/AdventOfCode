@@ -3,3 +3,5 @@ obj/
 /packages/
 \.idea/
 coverage.cobertura.xml
+AdventOfCode.Days/2021/.DS_Store
+.DS_Store
