@@ -83,23 +83,19 @@ namespace AdventOfCode
                 : options.Input;
             var adventDay = AdventFactory.CreateDay(options.Year, options.Day);
 
-            var watch = new Stopwatch();
-            
             if (options.Part1)
             {
                 string result;
                 try
                 {
-                    watch.Restart();
-                    result = adventDay.Part1ToString(text);
-                    watch.Stop();
+                    result = adventDay.ExecutePart1(text);
                 }
                 catch (NotImplementedException)
                 {
                     result = "Not yet implemented";
                 }
 
-                Console.WriteLine($"PART1= {result} ({watch.ElapsedMilliseconds}ms)");
+                Console.WriteLine(result);
             }
 
             if (options.Part2)
@@ -107,16 +103,14 @@ namespace AdventOfCode
                 string result;
                 try
                 {
-                    watch.Restart();
-                    result = adventDay.Part2ToString(text);
-                    watch.Stop();
+                    result = adventDay.ExecutePart2(text);
                 }
                 catch (NotImplementedException)
                 {
                     result = "Not yet implemented";
                 }
 
-                Console.WriteLine($"PART2= {result} ({watch.ElapsedMilliseconds}ms)");
+                Console.WriteLine(result);
             }
 
             return 0;

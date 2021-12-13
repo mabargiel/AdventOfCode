@@ -19,8 +19,8 @@ A-end
 b-end";
 
             var input = _day.ParseRawInput(rawInput);
-            
-            input.AdjacentList["start"].ShouldBeEquivalentTo(new HashSet<string> {"A", "b"});
+
+            input.AdjacentList["start"].ShouldBeEquivalentTo(new HashSet<string> { "A", "b" });
             input.AdjacentList["A"].ShouldBeEquivalentTo(new HashSet<string> { "start", "c", "b", "end" });
             input.AdjacentList["b"].ShouldBeEquivalentTo(new HashSet<string> { "start", "A", "d", "end" });
             input.AdjacentList["c"].ShouldBeEquivalentTo(new HashSet<string> { "A" });
@@ -69,10 +69,10 @@ start-RW", 226)]
             var input = new Graph(rawInput);
 
             var result = _day.Part1(input);
-            
+
             result.ShouldBe(expectedResult);
         }
-        
+
         [Test]
         [TestCase(@"start-A
 start-b
@@ -114,7 +114,7 @@ start-RW", 3509)]
             var input = new Graph(rawInput);
 
             var result = _day.Part2(input);
-            
+
             result.ShouldBe(expectedResult);
         }
     }

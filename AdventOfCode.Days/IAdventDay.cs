@@ -1,18 +1,43 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics;
 using AdventOfCode.Days._2021;
 
 namespace AdventOfCode.Days
 {
     public abstract class AdventDay<TIn, TOut1, TOut2> : IAdventDay
     {
-        public string Part1ToString(string rawInput)
+        public string ExecutePart1(string rawInput)
         {
-            return Part1(ParseRawInput(rawInput)).ToString();
+            var watch = new Stopwatch();
+            watch.Start();
+            var input = ParseRawInput(rawInput);
+            watch.Stop();
+            var inputParsingTime = watch.ElapsedMilliseconds;
+            
+            watch.Restart();
+            var result = Part1(input).ToString();
+            watch.Stop();
+            var executionTime = watch.ElapsedMilliseconds;
+
+            return
+                $"Part 1 >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime}ms\n>>> Execution time: {executionTime}ms";
         }
 
-        public string Part2ToString(string rawInput)
+        public string ExecutePart2(string rawInput)
         {
-            return Part2(ParseRawInput(rawInput)).ToString();
+            var watch = new Stopwatch();
+            watch.Start();
+            var input = ParseRawInput(rawInput);
+            watch.Stop();
+            var inputParsingTime = watch.ElapsedMilliseconds;
+            
+            watch.Restart();
+            var result = Part2(input).ToString();
+            watch.Stop();
+            var executionTime = watch.ElapsedMilliseconds;
+
+            return
+                $"Part 2 >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime}ms\n>>> Execution time: {executionTime}ms";
         }
 
         public abstract TIn ParseRawInput(string rawInput);
@@ -22,8 +47,8 @@ namespace AdventOfCode.Days
 
     public interface IAdventDay
     {
-        string Part1ToString(string rawInput);
-        string Part2ToString(string rawInput);
+        string ExecutePart1(string rawInput);
+        string ExecutePart2(string rawInput);
     }
 
     public interface IAdventDay<out TOut1, out TOut2>

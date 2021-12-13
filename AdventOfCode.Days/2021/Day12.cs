@@ -18,7 +18,7 @@ namespace AdventOfCode.Days._2021
 
         public override int Part2(Graph input)
         {
-            return input.CountPaths();
+            return input.DfsToEndVisitOneCaveTwice();
         }
     }
 
@@ -36,31 +36,31 @@ namespace AdventOfCode.Days._2021
 
         public Dictionary<string, HashSet<string>> AdjacentList { get; } = new();
 
-        public void AddEdge(string v, string w)
+        private void AddEdge(string v, string w)
         {
             if (!AdjacentList.ContainsKey(v))
             {
                 AdjacentList[v] = new HashSet<string>();
             }
-            
+
             if (!AdjacentList.ContainsKey(w))
             {
                 AdjacentList[w] = new HashSet<string>();
             }
-            
+
             AdjacentList[v].Add(w);
             AdjacentList[w].Add(v);
         }
-        
+
         public int DfsToEnd(string vertex = "start", HashSet<string> visited = null, int pathCount = 0)
         {
             visited ??= new HashSet<string>();
-            
-            if(!IsUpper(vertex))
+
+            if (!IsUpper(vertex))
             {
                 visited.Add(vertex);
             }
-            
+
             if (vertex == "end")
             {
                 pathCount++;
@@ -69,7 +69,7 @@ namespace AdventOfCode.Days._2021
             {
                 foreach (var neighbor in AdjacentList[vertex])
                 {
-                    if(!visited.Contains(neighbor))
+                    if (!visited.Contains(neighbor))
                     {
                         pathCount = DfsToEnd(neighbor, visited, pathCount);
                     }
@@ -79,60 +79,59 @@ namespace AdventOfCode.Days._2021
             visited.Remove(vertex);
             return pathCount;
         }
-        
-        public int CountPaths(string vertex = "start", HashSet<string> visitedTwice = null, HashSet<string> visited = null,
+
+        public int DfsToEndVisitOneCaveTwice()
+        {
+            return CountPaths();
+        }
+
+        private int CountPaths(string vertex = "start", string visitedTwiceVertex = null,
+            HashSet<string> visited = null,
             int pathCount = 0)
         {
-            visitedTwice ??= new HashSet<string>();
             visited ??= new HashSet<string>();
-            new List<string>();
-            
-            var addedTwice = false;
-
-            if (visitedTwice.Contains(vertex) || visitedTwice.Any(x => x is not ("start" or "end")) && visited.Contains(vertex))
-            {
-                return pathCount;
-            }
-            
-            if(!IsUpper(vertex) && visited.Contains(vertex))
-            {
-                visitedTwice.Add(vertex);
-                addedTwice = true;
-            }
-            else if(!IsUpper(vertex))
-            {
-                visited.Add(vertex);
-            }
 
             if (vertex == "end")
             {
                 pathCount++;
+                return pathCount;
             }
-            else
+
+            if (visitedTwiceVertex == vertex || visitedTwiceVertex != null && visited.Contains(vertex))
             {
-                foreach (var neighbor in AdjacentList[vertex])
-                {
-                    if (neighbor is "start")
-                    {
-                        continue;
-                    }
-
-                    pathCount = CountPaths(neighbor, visitedTwice, visited, pathCount);
-                }
+                return pathCount;
             }
 
-            if(!addedTwice)
+            var visitedTwice = false;
+
+            if (!IsUpper(vertex) && visited.Contains(vertex))
+            {
+                visitedTwiceVertex = vertex;
+                visitedTwice = true;
+            }
+            else if (!IsUpper(vertex))
+            {
+                visited.Add(vertex);
+            }
+
+            foreach (var neighbor in AdjacentList[vertex])
+            {
+                if (neighbor is "start")
+                {
+                    continue;
+                }
+
+                pathCount = CountPaths(neighbor, visitedTwiceVertex, visited, pathCount);
+            }
+
+            if (!visitedTwice)
             {
                 visited.Remove(vertex);
-            }
-            else
-            {
-                visitedTwice.Remove(vertex);
             }
 
             return pathCount;
         }
-        
+
         private static bool IsUpper(string vertex)
         {
             return vertex.All(char.IsUpper);
