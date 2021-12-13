@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using AdventOfCode.Days._2021;
+using AdventOfCode.Days.Common;
 using NUnit.Framework;
 using Shouldly;
 

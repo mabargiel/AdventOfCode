@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using AdventOfCode.Days.Common;
 
 namespace AdventOfCode.Days._2021
 {
@@ -85,6 +86,4 @@ namespace AdventOfCode.Days._2021
             return a | b;
         }
     }
-
-    public record Point(int X, int Y);
 }

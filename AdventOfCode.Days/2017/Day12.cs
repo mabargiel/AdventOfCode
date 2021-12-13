@@ -76,7 +76,7 @@ namespace AdventOfCode.Days._2017
                 return true;
             }
 
-            bool[] visited = new bool[_numberOfVertices];
+            var visited = new bool[_numberOfVertices];
             for (var i = 0; i < _numberOfVertices; i++)
             {
                 visited[i] = false;
