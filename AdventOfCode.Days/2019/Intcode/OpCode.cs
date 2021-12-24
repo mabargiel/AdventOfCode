@@ -1,16 +1,15 @@
-namespace AdventOfCode.Days._2019.Intcode
+namespace AdventOfCode.Days._2019.Intcode;
+
+public enum OpCode
 {
-    public enum OpCode
-    {
-        Add = 1,
-        Multiply,
-        Input,
-        Output,
-        JumpIfTrue,
-        JumpIfFalse,
-        LessThan,
-        Equals,
-        IncrementRelativeBase,
-        HaltProgram = 99
-    }
+    Add = 1,
+    Multiply,
+    Input,
+    Output,
+    JumpIfTrue,
+    JumpIfFalse,
+    LessThan,
+    Equals,
+    IncrementRelativeBase,
+    HaltProgram = 99
 }

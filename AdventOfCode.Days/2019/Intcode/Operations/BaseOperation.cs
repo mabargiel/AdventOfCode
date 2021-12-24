@@ -1,19 +1,18 @@
-namespace AdventOfCode.Days._2019.Intcode.Operations
+namespace AdventOfCode.Days._2019.Intcode.Operations;
+
+public abstract class BaseOperation
 {
-    public abstract class BaseOperation
+    private readonly int _length;
+    private readonly Program _program;
+
+    protected BaseOperation(Program program, int length)
     {
-        private readonly int _length;
-        private readonly Program _program;
+        _program = program;
+        _length = length;
+    }
 
-        protected BaseOperation(Program program, int length)
-        {
-            _program = program;
-            _length = length;
-        }
-
-        public virtual void Execute()
-        {
-            _program.Pointer += _length;
-        }
+    public virtual void Execute()
+    {
+        _program.Pointer += _length;
     }
 }

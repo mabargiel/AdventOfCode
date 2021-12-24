@@ -2,43 +2,42 @@ using AdventOfCode.Days._2017;
 using NUnit.Framework;
 using Shouldly;
 
-namespace AdventOfCode.Tests._2017
+namespace AdventOfCode.Tests._2017;
+
+public class Day11 : AdventDayTest<Days._2017.Day11>
 {
-    public class Day11 : AdventDayTest<Days._2017.Day11>
+    [Test]
+    public override void ParseRawInputTest()
     {
-        [Test]
-        public override void ParseRawInputTest()
+        const string rawInput = "se,sw,se,sw,sw,n,s,nw,ne";
+
+        var input = _day.ParseRawInput(rawInput);
+
+        input.ShouldBe(new[]
         {
-            const string rawInput = "se,sw,se,sw,sw,n,s,nw,ne";
+            Direction.SE, Direction.SW, Direction.SE, Direction.SW, Direction.SW, Direction.N, Direction.S,
+            Direction.NW, Direction.NE
+        });
+    }
 
-            var input = _day.ParseRawInput(rawInput);
+    [Test]
+    [TestCase(new[] { Direction.NE, Direction.NE, Direction.NE }, 3)]
+    [TestCase(new[] { Direction.NE, Direction.NE, Direction.SW, Direction.SW }, 0)]
+    [TestCase(new[] { Direction.NE, Direction.NE, Direction.S, Direction.S }, 2)]
+    [TestCase(new[] { Direction.SE, Direction.SW, Direction.SE, Direction.SW, Direction.SW }, 3)]
+    public void Part1_DetermineTheFewestStepsToFindChild(Direction[] input, int expectedSteps)
+    {
+        var result = _day.Part1(input);
 
-            input.ShouldBe(new[]
-            {
-                Direction.SE, Direction.SW, Direction.SE, Direction.SW, Direction.SW, Direction.N, Direction.S,
-                Direction.NW, Direction.NE
-            });
-        }
+        result.ShouldBe(expectedSteps);
+    }
 
-        [Test]
-        [TestCase(new[] { Direction.NE, Direction.NE, Direction.NE }, 3)]
-        [TestCase(new[] { Direction.NE, Direction.NE, Direction.SW, Direction.SW }, 0)]
-        [TestCase(new[] { Direction.NE, Direction.NE, Direction.S, Direction.S }, 2)]
-        [TestCase(new[] { Direction.SE, Direction.SW, Direction.SE, Direction.SW, Direction.SW }, 3)]
-        public void Part1_DetermineTheFewestStepsToFindChild(Direction[] input, int expectedSteps)
-        {
-            var result = _day.Part1(input);
+    [Test]
+    [TestCase(new[] { Direction.NE, Direction.NE, Direction.SW, Direction.SW }, 2)]
+    public void Part2_DetermineTheFurthestTheChildWent(Direction[] input, int expectedSteps)
+    {
+        var result = _day.Part2(input);
 
-            result.ShouldBe(expectedSteps);
-        }
-
-        [Test]
-        [TestCase(new[] { Direction.NE, Direction.NE, Direction.SW, Direction.SW }, 2)]
-        public void Part2_DetermineTheFurthestTheChildWent(Direction[] input, int expectedSteps)
-        {
-            var result = _day.Part2(input);
-
-            result.ShouldBe(expectedSteps);
-        }
+        result.ShouldBe(expectedSteps);
     }
 }

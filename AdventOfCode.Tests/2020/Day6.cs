@@ -1,14 +1,14 @@
 ﻿using NUnit.Framework;
 using Shouldly;
 
-namespace AdventOfCode.Tests._2020
+namespace AdventOfCode.Tests._2020;
+
+public class Day6
 {
-    public class Day6
+    [Test]
+    public void Part1()
     {
-        [Test]
-        public void Part1()
-        {
-            const string input = @"abc
+        const string input = @"abc
 
 a
 b
@@ -23,16 +23,16 @@ a
 a
 
 b";
-            var d6 = new Days._2020._6.Day6(input);
-            var result = d6.Part1();
+        var d6 = new Days._2020._6.Day6(input);
+        var result = d6.Part1();
 
-            result.ShouldBe(11);
-        }
+        result.ShouldBe(11);
+    }
 
-        [Test]
-        public void Part2()
-        {
-            const string input = @"abc
+    [Test]
+    public void Part2()
+    {
+        const string input = @"abc
 
 a
 b
@@ -47,10 +47,9 @@ a
 a
 
 b";
-            var d6 = new Days._2020._6.Day6(input);
-            var result = d6.Part2();
+        var d6 = new Days._2020._6.Day6(input);
+        var result = d6.Part2();
 
-            result.ShouldBe(6);
-        }
+        result.ShouldBe(6);
     }
 }

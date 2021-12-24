@@ -1,41 +1,40 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace AdventOfCode.Days._2019._1
+namespace AdventOfCode.Days._2019._1;
+
+public class Day1 : IAdventDay<int, int>
 {
-    public class Day1 : IAdventDay<int, int>
+    private readonly IEnumerable<int> _input;
+
+    public Day1(IEnumerable<int> input)
     {
-        private readonly IEnumerable<int> _input;
+        _input = input;
+    }
 
-        public Day1(IEnumerable<int> input)
-        {
-            _input = input;
-        }
+    public int Part1()
+    {
+        return _input.Sum(CalculateFuel);
+    }
 
-        public int Part1()
+    public int Part2()
+    {
+        return _input.Sum(mass =>
         {
-            return _input.Sum(CalculateFuel);
-        }
+            var totalFuel = CalculateFuel(mass);
+            var fuel = totalFuel;
 
-        public int Part2()
-        {
-            return _input.Sum(mass =>
+            while ((fuel = CalculateFuel(fuel)) > 0)
             {
-                var totalFuel = CalculateFuel(mass);
-                var fuel = totalFuel;
+                totalFuel += fuel;
+            }
 
-                while ((fuel = CalculateFuel(fuel)) > 0)
-                {
-                    totalFuel += fuel;
-                }
+            return totalFuel;
+        });
+    }
 
-                return totalFuel;
-            });
-        }
-
-        private static int CalculateFuel(int mass)
-        {
-            return mass / 3 - 2;
-        }
+    private static int CalculateFuel(int mass)
+    {
+        return mass / 3 - 2;
     }
 }

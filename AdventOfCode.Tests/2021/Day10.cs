@@ -1,63 +1,62 @@
 using NUnit.Framework;
 using Shouldly;
 
-namespace AdventOfCode.Tests._2021
+namespace AdventOfCode.Tests._2021;
+
+public class Day10 : AdventDayTest<Days._2021.Day10>
 {
-    public class Day10 : AdventDayTest<Days._2021.Day10>
+    [Test]
+    public override void ParseRawInputTest()
     {
-        [Test]
-        public override void ParseRawInputTest()
-        {
-            const string rawInput = @"[({(<(())[]>[[{[]{<()<>>
+        const string rawInput = @"[({(<(())[]>[[{[]{<()<>>
 [(()[<>])]({[<{<<[]>>(";
 
-            var input = _day.ParseRawInput(rawInput);
+        var input = _day.ParseRawInput(rawInput);
 
-            input.ShouldBe(new[] { "[({(<(())[]>[[{[]{<()<>>", "[(()[<>])]({[<{<<[]>>(" });
-        }
+        input.ShouldBe(new[] { "[({(<(())[]>[[{[]{<()<>>", "[(()[<>])]({[<{<<[]>>(" });
+    }
 
-        [Test]
-        public void Part1_CalculateCorruptedLinesScore()
+    [Test]
+    public void Part1_CalculateCorruptedLinesScore()
+    {
+        var input = new[]
         {
-            var input = new[]
-            {
-                "[({(<(())[]>[[{[]{<()<>>",
-                "[(()[<>])]({[<{<<[]>>(",
-                "{([(<{}[<>[]}>{[]{[(<()>",
-                "(((({<>}<{<{<>}{[]{[]{}",
-                "[[<[([]))<([[{}[[()]]]",
-                "[{[{({}]{}}([{[{{{}}([]",
-                "{<[[]]>}<{[{[{[]{()[[[]",
-                "[<(<(<(<{}))><([]([]()",
-                "<{([([[(<>()){}]>(<<{{",
-                "<{([{{}}[<[[[<>{}]]]>[]]"
-            };
+            "[({(<(())[]>[[{[]{<()<>>",
+            "[(()[<>])]({[<{<<[]>>(",
+            "{([(<{}[<>[]}>{[]{[(<()>",
+            "(((({<>}<{<{<>}{[]{[]{}",
+            "[[<[([]))<([[{}[[()]]]",
+            "[{[{({}]{}}([{[{{{}}([]",
+            "{<[[]]>}<{[{[{[]{()[[[]",
+            "[<(<(<(<{}))><([]([]()",
+            "<{([([[(<>()){}]>(<<{{",
+            "<{([{{}}[<[[[<>{}]]]>[]]"
+        };
 
-            var result = _day.Part1(input);
+        var result = _day.Part1(input);
 
-            result.ShouldBe(26397);
-        }
+        result.ShouldBe(26397);
+    }
 
-        [Test]
-        public void Part2_CalculateIncompleteLinesScore()
+    [Test]
+    public void Part2_CalculateIncompleteLinesScore()
+    {
+        var input = new[]
         {
-            var input = new[]
-            {
-                "[({(<(())[]>[[{[]{<()<>>",
-                "[(()[<>])]({[<{<<[]>>(",
-                "{([(<{}[<>[]}>{[]{[(<()>",
-                "(((({<>}<{<{<>}{[]{[]{}",
-                "[[<[([]))<([[{}[[()]]]",
-                "[{[{({}]{}}([{[{{{}}([]",
-                "{<[[]]>}<{[{[{[]{()[[[]",
-                "[<(<(<(<{}))><([]([]()",
-                "<{([([[(<>()){}]>(<<{{",
-                "<{([{{}}[<[[[<>{}]]]>[]]"
-            };
+            "[({(<(())[]>[[{[]{<()<>>",
+            "[(()[<>])]({[<{<<[]>>(",
+            "{([(<{}[<>[]}>{[]{[(<()>",
+            "(((({<>}<{<{<>}{[]{[]{}",
+            "[[<[([]))<([[{}[[()]]]",
+            "[{[{({}]{}}([{[{{{}}([]",
+            "{<[[]]>}<{[{[{[]{()[[[]",
+            "[<(<(<(<{}))><([]([]()",
+            "<{([([[(<>()){}]>(<<{{",
+            "<{([{{}}[<[[[<>{}]]]>[]]"
+        };
 
-            var result = _day.Part2(input);
+        var result = _day.Part2(input);
 
-            result.ShouldBe(288957);
-        }
+        result.ShouldBe(288957);
     }
 }

@@ -3,137 +3,136 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace AdventOfCode.Days._2019._3
+namespace AdventOfCode.Days._2019._3;
+
+public class Day3 : IAdventDay<int, int>
 {
-    public class Day3 : IAdventDay<int, int>
+    private static readonly Point CentralPort = new(0, 0);
+    private readonly string[] _wire1;
+    private readonly string[] _wire2;
+
+    public Day3(string[] wire1, string[] wire2)
     {
-        private static readonly Point CentralPort = new(0, 0);
-        private readonly string[] _wire1;
-        private readonly string[] _wire2;
+        _wire1 = wire1;
+        _wire2 = wire2;
+    }
 
-        public Day3(string[] wire1, string[] wire2)
+    public int Part1()
+    {
+        int ManhattanDistance(Point point)
         {
-            _wire1 = wire1;
-            _wire2 = wire2;
+            return Math.Abs(point.X - CentralPort.X) + Math.Abs(point.Y - CentralPort.Y);
         }
 
-        public int Part1()
+        var wire1Segments = new Wire(_wire1);
+        var wire2Segments = new Wire(_wire2);
+
+        var intersectionPoints = wire1Segments.GetIntersects(wire2Segments);
+
+        return intersectionPoints.Select(ManhattanDistance).Min();
+    }
+
+    public int Part2()
+    {
+        var wire1Segments = new Wire(_wire1);
+        var wire2Segments = new Wire(_wire2);
+
+        var intersectionPoints = wire1Segments.GetIntersects(wire2Segments);
+
+        var distances = from point in intersectionPoints
+            let w1Dist = GetDistance(wire1Segments, point)
+            let w2Dist = GetDistance(wire2Segments, point)
+            select w1Dist + w2Dist;
+
+        return (int)distances.Min();
+    }
+
+    private static double GetDistance(Wire wire, Point point)
+    {
+        double Distance(Point x, Point y)
         {
-            int ManhattanDistance(Point point)
-            {
-                return Math.Abs(point.X - CentralPort.X) + Math.Abs(point.Y - CentralPort.Y);
-            }
-
-            var wire1Segments = new Wire(_wire1);
-            var wire2Segments = new Wire(_wire2);
-
-            var intersectionPoints = wire1Segments.GetIntersects(wire2Segments);
-
-            return intersectionPoints.Select(ManhattanDistance).Min();
+            return Math.Sqrt(Math.Pow(x.X - y.X, 2) + Math.Pow(x.Y - y.Y, 2));
         }
 
-        public int Part2()
+        bool IsBetween(Point a, Point b, Point cBetween)
         {
-            var wire1Segments = new Wire(_wire1);
-            var wire2Segments = new Wire(_wire2);
-
-            var intersectionPoints = wire1Segments.GetIntersects(wire2Segments);
-
-            var distances = from point in intersectionPoints
-                let w1Dist = GetDistance(wire1Segments, point)
-                let w2Dist = GetDistance(wire2Segments, point)
-                select w1Dist + w2Dist;
-
-            return (int)distances.Min();
+            return Math.Abs(Distance(a, cBetween) + Distance(cBetween, b) - Distance(a, b)) < 0.1;
         }
 
-        private static double GetDistance(Wire wire, Point point)
+        double distance = 0;
+        foreach (var segment in wire.Segments)
         {
-            double Distance(Point x, Point y)
+            if (!IsBetween(segment.Start, segment.End, point))
             {
-                return Math.Sqrt(Math.Pow(x.X - y.X, 2) + Math.Pow(x.Y - y.Y, 2));
+                distance += Distance(segment.Start, segment.End);
             }
-
-            bool IsBetween(Point a, Point b, Point cBetween)
+            else
             {
-                return Math.Abs(Distance(a, cBetween) + Distance(cBetween, b) - Distance(a, b)) < 0.1;
+                distance += Distance(segment.Start, point);
+                break;
             }
+        }
 
-            double distance = 0;
-            foreach (var segment in wire.Segments)
+        return distance;
+    }
+
+    private class Wire
+    {
+        public Wire(IEnumerable<string> wire)
+        {
+            var segmentsList = new List<Segment>();
+
+            var pointA = CentralPort;
+            foreach (var wirePoint in wire)
             {
-                if (!IsBetween(segment.Start, segment.End, point))
+                var bX = pointA.X;
+                var bY = pointA.Y;
+
+                var (direction, distance) = (Enum.Parse<Direction>(wirePoint[0].ToString()),
+                    int.Parse(wirePoint.Substring(1, wirePoint.Length - 1)));
+
+                switch (direction)
                 {
-                    distance += Distance(segment.Start, segment.End);
-                }
-                else
-                {
-                    distance += Distance(segment.Start, point);
-                    break;
-                }
-            }
-
-            return distance;
-        }
-
-        private class Wire
-        {
-            public Wire(IEnumerable<string> wire)
-            {
-                var segmentsList = new List<Segment>();
-
-                var pointA = CentralPort;
-                foreach (var wirePoint in wire)
-                {
-                    var bX = pointA.X;
-                    var bY = pointA.Y;
-
-                    var (direction, distance) = (Enum.Parse<Direction>(wirePoint[0].ToString()),
-                        int.Parse(wirePoint.Substring(1, wirePoint.Length - 1)));
-
-                    switch (direction)
-                    {
-                        case Direction.U:
-                            bY += distance;
-                            break;
-                        case Direction.D:
-                            bY -= distance;
-                            break;
-                        case Direction.R:
-                            bX += distance;
-                            break;
-                        case Direction.L:
-                            bX -= distance;
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                    var pointB = new Point(bX, bY);
-                    segmentsList.Add(new Segment(pointA, pointB));
-                    pointA.X = pointB.X;
-                    pointA.Y = pointB.Y;
+                    case Direction.U:
+                        bY += distance;
+                        break;
+                    case Direction.D:
+                        bY -= distance;
+                        break;
+                    case Direction.R:
+                        bX += distance;
+                        break;
+                    case Direction.L:
+                        bX -= distance;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
 
-                Segments = segmentsList.ToArray();
+                var pointB = new Point(bX, bY);
+                segmentsList.Add(new Segment(pointA, pointB));
+                pointA.X = pointB.X;
+                pointA.Y = pointB.Y;
             }
 
-            public Segment[] Segments { get; }
+            Segments = segmentsList.ToArray();
+        }
 
-            public IEnumerable<Point> GetIntersects(Wire wire)
-            {
-                var intersectingSegments = Segments.SelectMany(x => wire.Segments.Select(y => y.GetIntersection(x)))
-                    .Where(x => x != null).Cast<Point>();
-                return intersectingSegments;
-            }
+        public Segment[] Segments { get; }
 
-            private enum Direction
-            {
-                U,
-                D,
-                R,
-                L
-            }
+        public IEnumerable<Point> GetIntersects(Wire wire)
+        {
+            var intersectingSegments = Segments.SelectMany(x => wire.Segments.Select(y => y.GetIntersection(x)))
+                .Where(x => x != null).Cast<Point>();
+            return intersectingSegments;
+        }
+
+        private enum Direction
+        {
+            U,
+            D,
+            R,
+            L
         }
     }
 }
