@@ -12,15 +12,15 @@ namespace AdventOfCode.Days
             watch.Start();
             var input = ParseRawInput(rawInput);
             watch.Stop();
-            var inputParsingTime = watch.ElapsedMilliseconds;
+            var inputParsingTime = watch.Elapsed.TotalMilliseconds;
             
             watch.Restart();
             var result = Part1(input).ToString();
             watch.Stop();
-            var executionTime = watch.ElapsedMilliseconds;
+            var executionTime = watch.Elapsed.TotalMilliseconds;
 
             return
-                $"Part 1 >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime}ms\n>>> Execution time: {executionTime}ms";
+                $"Part 1 >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime:F2} ms\n>>> Execution time: {executionTime:F2} ms";
         }
 
         public string ExecutePart2(string rawInput)
@@ -29,15 +29,15 @@ namespace AdventOfCode.Days
             watch.Start();
             var input = ParseRawInput(rawInput);
             watch.Stop();
-            var inputParsingTime = watch.ElapsedMilliseconds;
+            var inputParsingTime = watch.Elapsed.TotalMilliseconds;
             
             watch.Restart();
             var result = Part2(input).ToString();
             watch.Stop();
-            var executionTime = watch.ElapsedMilliseconds;
+            var executionTime = watch.Elapsed.TotalMilliseconds;
 
             return
-                $"Part 2 >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime}ms\n>>> Execution time: {executionTime}ms";
+                $"Part 2 >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime:F2} ms\n>>> Execution time: {executionTime:F2} ms";
         }
 
         public abstract TIn ParseRawInput(string rawInput);

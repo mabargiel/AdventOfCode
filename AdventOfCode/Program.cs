@@ -79,9 +79,9 @@ namespace AdventOfCode
                 Console.WriteLine("Provide either input or input file. Not both.");
             }
 
-            var text = string.IsNullOrEmpty(options.Input)
+            var text = (string.IsNullOrEmpty(options.Input)
                 ? await File.ReadAllTextAsync(options.InputFile)
-                : options.Input;
+                : options.Input).Trim();
             
             var adventDay = AdventFactory.CreateDay(options.Year, options.Day);
 
