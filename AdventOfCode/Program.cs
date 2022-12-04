@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using CommandLine;
 using CommandLine.Text;
@@ -51,7 +52,7 @@ namespace AdventOfCode
             await new Parser(with => with.EnableDashDash = true).ParseArguments<Options>(args)
                 .MapResult(RunTask, errors =>
                 {
-                    foreach (var error in errors)
+                    foreach (var error in errors.Where(e => e.Tag is not ErrorType.HelpRequestedError or ErrorType.VersionRequestedError))
                     {
                         Console.WriteLine(error.ToString());
                     }
@@ -81,6 +82,7 @@ namespace AdventOfCode
             var text = string.IsNullOrEmpty(options.Input)
                 ? await File.ReadAllTextAsync(options.InputFile)
                 : options.Input;
+            
             var adventDay = AdventFactory.CreateDay(options.Year, options.Day);
 
             if (options.Part1)
