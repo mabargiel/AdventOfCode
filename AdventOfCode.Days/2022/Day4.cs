@@ -7,7 +7,7 @@ namespace AdventOfCode.Days._2022
     {
         public override Range[][] ParseRawInput(string rawInput)
         {
-            return rawInput.Split(Environment.NewLine).Select(info =>
+            return rawInput.Trim().Split(Environment.NewLine).Select(info =>
             {
                 var pair = info.Split(',');
                 return pair
