@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode.Days._2022
 {
@@ -22,18 +23,17 @@ namespace AdventOfCode.Days._2022
 
         private static int FindMarker(string input, int length)
         {
-            var window = new List<char>(length);
+            var window = new List<char>(input[..length]);
 
-            for (var i = 0; i < input.Length - length; i++)
+            for (var i = length; i < input.Length; i++)
             {
-                window.Add(input[i]);
-                if (new HashSet<char>(window).Count == length)
+                if (window.Distinct().Count() == length)
                 {
-                    return i + 1;
+                    return i;
                 }
 
-                if (i >= length - 1)
-                    window.RemoveAt(0);
+                window.Add(input[i]);
+                window.RemoveAt(0);
             }
 
             throw new ArgumentException($"Could not find the marker of length {length} in the given input");

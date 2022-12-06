@@ -36,5 +36,17 @@ namespace AdventOfCode.Tests._2022
             
             result.ShouldBe(expectedResult);
         }
+        
+        [Test]
+        [TestCase("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19)]
+        [TestCase("bvwbjplbgvbhsrlpgdmjqwftvncz", 23)]
+        [TestCase("nppdvjthqldpwncqszvftbrmjlhg", 23)]
+        [TestCase("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29)]
+        public void Part2_WithExampleInput_FindStartMessagePos(string input, int expectedResult)
+        {
+            var result = _day6.Part2(input);
+            
+            result.ShouldBe(expectedResult);
+        }
     }
 }
