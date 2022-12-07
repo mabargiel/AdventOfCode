@@ -52,11 +52,7 @@ public class Day7 : AdventDay<string[], int, int>
                 {
                     var path = Path.Combine(trace.Peek(), value);
                     trace.Push(path);
-
-                    if (!fileSystem.ContainsKey(path))
-                    {
-                        fileSystem[path] = 0;
-                    }
+                    fileSystem[path] = 0;
                 }
             }
             else
