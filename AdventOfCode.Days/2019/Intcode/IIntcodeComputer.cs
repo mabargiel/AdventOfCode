@@ -1,13 +1,12 @@
 using System;
 using System.Threading.Tasks;
 
-namespace AdventOfCode.Days._2019.Intcode
+namespace AdventOfCode.Days._2019.Intcode;
+
+public interface IIntcodeComputer
 {
-    public interface IIntcodeComputer
-    {
-        Program Program { get; }
-        Task StartAsync();
-        event Action<long> OnOutput;
-        public void Input(in long value);
-    }
+    Program Program { get; }
+    Task StartAsync();
+    event Action<long> OnOutput;
+    public void Input(in long value);
 }
