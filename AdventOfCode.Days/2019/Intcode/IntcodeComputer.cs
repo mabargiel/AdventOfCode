@@ -5,40 +5,39 @@ using System.Linq;
 using System.Threading.Tasks;
 using AdventOfCode.Days._2019.Intcode.Operations;
 
-namespace AdventOfCode.Days._2019.Intcode
+namespace AdventOfCode.Days._2019.Intcode;
+
+public class IntcodeComputer : IIntcodeComputer
 {
-    public class IntcodeComputer : IIntcodeComputer
+    private readonly BlockingCollection<long> _input = new();
+
+    public IntcodeComputer(IEnumerable<long> code)
     {
-        private readonly BlockingCollection<long> _input = new();
+        var instructions = code.Select((x, i) => (x, (long)i)).ToDictionary(x => x.Item2, x => x.x);
+        Program = new Program(instructions, _input);
+        Program.OnOutput += l => { OnOutput?.Invoke(l); };
+    }
 
-        public IntcodeComputer(IEnumerable<long> code)
+    public Program Program { get; }
+    public event Action<long> OnOutput;
+
+    public async Task StartAsync()
+    {
+        var operationFactory = new OperationFactory(Program);
+        var operation = operationFactory.Next();
+
+        await Task.Run(() =>
         {
-            var instructions = code.Select((x, i) => (x, (long)i)).ToDictionary(x => x.Item2, x => x.x);
-            Program = new Program(instructions, _input);
-            Program.OnOutput += l => { OnOutput?.Invoke(l); };
-        }
-
-        public Program Program { get; }
-        public event Action<long> OnOutput;
-
-        public async Task StartAsync()
-        {
-            var operationFactory = new OperationFactory(Program);
-            var operation = operationFactory.Next();
-
-            await Task.Run(() =>
+            while (Program.CurrentInteger() != (int)OpCode.HaltProgram)
             {
-                while (Program.CurrentInteger() != (int)OpCode.HaltProgram)
-                {
-                    operation.Execute();
-                    operation = operationFactory.Next();
-                }
-            });
-        }
+                operation.Execute();
+                operation = operationFactory.Next();
+            }
+        });
+    }
 
-        public void Input(in long value)
-        {
-            _input.Add(value);
-        }
+    public void Input(in long value)
+    {
+        _input.Add(value);
     }
 }

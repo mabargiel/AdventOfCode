@@ -2,18 +2,17 @@ using System;
 using AdventOfCode.Days;
 using NUnit.Framework;
 
-namespace AdventOfCode.Tests
+namespace AdventOfCode.Tests;
+
+public abstract class AdventDayTest<T> where T : IAdventDay
 {
-    public abstract class AdventDayTest<T> where T: IAdventDay
+    protected T _day;
+
+    [SetUp]
+    public void Initialize()
     {
-        protected T _day;
-
-        [SetUp]
-        public void Initialize()
-        {
-            _day = Activator.CreateInstance<T>();
-        }
-
-        public abstract void ParseRawInputTest();
+        _day = Activator.CreateInstance<T>();
     }
+
+    public abstract void ParseRawInputTest();
 }
