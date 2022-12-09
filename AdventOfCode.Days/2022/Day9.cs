@@ -42,9 +42,16 @@ public class Day9 : AdventDay<Motion[], int, int>
 
             for (var i = 0; i < motion.Steps; i++)
             {
-                head = move(head);
+                head = motion.Direction switch
+                {
+                    'U' => head with { Y = head.Y + 1 },
+                    'D' => head with { Y = head.Y - 1 },
+                    'L' => head with { X = head.X - 1 },
+                    'R' => head with { X = head.X + 1 },
+                    _ => head
+                };
+                
                 var curr = head;
-
                 for (var j = 0; j < tailLength; j++)
                 {
                     var tailPart = tail[j];
