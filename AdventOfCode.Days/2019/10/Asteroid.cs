@@ -1,45 +1,44 @@
 using System;
 using System.Drawing;
 
-namespace AdventOfCode.Days._2019._10
+namespace AdventOfCode.Days._2019._10;
+
+public class Asteroid : IEquatable<Asteroid>
 {
-    public class Asteroid : IEquatable<Asteroid>
+    public Asteroid(in int x, in int y)
     {
-        public Asteroid(in int x, in int y)
+        Point = new Point(x, y);
+    }
+
+    public Point Point { get; }
+
+    public bool Equals(Asteroid other)
+    {
+        if (ReferenceEquals(null, other))
         {
-            Point = new Point(x, y);
+            return false;
         }
 
-        public Point Point { get; }
+        return ReferenceEquals(this, other) || Point.Equals(other.Point);
+    }
 
-        public bool Equals(Asteroid other)
+    public override bool Equals(object obj)
+    {
+        if (ReferenceEquals(null, obj))
         {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            return ReferenceEquals(this, other) || Point.Equals(other.Point);
+            return false;
         }
 
-        public override bool Equals(object obj)
+        if (ReferenceEquals(this, obj))
         {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            return obj.GetType() == GetType() && Equals((Asteroid)obj);
+            return true;
         }
 
-        public override int GetHashCode()
-        {
-            return Point.GetHashCode();
-        }
+        return obj.GetType() == GetType() && Equals((Asteroid)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return Point.GetHashCode();
     }
 }

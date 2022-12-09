@@ -1,14 +1,14 @@
 ﻿using NUnit.Framework;
 using Shouldly;
 
-namespace AdventOfCode.Tests._2020
+namespace AdventOfCode.Tests._2020;
+
+public class Day3
 {
-    public class Day3
+    [Test]
+    public void Part1_Goes3_1_Hits7Trees()
     {
-        [Test]
-        public void Part1_Goes3_1_Hits7Trees()
-        {
-            const string input = @"..##.......
+        const string input = @"..##.......
 #...#...#..
 .#....#..#.
 ..#.#...#.#
@@ -20,16 +20,16 @@ namespace AdventOfCode.Tests._2020
 #...##....#
 .#..#...#.#";
 
-            var d3 = new Days._2020._3.Day3(input);
-            var result = d3.Part1();
+        var d3 = new Days._2020._3.Day3(input);
+        var result = d3.Part1();
 
-            result.ShouldBe(7);
-        }
+        result.ShouldBe(7);
+    }
 
-        [Test]
-        public void Part1_TraversesMapMultipleTimesAsExpected_ReturnsMultipliedResult()
-        {
-            const string input = @"..##.......
+    [Test]
+    public void Part1_TraversesMapMultipleTimesAsExpected_ReturnsMultipliedResult()
+    {
+        const string input = @"..##.......
 #...#...#..
 .#....#..#.
 ..#.#...#.#
@@ -41,10 +41,9 @@ namespace AdventOfCode.Tests._2020
 #...##....#
 .#..#...#.#";
 
-            var d3 = new Days._2020._3.Day3(input);
-            var result = d3.Part2();
+        var d3 = new Days._2020._3.Day3(input);
+        var result = d3.Part2();
 
-            result.ShouldBe(336);
-        }
+        result.ShouldBe(336);
     }
 }

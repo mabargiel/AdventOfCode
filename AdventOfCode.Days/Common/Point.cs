@@ -1,4 +1,3 @@
-namespace AdventOfCode.Days.Common
-{
-    public record Point(int X, int Y);
-}
+namespace AdventOfCode.Days.Common;
+
+public record Point(int X, int Y);

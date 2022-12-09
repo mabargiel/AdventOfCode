@@ -2,15 +2,15 @@
 using NUnit.Framework;
 using Shouldly;
 
-namespace AdventOfCode.Tests._2020
+namespace AdventOfCode.Tests._2020;
+
+public class Day10
 {
-    public class Day10
+    private static object[] Examples =
     {
-        private static object[] Examples =
+        new object[]
         {
-            new object[]
-            {
-                @"16
+            @"16
                             10
                             15
                             5
@@ -21,11 +21,11 @@ namespace AdventOfCode.Tests._2020
                             6
                             12
                             4".TrimIndent(),
-                7 * 5, 8
-            },
-            new object[]
-            {
-                @"28
+            7 * 5, 8
+        },
+        new object[]
+        {
+            @"28
                             33
                             18
                             42
@@ -56,28 +56,27 @@ namespace AdventOfCode.Tests._2020
                             34
                             10
                             3".TrimIndent(),
-                22 * 10, 19_208
-            }
-        };
-
-        [Test]
-        [TestCaseSource(nameof(Examples))]
-        public void Part1(string input, int expected, int _)
-        {
-            var d10 = new Days._2020._10.Day10(input);
-            var result = d10.Part1();
-
-            result.ShouldBe(expected);
+            22 * 10, 19_208
         }
+    };
 
-        [Test]
-        [TestCaseSource(nameof(Examples))]
-        public void Part2(string input, int _, int expected)
-        {
-            var d10 = new Days._2020._10.Day10(input);
-            var result = d10.Part2();
+    [Test]
+    [TestCaseSource(nameof(Examples))]
+    public void Part1(string input, int expected, int _)
+    {
+        var d10 = new Days._2020._10.Day10(input);
+        var result = d10.Part1();
 
-            result.ShouldBe(expected);
-        }
+        result.ShouldBe(expected);
+    }
+
+    [Test]
+    [TestCaseSource(nameof(Examples))]
+    public void Part2(string input, int _, int expected)
+    {
+        var d10 = new Days._2020._10.Day10(input);
+        var result = d10.Part2();
+
+        result.ShouldBe(expected);
     }
 }
