@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace AdventOfCode.Days._2021
 {
-    public class Day14 : AdventDay<Rules, int, long>
+    public class Day14 : AdventDay<PolymerRules, int, long>
     {
-        public override Rules ParseRawInput(string rawInput)
+        public override PolymerRules ParseRawInput(string rawInput)
         {
             var split = rawInput.Trim().Split(Environment.NewLine + Environment.NewLine);
             var template = split[0];
@@ -16,43 +16,56 @@ namespace AdventOfCode.Days._2021
                 return new KeyValuePair<string, char>(adjacency[0], adjacency[1].First());
             }));
 
-            return new Rules(template, insertions);
+            return new PolymerRules(template, insertions);
         }
 
-        public override int Part1(Rules input)
+        public override int Part1(PolymerRules input)
         {
-            var charCounts = input.Template.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
-            var current = input.Template;
-            for (var i = 0; i < 10; i++)
-            {
-                for (var j = 0; j < current.Length - 1; j += 2)
-                {
-                    var first = current[j];
-                    var second = current[j + 1];
-                    var middle = input.Insertions[$"{first}{second}"];
-                    if (!charCounts.ContainsKey(middle))
-                    {
-                        charCounts[middle] = 1;
-                    }
-                    else
-                    {
-                        charCounts[middle]++;
-                    }
+            const int steps = 10;
+            return (int) Solve(input, steps);
+        }
 
-                    current = current.Insert(j + 1, middle.ToString());
-                }
+        public override long Part2(PolymerRules input)
+        {
+            const int steps = 40;
+            return Solve(input, steps);
+        }
+
+        private static long Solve(PolymerRules input, int steps)
+        {
+            var moleculeCount = new Dictionary<string, long>();
+            for (var i = 0; i < input.Polymer.Length - 1; i++)
+            {
+                var molecule = input.Polymer.Substring(i, 2);
+                moleculeCount[molecule] = moleculeCount.GetValueOrDefault(molecule) + 1;
             }
 
-            var values = charCounts.Values;
+            for (var i = 0; i < steps; i++)
+            {
+                var updated = new Dictionary<string, long>();
+                foreach (var (molecule, count) in moleculeCount)
+                {
+                    var between = input.Insertions[molecule];
+                    var (ai, ib) = (molecule[0].ToString() + between, between + molecule[1].ToString());
+                    updated[ai] = count + updated.GetValueOrDefault(ai);
+                    updated[ib] = count + updated.GetValueOrDefault(ib);
+                }
 
-            return values.Max() - values.Min();
-        }
+                moleculeCount = updated;
+            }
 
-        public override long Part2(Rules input)
-        {
-            throw new NotImplementedException();
+            var elementCounts = new Dictionary<char, long>();
+            foreach (var (molecule, count) in moleculeCount)
+            {
+                var a = molecule[0];
+                elementCounts[a] = elementCounts.GetValueOrDefault(a) + count;
+            }
+            
+            elementCounts[input.Polymer.Last()]++;
+
+            return elementCounts.Values.Max() - elementCounts.Values.Min();
         }
     }
 
-    public record Rules(string Template, Dictionary<string, char> Insertions);
+    public record PolymerRules(string Polymer, Dictionary<string, char> Insertions);
 }
