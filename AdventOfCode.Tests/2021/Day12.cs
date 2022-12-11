@@ -20,12 +20,7 @@ b-end";
 
         var input = _day.ParseRawInput(rawInput);
 
-        input.AdjacentList["start"].ShouldBeEquivalentTo(new HashSet<string> { "A", "b" });
-        input.AdjacentList["A"].ShouldBeEquivalentTo(new HashSet<string> { "start", "c", "b", "end" });
-        input.AdjacentList["b"].ShouldBeEquivalentTo(new HashSet<string> { "start", "A", "d", "end" });
-        input.AdjacentList["c"].ShouldBeEquivalentTo(new HashSet<string> { "A" });
-        input.AdjacentList["d"].ShouldBeEquivalentTo(new HashSet<string> { "b" });
-        input.AdjacentList["end"].ShouldBeEquivalentTo(new HashSet<string> { "A", "b" });
+        input.ShouldBe(rawInput);
     }
 
     [Test]
@@ -64,10 +59,8 @@ he-WI
 zg-he
 pj-fs
 start-RW", 226)]
-    public void Part1_FindUniquePathsCount(string rawInput, int expectedResult)
+    public void Part1_FindUniquePathsCount(string input, int expectedResult)
     {
-        var input = new Graph(rawInput);
-
         var result = _day.Part1(input);
 
         result.ShouldBe(expectedResult);
@@ -109,10 +102,8 @@ he-WI
 zg-he
 pj-fs
 start-RW", 3509)]
-    public void Part2_FindUniquePathsWithVisitingSmallCaveTwiceCount(string rawInput, int expectedResult)
+    public void Part2_FindUniquePathsWithVisitingSmallCaveTwiceCount(string input, int expectedResult)
     {
-        var input = new Graph(rawInput);
-
         var result = _day.Part2(input);
 
         result.ShouldBe(expectedResult);

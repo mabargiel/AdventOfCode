@@ -14,13 +14,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Combinatorics" Version="2.0.0"/>
-        <PackageReference Include="CommandLineParser" Version="2.8.0"/>
-        <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1"/>
+        <PackageReference Include="Combinatorics" Version="2.0.0" />
+        <PackageReference Include="CommandLineParser" Version="2.9.1" />
+        <PackageReference Include="XAct.Wintellect.PowerCollections" Version="0.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AdventOfCode.Days\AdventOfCode.Days.csproj"/>
+        <ProjectReference Include="..\AdventOfCode.Days\AdventOfCode.Days.csproj" />
     </ItemGroup>
 
 </Project>
