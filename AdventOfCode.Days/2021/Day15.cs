@@ -91,7 +91,7 @@ public class Day15 : AdventDay<int[,], int, int>
             }
         }
 
-        return graph.GetShortestPathLength(0, width * height - 1);
+        return graph.Dijkstra(0, width * height - 1);
     }
 
     private class Graph
@@ -126,7 +126,7 @@ public class Day15 : AdventDay<int[,], int, int>
             return minIndex;
         }
 
-        public int GetShortestPathLength(int src, int dst)
+        public int Dijkstra(int from, int to)
         {
             //var unvisited = new PriorityQueue<int, int>();
             var dist = new int[_vertices];
@@ -138,7 +138,7 @@ public class Day15 : AdventDay<int[,], int, int>
                 //unvisited.Enqueue(i, int.MaxValue);
             }
             
-            dist[src] = 0;
+            dist[from] = 0;
             //unvisited.Enqueue(src, 0);
 
             for (var count = 0; count < _vertices; count++)
@@ -160,7 +160,7 @@ public class Day15 : AdventDay<int[,], int, int>
                 }
             }
 
-            return dist[dst];
+            return dist[to];
         }
     }
 }
