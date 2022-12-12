@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
+using AdventOfCode.Days.Common;
 
 namespace AdventOfCode.Days._2021;
 
@@ -92,90 +92,6 @@ public class Day15 : AdventDay<int[,], int, int>
             }
         }
 
-        return graph.GetShortestPathLength(0, width * height - 1);
+        return graph.DijkstraShortestPath(0, width * height - 1);
     }
 }
-
-    public class Graph
-    {
-        private readonly int _vertices;
-        private readonly Dictionary<int, List<(int, int)>> _adjArray;
-        private readonly int[] _dist;
-        private readonly HashSet<int> _settled;
-        private readonly PriorityQueue<int, int> _pq;
-
-        public Graph(int vertices)
-        {
-            _vertices = vertices;
-            _dist = new int[vertices];
-            _settled = new HashSet<int>();
-            _pq = new PriorityQueue<int, int>(vertices);
-            _adjArray = new Dictionary<int, List<(int, int)>>(vertices);
-        }
-
-        public void AddEdge(int src, int dst, int weight)
-        {
-            if (_adjArray.TryGetValue(src, out var value))
-            {
-                value.Add((dst, weight));
-            } else
-            {
-                _adjArray[src] = new (){(dst, weight)};
-            }
-        }
-
-        public int GetShortestPathLength(int src, int dst)
-        {
-            if (_dist.Contains(dst))
-            {
-                return _dist[dst];
-            }
-            
-            for (var i = 0; i < _vertices; i++)
-            {
-                _dist[i] = int.MaxValue;
-            }
-            
-            _dist[src] = 0;
-            _pq.Enqueue(src, 0);
-
-            while (_settled.Count != _vertices)
-            {
-                if (_pq.Count == 0)
-                {
-                    return _dist[dst];
-                }
-
-                var u = _pq.Dequeue();
-
-                if (_settled.Contains(u))
-                {
-                    continue;
-                }
-
-                _settled.Add(u);
-                ProcessNeighbours(u);
-            }
-
-            return _dist[dst];
-        }
-        
-        private void ProcessNeighbours(int u)
-        {
-            for (var i = 0; i < _adjArray[u].Count; i++)
-            {
-                var (node, cost) = _adjArray[u][i];
-                if (_settled.Contains(node))
-                {
-                    continue;
-                }
-
-                var newDistance = _dist[u] + cost;
-                if (newDistance < _dist[node])
-                    _dist[node] = newDistance;
-
-                // Add the current node to the queue
-                _pq.Enqueue(node, _dist[node]);
-            }
-        }
-    }
