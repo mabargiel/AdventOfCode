@@ -1,5 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
 using AdventOfCode.Days.Common;
 
 namespace AdventOfCode.Days._2021;
@@ -44,12 +43,12 @@ public class Day15 : AdventDay<int[,], int, int>
                     for (var l = 0; l < width; l++)
                     {
                         var newValue = input[k, l] + i + j;
-                        
+
                         if (newValue > 9)
                         {
-                            newValue = (newValue % 10) + 1;
+                            newValue = newValue % 10 + 1;
                         }
-                        
+
                         newInput[i * height + k, j * width + l] = newValue;
                     }
                 }

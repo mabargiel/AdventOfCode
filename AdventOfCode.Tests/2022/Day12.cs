@@ -5,7 +5,7 @@ using Shouldly;
 
 namespace AdventOfCode.Tests._2022;
 
-public class Day12 : AdventDayTest<AdventOfCode.Days._2022.Day12>
+public class Day12 : AdventDayTest<Days._2022.Day12>
 {
     [Test]
     public override void ParseRawInputTest()
@@ -15,7 +15,7 @@ abcryxxl
 accszExk
 acctuvwj
 abdefghi";
-        
+
         var input = _day.ParseRawInput(exampleInput);
 
         input.ShouldBeEquivalentTo(new Input(new Point(0, 0), new Point(2, 5), new[,]
@@ -41,10 +41,10 @@ abdefghi";
         });
 
         var result = _day.Part1(input);
-        
+
         result.ShouldBe(31);
     }
-    
+
     [Test]
     public void Part2_WithExampleInput_FindShortestPathFroma()
     {
@@ -58,7 +58,7 @@ abdefghi";
         });
 
         var result = _day.Part2(input);
-        
+
         result.ShouldBe(29);
     }
 }

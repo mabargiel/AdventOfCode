@@ -1,5 +1,4 @@
 using System;
-using AdventOfCode.Days._2021;
 using AdventOfCode.Days.Common;
 
 namespace AdventOfCode.Days._2022;
@@ -16,7 +15,7 @@ public class Day12 : AdventDay<Input, int, int>
         Point dsc = null;
 
         const int asciiA = 96;
-        
+
         for (var i = 0; i < height; i++)
         {
             for (var j = 0; j < width; j++)
