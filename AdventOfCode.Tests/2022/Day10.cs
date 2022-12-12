@@ -15,7 +15,7 @@ public class Day10
     }
 
     [Test]
-    public void ParseRawInput_WithExampleInput_SplitsItAGridOfHeights()
+    public void ParseRawInput_WithExampleInput_CreatesArrayOfOperations()
     {
         const string rawInput = @"noop
 addx 3

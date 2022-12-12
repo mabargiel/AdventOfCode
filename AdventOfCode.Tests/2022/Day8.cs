@@ -14,7 +14,7 @@ public class Day8
     }
 
     [Test]
-    public void ParseRawInput_WithExampleInput_SplitsItAGridOfHeights()
+    public void ParseRawInput_WithExampleInput_SplitsItIntoAGridOfHeights()
     {
         var rawInput = @"30373
 25512
