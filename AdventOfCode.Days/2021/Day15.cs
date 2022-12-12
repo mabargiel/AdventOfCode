@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode.Days._2021;
 
@@ -91,76 +92,90 @@ public class Day15 : AdventDay<int[,], int, int>
             }
         }
 
-        return graph.Dijkstra(0, width * height - 1);
+        return graph.GetShortestPathLength(0, width * height - 1);
     }
+}
 
-    private class Graph
+    public class Graph
     {
         private readonly int _vertices;
-        private readonly Dictionary<(int, int), int> _adjArray;
+        private readonly Dictionary<int, List<(int, int)>> _adjArray;
+        private readonly int[] _dist;
+        private readonly HashSet<int> _settled;
+        private readonly PriorityQueue<int, int> _pq;
 
         public Graph(int vertices)
         {
             _vertices = vertices;
-            _adjArray = new Dictionary<(int, int), int>();
+            _dist = new int[vertices];
+            _settled = new HashSet<int>();
+            _pq = new PriorityQueue<int, int>(vertices);
+            _adjArray = new Dictionary<int, List<(int, int)>>(vertices);
         }
 
         public void AddEdge(int src, int dst, int weight)
         {
-            _adjArray[(src, dst)] = weight;
-        }
-
-        private int MinDistance(IReadOnlyList<int> dist, IReadOnlyList<bool> sptSet)
-        {
-            int min = int.MaxValue, minIndex = -1;
-
-            for (var v = 0; v < _vertices; v++)
+            if (_adjArray.TryGetValue(src, out var value))
             {
-                if (sptSet[v] == false && dist[v] <= min)
-                {
-                    min = dist[v];
-                    minIndex = v;
-                }
+                value.Add((dst, weight));
+            } else
+            {
+                _adjArray[src] = new (){(dst, weight)};
             }
-
-            return minIndex;
         }
 
-        public int Dijkstra(int from, int to)
+        public int GetShortestPathLength(int src, int dst)
         {
-            //var unvisited = new PriorityQueue<int, int>();
-            var dist = new int[_vertices];
-            var sptSet = new bool[_vertices];
-            for (var i = 0; i < _vertices; i++)
+            if (_dist.Contains(dst))
             {
-                dist[i] = int.MaxValue;
-                sptSet[i] = false;
-                //unvisited.Enqueue(i, int.MaxValue);
+                return _dist[dst];
             }
             
-            dist[from] = 0;
-            //unvisited.Enqueue(src, 0);
-
-            for (var count = 0; count < _vertices; count++)
+            for (var i = 0; i < _vertices; i++)
             {
-                var u = MinDistance(dist, sptSet);
-                sptSet[u] = true;
-                for (var v = 0; v < _vertices; v++)
+                _dist[i] = int.MaxValue;
+            }
+            
+            _dist[src] = 0;
+            _pq.Enqueue(src, 0);
+
+            while (_settled.Count != _vertices)
+            {
+                if (_pq.Count == 0)
                 {
-                    if (!_adjArray.ContainsKey((u, v)))
-                    {
-                        continue;
-                    }
-                    
-                    if (!sptSet[v] && _adjArray[(u, v)] != 0 &&
-                        dist[u] != int.MaxValue && dist[u] + _adjArray[(u, v)] < dist[v])
-                    {
-                        dist[v] = dist[u] + _adjArray[(u, v)];
-                    }
+                    return _dist[dst];
                 }
+
+                var u = _pq.Dequeue();
+
+                if (_settled.Contains(u))
+                {
+                    continue;
+                }
+
+                _settled.Add(u);
+                ProcessNeighbours(u);
             }
 
-            return dist[to];
+            return _dist[dst];
+        }
+        
+        private void ProcessNeighbours(int u)
+        {
+            for (var i = 0; i < _adjArray[u].Count; i++)
+            {
+                var (node, cost) = _adjArray[u][i];
+                if (_settled.Contains(node))
+                {
+                    continue;
+                }
+
+                var newDistance = _dist[u] + cost;
+                if (newDistance < _dist[node])
+                    _dist[node] = newDistance;
+
+                // Add the current node to the queue
+                _pq.Enqueue(node, _dist[node]);
+            }
         }
     }
-}
