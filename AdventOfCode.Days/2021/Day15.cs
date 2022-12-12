@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using AdventOfCode.Days.Common;
 
 namespace AdventOfCode.Days._2021;
 
@@ -43,12 +43,12 @@ public class Day15 : AdventDay<int[,], int, int>
                     for (var l = 0; l < width; l++)
                     {
                         var newValue = input[k, l] + i + j;
-                        
+
                         if (newValue > 9)
                         {
-                            newValue = (newValue % 10) + 1;
+                            newValue = newValue % 10 + 1;
                         }
-                        
+
                         newInput[i * height + k, j * width + l] = newValue;
                     }
                 }
@@ -91,76 +91,6 @@ public class Day15 : AdventDay<int[,], int, int>
             }
         }
 
-        return graph.Dijkstra(0, width * height - 1);
-    }
-
-    private class Graph
-    {
-        private readonly int _vertices;
-        private readonly Dictionary<(int, int), int> _adjArray;
-
-        public Graph(int vertices)
-        {
-            _vertices = vertices;
-            _adjArray = new Dictionary<(int, int), int>();
-        }
-
-        public void AddEdge(int src, int dst, int weight)
-        {
-            _adjArray[(src, dst)] = weight;
-        }
-
-        private int MinDistance(IReadOnlyList<int> dist, IReadOnlyList<bool> sptSet)
-        {
-            int min = int.MaxValue, minIndex = -1;
-
-            for (var v = 0; v < _vertices; v++)
-            {
-                if (sptSet[v] == false && dist[v] <= min)
-                {
-                    min = dist[v];
-                    minIndex = v;
-                }
-            }
-
-            return minIndex;
-        }
-
-        public int Dijkstra(int from, int to)
-        {
-            //var unvisited = new PriorityQueue<int, int>();
-            var dist = new int[_vertices];
-            var sptSet = new bool[_vertices];
-            for (var i = 0; i < _vertices; i++)
-            {
-                dist[i] = int.MaxValue;
-                sptSet[i] = false;
-                //unvisited.Enqueue(i, int.MaxValue);
-            }
-            
-            dist[from] = 0;
-            //unvisited.Enqueue(src, 0);
-
-            for (var count = 0; count < _vertices; count++)
-            {
-                var u = MinDistance(dist, sptSet);
-                sptSet[u] = true;
-                for (var v = 0; v < _vertices; v++)
-                {
-                    if (!_adjArray.ContainsKey((u, v)))
-                    {
-                        continue;
-                    }
-                    
-                    if (!sptSet[v] && _adjArray[(u, v)] != 0 &&
-                        dist[u] != int.MaxValue && dist[u] + _adjArray[(u, v)] < dist[v])
-                    {
-                        dist[v] = dist[u] + _adjArray[(u, v)];
-                    }
-                }
-            }
-
-            return dist[to];
-        }
+        return graph.DijkstraShortestPath(0, width * height - 1);
     }
 }
