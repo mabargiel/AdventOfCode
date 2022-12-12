@@ -15,7 +15,7 @@ public class Day9
     }
 
     [Test]
-    public void ParseRawInput_WithExampleInput_SplitsItAGridOfHeights()
+    public void ParseRawInput_WithExampleInput_CreatesMoveStepsArray()
     {
         var rawInput = @"R 4
 U 4
