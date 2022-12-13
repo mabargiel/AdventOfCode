@@ -45,6 +45,7 @@ public class Day16
     [TestCase("F600BC2D8F", 0)]
     [TestCase("9C005AC2F8F0", 0)]
     [TestCase("9C0141080250320F1802104A08", 1)]
+    [TestCase("2000E3C8DE98BDBD8800", 100000000000)]
     public void Part2_WithExampleInput_ParseStringAndExecuteBitsProgram(string rawInput, long expectedResult)
     {
         var result = _day16.Part2(_day16.ParseRawInput(rawInput));

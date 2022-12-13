@@ -50,7 +50,7 @@ public class Day16 : AdventDay<byte[], int, long>
     private static long ProcessPacket(Queue<byte> reader, ref int versionsSum)
     {
         var packetVersion = Decode(DequeueChunk(reader, 3));
-        versionsSum += packetVersion;
+        versionsSum += (int) packetVersion;
 
         var packetTypeId = Decode(DequeueChunk(reader, 3));
         if (packetTypeId == 4) //literal
@@ -88,7 +88,7 @@ public class Day16 : AdventDay<byte[], int, long>
             }
         }
 
-        return ExecuteOperation(literals, packetTypeId);
+        return ExecuteOperation(literals, (int) packetTypeId);
     }
 
     private static long ExecuteOperation(List<long> literals, int packetTypeId)
@@ -106,7 +106,7 @@ public class Day16 : AdventDay<byte[], int, long>
         };
     }
 
-    private static byte[] DequeueChunk(Queue<byte> queue, int chunkSize)
+    private static byte[] DequeueChunk(Queue<byte> queue, long chunkSize)
     {
         var chunk = new byte[chunkSize];
         for (var i = 0; i < chunkSize; i++)
@@ -117,12 +117,12 @@ public class Day16 : AdventDay<byte[], int, long>
         return chunk;
     }
 
-    private static int Decode(byte[] bits)
+    private static long Decode(byte[] bits)
     {
-        var result = 0;
+        var result = 0L;
         for (var i = bits.Length - 1; i >= 0; i--)
         {
-            result += bits[^(i + 1)] * (int) Math.Pow(2, i);
+            result += bits[^(i + 1)] * (long) Math.Pow(2, i);
         }
 
         return result;
