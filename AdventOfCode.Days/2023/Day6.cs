@@ -29,24 +29,8 @@ public class Day6 : AdventDay<Race[], int, int>
 
     public override int Part1(Race[] input)
     {
-        var result = 1;
-
-        foreach (var race in input)
-        {
-            var waysToBeatARecord = 0;
-
-            for (var i = 1; i <= race.Duration; i++)
-            {
-                if (i * (race.Duration - i) > race.CurrentRecord)
-                {
-                    waysToBeatARecord++;
-                }
-            }
-
-            result *= waysToBeatARecord;
-        }
-
-        return result;
+        return input.Select(race => CountWaysToWin(race.Duration, race.CurrentRecord))
+            .Aggregate(1, (current, waysToBeatARecord) => current * waysToBeatARecord);
     }
 
     public override int Part2(Race[] input)
@@ -54,26 +38,29 @@ public class Day6 : AdventDay<Race[], int, int>
         var duration = long.Parse(string.Join(string.Empty, input.Select(x => x.Duration)));
         var currentRecord = long.Parse(string.Join(string.Empty, input.Select(x => x.CurrentRecord)));
 
+        var result = CountWaysToWin(duration, currentRecord);
+
+        return result;
+    }
+
+    private static int CountWaysToWin(long duration, long currentRecord)
+    {
         var mid = duration / 2.0;
-        var floor = (int)Math.Floor(mid);
-        var ceiling = (int)Math.Ceiling(mid);
+        var floor = (int) Math.Floor(mid);
         var firstWinnableIndex = -1;
 
         for (var i = 1; i <= floor; i++)
         {
-            if (i * (duration - i) >= currentRecord)
+            if (i * (duration - i) > currentRecord)
             {
                 firstWinnableIndex = i;
                 break;
             }
         }
 
-        var result = 2 * (ceiling - firstWinnableIndex);
-
-        if (duration % 2 == 0)
-        {
-            result++;
-        }
+        var result = duration % 2 == 0 
+            ? 2 * (floor - firstWinnableIndex) + 1 
+            : 2 * (floor - firstWinnableIndex + 1);
 
         return result;
     }
