@@ -46,7 +46,7 @@ public class Day10
     public void Part1(string asteroidsMap, int expectedDetectedAsteroids)
     {
         var d9 = new Days._2019._10.Day10(asteroidsMap);
-        Assert.AreEqual(expectedDetectedAsteroids, d9.Part1());
+        Assert.That(expectedDetectedAsteroids, Is.EqualTo(d9.Part1()));
     }
 
     [Test]

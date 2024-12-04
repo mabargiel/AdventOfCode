@@ -13,7 +13,7 @@ public class Day4
     {
         var d4 = new Days._2019._4.Day4(start, end);
 
-        Assert.AreEqual(expectedPossibilities, d4.Part1());
+        Assert.That(expectedPossibilities, Is.EqualTo(d4.Part1()));
     }
 
     [Test]
@@ -25,6 +25,6 @@ public class Day4
     {
         var d4 = new Days._2019._4.Day4(start, end);
 
-        Assert.AreEqual(expectedPossibilities, d4.Part2());
+        Assert.That(expectedPossibilities, Is.EqualTo(d4.Part2()));
     }
 }

@@ -10,7 +10,7 @@ public class Day5
     {
         var d5 = new Days._2019._5.Day5(code, input);
 
-        Assert.AreEqual(output, d5.Part1());
+        Assert.That(output, Is.EqualTo(d5.Part1()));
     }
 
     [Test]
@@ -51,6 +51,6 @@ public class Day5
     {
         var d5 = new Days._2019._5.Day5(code, input);
 
-        Assert.AreEqual(output, d5.Part2());
+        Assert.That(output, Is.EqualTo(d5.Part2()));
     }
 }

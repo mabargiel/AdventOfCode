@@ -15,7 +15,7 @@ public class Day3
     public void Part1(object[] wire1, object[] wire2, int expectedDistance)
     {
         var d3 = new Days._2019.Day3();
-        Assert.AreEqual(expectedDistance, d3.Part1((wire1.Cast<string>().ToArray(), wire2.Cast<string>().ToArray())));
+        Assert.That(expectedDistance, Is.EqualTo(d3.Part1((wire1.Cast<string>().ToArray(), wire2.Cast<string>().ToArray()))));
     }
 
     [Test]
@@ -29,6 +29,6 @@ public class Day3
     {
         var d3 = new Days._2019.Day3();
 
-        Assert.AreEqual(expectedDistance, d3.Part2((wire1.Cast<string>().ToArray(), wire2.Cast<string>().ToArray())));
+        Assert.That(expectedDistance, Is.EqualTo(d3.Part2((wire1.Cast<string>().ToArray(), wire2.Cast<string>().ToArray()))));
     }
 }

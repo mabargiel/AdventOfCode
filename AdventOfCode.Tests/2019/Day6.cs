@@ -10,7 +10,7 @@ public class Day6
     {
         var d6 = new Days._2019._6.Day6(map);
 
-        Assert.AreEqual(expectedOrbits, d6.Part1());
+        Assert.That(expectedOrbits, Is.EqualTo(d6.Part1()));
     }
 
     [Test]
@@ -21,6 +21,6 @@ public class Day6
     {
         var d6 = new Days._2019._6.Day6(map);
 
-        Assert.AreEqual(expectedTransfers, d6.Part2());
+        Assert.That(expectedTransfers, Is.EqualTo(d6.Part2()));
     }
 }

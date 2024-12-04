@@ -13,7 +13,7 @@ public class Day8
     {
         var d8 = new Days._2019._8.Day8(imageData, width, height);
 
-        Assert.AreEqual(expectedOutput, d8.Part1());
+        Assert.That(expectedOutput, Is.EqualTo(d8.Part1()));
     }
 
     [Test]
@@ -32,6 +32,6 @@ public class Day8
     {
         var d8 = new Days._2019._8.Day8(imageData, width, height);
 
-        Assert.AreEqual(expectedOutput, d8.Part2());
+        Assert.That(expectedOutput, Is.EqualTo(d8.Part2()));
     }
 }

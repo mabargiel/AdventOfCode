@@ -43,6 +43,6 @@ public class Day11
 
         await task;
 
-        Assert.AreEqual(expectedResult, paintArea.Count);
+        Assert.That(expectedResult, Is.EqualTo(paintArea.Count));
     }
 }

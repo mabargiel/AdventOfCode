@@ -17,7 +17,7 @@ public class Day12
     {
         var day12 = new Days._2019._12.Day12(input, timesteps);
 
-        Assert.AreEqual(expectedResult, day12.Part1());
+        Assert.That(expectedResult, Is.EqualTo(day12.Part1()));
     }
 
     [Test]
@@ -33,6 +33,6 @@ public class Day12
     {
         var day12 = new Days._2019._12.Day12(input);
 
-        Assert.AreEqual(expectedResult, day12.Part2());
+        Assert.That(expectedResult, Is.EqualTo(day12.Part2()));
     }
 }

@@ -22,7 +22,7 @@ public class Day7
     {
         var d7 = new Days._2019._7.Day7(code, 0);
 
-        Assert.AreEqual(expectedOutput, d7.Part1());
+        Assert.That(expectedOutput, Is.EqualTo(d7.Part1()));
     }
 
     [Test]
@@ -44,6 +44,6 @@ public class Day7
     {
         var d7 = new Days._2019._7.Day7(code, input);
 
-        Assert.AreEqual(expectedOutput, d7.Part2());
+        Assert.That(expectedOutput, Is.EqualTo(d7.Part2()));
     }
 }

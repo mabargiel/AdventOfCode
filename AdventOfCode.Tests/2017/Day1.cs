@@ -20,7 +20,7 @@ public class Day1
 
         var input = _day.ParseRawInput(rawInput);
 
-        input.ShouldBe(new[] { 9, 1, 2, 1, 2, 1, 2, 9 });
+        input.ShouldBe([9, 1, 2, 1, 2, 1, 2, 9]);
     }
 
     [Test]
@@ -30,7 +30,7 @@ public class Day1
     [TestCase(new[] { 9, 1, 2, 1, 2, 1, 2, 9 }, 9)]
     public void Part1(int[] input, int expectedResult)
     {
-        Assert.AreEqual(expectedResult, _day.Part1(input));
+        Assert.That(expectedResult, Is.EqualTo(_day.Part1(input)));
     }
 
     [Test]
@@ -41,6 +41,6 @@ public class Day1
     [TestCase(new[] { 1, 2, 1, 3, 1, 4, 1, 5 }, 4)]
     public void Part2(int[] input, int expectedResult)
     {
-        Assert.AreEqual(expectedResult, _day.Part2(input));
+        Assert.That(expectedResult, Is.EqualTo(_day.Part2(input)));
     }
 }

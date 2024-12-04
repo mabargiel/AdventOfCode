@@ -30,6 +30,6 @@ public class Day13
 
         await game;
 
-        Assert.AreEqual(expectedResult, tiles.Count);
+        Assert.That(expectedResult, Is.EqualTo(tiles.Count));
     }
 }
