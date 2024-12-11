@@ -94,7 +94,7 @@ internal class Program
             }
             catch (NotImplementedException)
             {
-                result = "Not yet implemented";
+                result = "Part 1 >\n>>> Not yet implemented";
             }
 
             Console.WriteLine(result);
@@ -109,7 +109,7 @@ internal class Program
             }
             catch (NotImplementedException)
             {
-                result = "Not yet implemented";
+                result = "Part 2 >\n>>> Not yet implemented";
             }
 
             Console.WriteLine(result);
