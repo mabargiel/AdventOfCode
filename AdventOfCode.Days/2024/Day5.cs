@@ -21,6 +21,11 @@ public class Day5 : AdventDay<PrinterPages, int, int>
         return new PrinterPages(rules, updates);
     }
 
+    /// <summary>
+    /// Sum middle page numbers of all valid updates, by checking if update follow ordering rules
+    /// </summary>
+    /// <param name="input">Parsed input</param>
+    /// <returns>Sum of middle page numbers of all valid updates</returns>
     public override int Part1(PrinterPages input)
     {
         var (rules, updates) = input;
@@ -53,6 +58,12 @@ public class Day5 : AdventDay<PrinterPages, int, int>
         return sumOfValidUpdates;
     }
 
+    /// <summary>
+    /// Same as part 1, but if an update is invalid, swap the two numbers and check again until update becomes valid.
+    /// This time sum all middle page numbers of updates needing correction.
+    /// </summary>
+    /// <param name="input">Parsed input</param>
+    /// <returns>um of middle page numbers of all corrected updates</returns>
     public override int Part2(PrinterPages input)
     {
         var (rules, updates) = input;

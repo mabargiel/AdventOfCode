@@ -22,14 +22,24 @@ public abstract class AdventDay<TIn, TOut1, TOut2> : IAdventDay
         var input = ParseRawInput(rawInput);
         watch.Stop();
         var inputParsingTime = watch.Elapsed.TotalMilliseconds;
-        
+
         watch.Restart();
         var result = part(input);
         watch.Stop();
         var executionTime = watch.Elapsed.TotalMilliseconds;
-        
+
         return
-            $"{name} >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime:F2} ms\n>>> Execution time: {executionTime:F2} ms";
+            $"{name} >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime:F2} ms\n>>> Execution time: {FormatExecutionTime(executionTime)}";
+    }
+
+    private string FormatExecutionTime(double executionTime)
+    {
+        return executionTime switch
+        {
+            < 1000 => $"{executionTime:F2} ms",
+            < 60000 => $"{executionTime / 1000:F2} s",
+            _ => $"{executionTime / 60000:F2} m"
+        };
     }
 
     public abstract TIn ParseRawInput(string rawInput);
