@@ -15,13 +15,21 @@ public partial class Day8 : AdventDay<NavigationMap, int, long>
         var split = rawInput.Trim().Split(Environment.NewLine + Environment.NewLine);
         var leftRight = split[0];
         var pathRegex = PathRegex();
-        var paths = new Dictionary<string, LeftRight>(split[1].Split(Environment.NewLine).Select(row =>
-        {
-            var match = pathRegex.Match(row);
-            return new KeyValuePair<string, LeftRight>(match.Groups["source"].ToString(), new LeftRight(
-                match.Groups["left"].ToString(),
-                match.Groups["right"].ToString()));
-        }));
+        var paths = new Dictionary<string, LeftRight>(
+            split[1]
+                .Split(Environment.NewLine)
+                .Select(row =>
+                {
+                    var match = pathRegex.Match(row);
+                    return new KeyValuePair<string, LeftRight>(
+                        match.Groups["source"].ToString(),
+                        new LeftRight(
+                            match.Groups["left"].ToString(),
+                            match.Groups["right"].ToString()
+                        )
+                    );
+                })
+        );
 
         return new NavigationMap(leftRight, paths);
     }
@@ -36,7 +44,10 @@ public partial class Day8 : AdventDay<NavigationMap, int, long>
         while (currentPlace != "ZZZ")
         {
             var instructionIndex = steps % instructions.Length;
-            currentPlace = instructions[instructionIndex] == 'L' ? paths[currentPlace].Left : paths[currentPlace].Right;
+            currentPlace =
+                instructions[instructionIndex] == 'L'
+                    ? paths[currentPlace].Left
+                    : paths[currentPlace].Right;
             steps++;
         }
 
@@ -56,9 +67,8 @@ public partial class Day8 : AdventDay<NavigationMap, int, long>
             {
                 var currentStep = instructions[stepsPerNode % instructions.Length];
 
-                currentNodes[i] = currentStep == 'L'
-                    ? paths[currentNodes[i]].Left
-                    : paths[currentNodes[i]].Right;
+                currentNodes[i] =
+                    currentStep == 'L' ? paths[currentNodes[i]].Left : paths[currentNodes[i]].Right;
 
                 stepsPerNode++;
             }

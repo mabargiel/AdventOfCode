@@ -5,9 +5,12 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Days._2022;
 
-public class Day5 : AdventDay<(Stack<char>[] Containers, ContainerCraneAction[] Actions), string, string>
+public class Day5
+    : AdventDay<(Stack<char>[] Containers, ContainerCraneAction[] Actions), string, string>
 {
-    public override (Stack<char>[] Containers, ContainerCraneAction[] Actions) ParseRawInput(string rawInput)
+    public override (Stack<char>[] Containers, ContainerCraneAction[] Actions) ParseRawInput(
+        string rawInput
+    )
     {
         var configs = rawInput.Split(Environment.NewLine + Environment.NewLine);
         var stacksLines = configs[0].Split(Environment.NewLine);
@@ -34,12 +37,19 @@ public class Day5 : AdventDay<(Stack<char>[] Containers, ContainerCraneAction[] 
         }
 
         var actionRegex = new Regex(@"move (?<count>\d+) from (?<from>\d) to (?<to>\d)");
-        var actions = configs[1].Trim().Split(Environment.NewLine).Select(action =>
-        {
-            var match = actionRegex.Match(action);
-            return new ContainerCraneAction(int.Parse(match.Groups["count"].Value),
-                int.Parse(match.Groups["from"].Value), int.Parse(match.Groups["to"].Value));
-        }).ToArray();
+        var actions = configs[1]
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(action =>
+            {
+                var match = actionRegex.Match(action);
+                return new ContainerCraneAction(
+                    int.Parse(match.Groups["count"].Value),
+                    int.Parse(match.Groups["from"].Value),
+                    int.Parse(match.Groups["to"].Value)
+                );
+            })
+            .ToArray();
 
         return (stacks, actions);
     }

@@ -19,7 +19,9 @@ public class Day9 : IAdventDay<long, long>
     {
         for (var i = _preambleLength; i < _nums.Length; i++)
         {
-            var sums = new Combinations<long>(_nums[(i - _preambleLength)..i], 2).Select(it => it.Sum());
+            var sums = new Combinations<long>(_nums[(i - _preambleLength)..i], 2).Select(it =>
+                it.Sum()
+            );
 
             if (sums.All(sum => sum != _nums[i]))
             {

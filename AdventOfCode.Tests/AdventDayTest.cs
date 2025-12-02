@@ -4,7 +4,8 @@ using NUnit.Framework;
 
 namespace AdventOfCode.Tests;
 
-public abstract class AdventDayTest<T> where T : IAdventDay
+public abstract class AdventDayTest<T>
+    where T : IAdventDay
 {
     protected T _day;
 

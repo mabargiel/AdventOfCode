@@ -17,20 +17,28 @@ public class Day8
     [Test]
     public void ParseRawInput_IntoInstructionsArray()
     {
-        var rawInput = @"b inc 5 if a > 1
+        var rawInput =
+            @"b inc 5 if a > 1
 a inc 1 if b < 5
 c dec -10 if a >= 1
 c inc -20 if c == 10";
 
         var input = _day.ParseRawInput(rawInput);
 
-        input.ShouldBeEquivalentTo(new Instruction[]
-        {
-            new("b", Operation.INC, 5, new Condition("a", ConditionType.GreaterThan, 1)),
-            new("a", Operation.INC, 1, new Condition("b", ConditionType.LessThan, 5)),
-            new("c", Operation.DEC, -10, new Condition("a", ConditionType.GreaterThanOrEqualTo, 1)),
-            new("c", Operation.INC, -20, new Condition("c", ConditionType.Equals, 10))
-        });
+        input.ShouldBeEquivalentTo(
+            new Instruction[]
+            {
+                new("b", Operation.INC, 5, new Condition("a", ConditionType.GreaterThan, 1)),
+                new("a", Operation.INC, 1, new Condition("b", ConditionType.LessThan, 5)),
+                new(
+                    "c",
+                    Operation.DEC,
+                    -10,
+                    new Condition("a", ConditionType.GreaterThanOrEqualTo, 1)
+                ),
+                new("c", Operation.INC, -20, new Condition("c", ConditionType.Equals, 10)),
+            }
+        );
     }
 
     [Test]
@@ -41,7 +49,7 @@ c inc -20 if c == 10";
             new("b", Operation.INC, 5, new Condition("a", ConditionType.GreaterThan, 1)),
             new("a", Operation.INC, 1, new Condition("b", ConditionType.LessThan, 5)),
             new("c", Operation.DEC, -10, new Condition("a", ConditionType.GreaterThanOrEqualTo, 1)),
-            new("c", Operation.INC, -20, new Condition("c", ConditionType.Equals, 10))
+            new("c", Operation.INC, -20, new Condition("c", ConditionType.Equals, 10)),
         };
 
         var result = _day.Part1(input);
@@ -57,7 +65,7 @@ c inc -20 if c == 10";
             new("b", Operation.INC, 5, new Condition("a", ConditionType.GreaterThan, 1)),
             new("a", Operation.INC, 1, new Condition("b", ConditionType.LessThan, 5)),
             new("c", Operation.DEC, -10, new Condition("a", ConditionType.GreaterThanOrEqualTo, 1)),
-            new("c", Operation.INC, -20, new Condition("c", ConditionType.Equals, 10))
+            new("c", Operation.INC, -20, new Condition("c", ConditionType.Equals, 10)),
         };
 
         var result = _day.Part2(input);

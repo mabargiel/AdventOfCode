@@ -80,9 +80,15 @@ public class Day3 : AdventDay<int, int, int>
                     y += yVect;
 
                     spiral.TryGetValue((x - xVect, y - yVect), out neighbourValues[0]);
-                    spiral.TryGetValue((x - (xVect + yVect), y + (xVect - yVect)), out neighbourValues[2]);
+                    spiral.TryGetValue(
+                        (x - (xVect + yVect), y + (xVect - yVect)),
+                        out neighbourValues[2]
+                    );
                     spiral.TryGetValue((x - yVect, y + xVect), out neighbourValues[1]);
-                    spiral.TryGetValue((x + (xVect - yVect), y + xVect + yVect), out neighbourValues[3]);
+                    spiral.TryGetValue(
+                        (x + (xVect - yVect), y + xVect + yVect),
+                        out neighbourValues[3]
+                    );
 
                     spiral[(x, y)] = neighbourValues.Sum();
 

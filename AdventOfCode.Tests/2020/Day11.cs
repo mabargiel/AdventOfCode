@@ -20,8 +20,9 @@ public class Day11
                 LLLLLLLLLL
                 L.LLLLLL.L
                 L.LLLLL.LL".TrimIndent(),
-            37, 26
-        }
+            37,
+            26,
+        },
     };
 
     [Test]

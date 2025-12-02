@@ -8,7 +8,8 @@ public class Day6
     [Test]
     public void Part1()
     {
-        const string input = @"abc
+        const string input =
+            @"abc
 
 a
 b
@@ -32,7 +33,8 @@ b";
     [Test]
     public void Part2()
     {
-        const string input = @"abc
+        const string input =
+            @"abc
 
 a
 b

@@ -19,7 +19,7 @@ public class Day10 : IAdventDay<int, long>
         {
             [1] = 0,
             [2] = 0,
-            [3] = 1
+            [3] = 1,
         };
 
         differences[_adapters[0]]++;
@@ -42,17 +42,19 @@ public class Day10 : IAdventDay<int, long>
         for (var i = 0; i < fullAdaptersList.Count - 1; i++)
         {
             var currentNumber = fullAdaptersList[i];
-            var subsetCount =
-                fullAdaptersList.Count(adapter => adapter > currentNumber && adapter - currentNumber <= 3);
+            var subsetCount = fullAdaptersList.Count(adapter =>
+                adapter > currentNumber && adapter - currentNumber <= 3
+            );
 
             if (subsetCount == 1)
             {
                 continue;
             }
 
-            result *= fullAdaptersList[i + subsetCount + 1] - currentNumber > 4
-                ? (int)Math.Pow(2, subsetCount - 1)
-                : (int)Math.Pow(2, subsetCount) - 1;
+            result *=
+                fullAdaptersList[i + subsetCount + 1] - currentNumber > 4
+                    ? (int)Math.Pow(2, subsetCount - 1)
+                    : (int)Math.Pow(2, subsetCount) - 1;
 
             i += subsetCount;
         }

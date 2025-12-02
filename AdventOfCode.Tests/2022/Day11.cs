@@ -5,7 +5,8 @@ namespace AdventOfCode.Tests._2022;
 
 public class Day11
 {
-    private const string _exampleInput = @"
+    private const string _exampleInput =
+        @"
 Monkey 0:
   Starting items: 79, 98
   Operation: new = old * 19

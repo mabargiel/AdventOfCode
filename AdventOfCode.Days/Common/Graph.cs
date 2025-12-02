@@ -18,9 +18,10 @@ public class Graph
         if (_adjArray.TryGetValue(src, out var value))
         {
             value.Add((dst, weight));
-        } else
+        }
+        else
         {
-            _adjArray[src] = new (){(dst, weight)};
+            _adjArray[src] = new() { (dst, weight) };
         }
     }
 
@@ -29,12 +30,12 @@ public class Graph
         var settled = new HashSet<int>();
         var pq = new PriorityQueue<int, int>(_vertices);
         var dist = new int[_vertices];
-            
+
         for (var i = 0; i < _vertices; i++)
         {
             dist[i] = int.MaxValue;
         }
-            
+
         dist[src] = 0;
         pq.Enqueue(src, 0);
 
@@ -57,7 +58,7 @@ public class Graph
         }
 
         return dist[dst];
-            
+
         void ProcessNeighbours(int u)
         {
             for (var i = 0; i < _adjArray[u].Count; i++)

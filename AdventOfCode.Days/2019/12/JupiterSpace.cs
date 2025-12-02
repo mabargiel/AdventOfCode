@@ -35,7 +35,12 @@ public class JupiterSpace
     public long MoveTimeUntilRepeat()
     {
         var initialMoons = _moons.Select(x => x.Clone()).ToArray();
-        var timeDimensions = new Dictionary<char, long> { { 'X', 0 }, { 'Y', 0 }, { 'Z', 0 } };
+        var timeDimensions = new Dictionary<char, long>
+        {
+            { 'X', 0 },
+            { 'Y', 0 },
+            { 'Z', 0 },
+        };
 
         //for each dimension separately
         foreach (var dimension in timeDimensions.Keys.ToArray())

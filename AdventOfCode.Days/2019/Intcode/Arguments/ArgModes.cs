@@ -4,5 +4,5 @@ public enum ArgModes
 {
     Position,
     Immediate,
-    Relative
+    Relative,
 }

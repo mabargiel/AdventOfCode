@@ -7,7 +7,10 @@ public class Day2 : AdventDay<int[][], int, int>
 {
     public override int[][] ParseRawInput(string rawInput)
     {
-        return rawInput.Split(Environment.NewLine).Select(x => x.Split('\t').Select(int.Parse).ToArray()).ToArray();
+        return rawInput
+            .Split(Environment.NewLine)
+            .Select(x => x.Split('\t').Select(int.Parse).ToArray())
+            .ToArray();
     }
 
     public override int Part1(int[][] input)
@@ -32,7 +35,9 @@ public class Day2 : AdventDay<int[][], int, int>
                 }
             }
 
-            throw new ArgumentException("Could not find two numbers that can be evenly divided by themselves");
+            throw new ArgumentException(
+                "Could not find two numbers that can be evenly divided by themselves"
+            );
         });
     }
 }

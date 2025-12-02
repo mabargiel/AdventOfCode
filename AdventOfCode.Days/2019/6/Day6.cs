@@ -38,15 +38,23 @@ public class Day6 : IAdventDay<int, int>
         var vertexes = new OrderedBag<Vertex>();
         foreach (var oribitngObject in _map.Where(x => x.Name != "YOU" && x.Name != "SAN"))
         {
-            vertexes.Add(new Vertex(oribitngObject, oribitngObject.Equals(meObjectOrbit) ? 0 : int.MaxValue));
+            vertexes.Add(
+                new Vertex(oribitngObject, oribitngObject.Equals(meObjectOrbit) ? 0 : int.MaxValue)
+            );
         }
 
         while (vertexes.Any())
         {
             var u = vertexes.RemoveFirst();
-            var neighbours = vertexes.Where(x =>
-                (x.OribitngObject.OrbitsOn.Equals(u.OribitngObject) ||
-                 x.OribitngObject.Equals(u.OribitngObject.OrbitsOn)) && u.Cost + 1 < x.Cost).ToList();
+            var neighbours = vertexes
+                .Where(x =>
+                    (
+                        x.OribitngObject.OrbitsOn.Equals(u.OribitngObject)
+                        || x.OribitngObject.Equals(u.OribitngObject.OrbitsOn)
+                    )
+                    && u.Cost + 1 < x.Cost
+                )
+                .ToList();
 
             if (u.OribitngObject.Equals(santaOrbitObject))
             {
@@ -72,16 +80,20 @@ public class Day6 : IAdventDay<int, int>
             var split = representation.Split(')');
             var right = split[1];
 
-            var newObject = map.FirstOrDefault(x => x.Name == right) ??
-                            CreateObject(map, mapRepresentation, representation);
+            var newObject =
+                map.FirstOrDefault(x => x.Name == right)
+                ?? CreateObject(map, mapRepresentation, representation);
             map.Add(newObject);
         }
 
         return map.ToArray();
     }
 
-    private static OribitngObject CreateObject(HashSet<OribitngObject> map, string[] mapRepresentation,
-        string representation)
+    private static OribitngObject CreateObject(
+        HashSet<OribitngObject> map,
+        string[] mapRepresentation,
+        string representation
+    )
     {
         if (representation == null)
         {
@@ -90,15 +102,18 @@ public class Day6 : IAdventDay<int, int>
 
         var split = representation.Split(')');
         var (left, right) = (split[0], split[1]);
-        var directOribitingObject =
-            mapRepresentation.FirstOrDefault(
-                x => x.Substring(x.LastIndexOf(')') + 1) == left && x != representation);
+        var directOribitingObject = mapRepresentation.FirstOrDefault(x =>
+            x.Substring(x.LastIndexOf(')') + 1) == left && x != representation
+        );
 
         var newObject = map.FirstOrDefault(x => x.Name == right);
 
         if (newObject == null)
         {
-            newObject = new OribitngObject(right, CreateObject(map, mapRepresentation, directOribitingObject));
+            newObject = new OribitngObject(
+                right,
+                CreateObject(map, mapRepresentation, directOribitingObject)
+            );
             map.Add(newObject);
         }
 

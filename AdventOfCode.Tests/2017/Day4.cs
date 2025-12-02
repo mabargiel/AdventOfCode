@@ -24,12 +24,14 @@ aa bb cc dd aaa";
 
         var input = _day.ParseRawInput(rawInput);
 
-        input.ShouldBe(new List<List<string>>
-        {
-            new() { "aa", "bb", "cc", "dd", "ee" },
-            new() { "aa", "bb", "cc", "dd", "aa" },
-            new() { "aa", "bb", "cc", "dd", "aaa" }
-        });
+        input.ShouldBe(
+            new List<List<string>>
+            {
+                new() { "aa", "bb", "cc", "dd", "ee" },
+                new() { "aa", "bb", "cc", "dd", "aa" },
+                new() { "aa", "bb", "cc", "dd", "aaa" },
+            }
+        );
     }
 
     [Test]
@@ -39,7 +41,7 @@ aa bb cc dd aaa";
         {
             new() { "aa", "bb", "cc", "dd", "ee" },
             new() { "aa", "bb", "cc", "dd", "aa" },
-            new() { "aa", "bb", "cc", "dd", "aaa" }
+            new() { "aa", "bb", "cc", "dd", "aaa" },
         };
 
         var result = _day.Part1(input);
@@ -55,7 +57,7 @@ aa bb cc dd aaa";
             new() { "abcde", "fghij" },
             new() { "abcde", "xyz", "ecdab" },
             new() { "a", "ab", "abc", "abd", "abf", "abj" },
-            new() { "oiii", "ioii", "iioi", "iiio" }
+            new() { "oiii", "ioii", "iioi", "iiio" },
         };
 
         var result = _day.Part2(input);

@@ -3,9 +3,7 @@
 public class NoInstruction : Instruction
 {
     public NoInstruction(int argument)
-        : base(argument)
-    {
-    }
+        : base(argument) { }
 
     public override (int Move, int Increase) Execute()
     {

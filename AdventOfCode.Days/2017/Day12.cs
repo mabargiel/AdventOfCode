@@ -8,14 +8,19 @@ public class Day12 : AdventDay<Dictionary<int, int[]>, int, int>
 {
     public override Dictionary<int, int[]> ParseRawInput(string rawInput)
     {
-        return new Dictionary<int, int[]>(rawInput.Trim().Split(Environment.NewLine).Select(s =>
-        {
-            var split = s.Split("<->").Select(x => x.Trim()).ToArray();
-            var program = int.Parse(split[0]);
-            var adjacentPrograms = split[1].Split(", ").Select(int.Parse).ToArray();
+        return new Dictionary<int, int[]>(
+            rawInput
+                .Trim()
+                .Split(Environment.NewLine)
+                .Select(s =>
+                {
+                    var split = s.Split("<->").Select(x => x.Trim()).ToArray();
+                    var program = int.Parse(split[0]);
+                    var adjacentPrograms = split[1].Split(", ").Select(int.Parse).ToArray();
 
-            return new KeyValuePair<int, int[]>(program, adjacentPrograms);
-        }));
+                    return new KeyValuePair<int, int[]>(program, adjacentPrograms);
+                })
+        );
     }
 
     public override int Part1(Dictionary<int, int[]> input)
@@ -35,7 +40,8 @@ public class Day12 : AdventDay<Dictionary<int, int[]>, int, int>
 
 public class ProgramsGraph : Graph
 {
-    public ProgramsGraph(Dictionary<int, int[]> programMap) : base(programMap.Count)
+    public ProgramsGraph(Dictionary<int, int[]> programMap)
+        : base(programMap.Count)
     {
         foreach (var (key, value) in programMap)
         {

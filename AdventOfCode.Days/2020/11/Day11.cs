@@ -39,18 +39,21 @@ public class Day11 : IAdventDay<int, int>
         do
         {
             prev = new SeatsMap(curr);
-            Parallel.ForEach(prev.ToList(), item =>
-            {
-                var ((x, y), value) = item;
-                var adjacentSeats = prev.GetAdjacentSeats(x, y);
-
-                curr[(x, y)] = value switch
+            Parallel.ForEach(
+                prev.ToList(),
+                item =>
                 {
-                    'L' when adjacentSeats.All(it => it != '#') => '#',
-                    '#' when adjacentSeats.Count(it => it == '#') >= 4 => 'L',
-                    _ => prev[(x, y)]
-                };
-            });
+                    var ((x, y), value) = item;
+                    var adjacentSeats = prev.GetAdjacentSeats(x, y);
+
+                    curr[(x, y)] = value switch
+                    {
+                        'L' when adjacentSeats.All(it => it != '#') => '#',
+                        '#' when adjacentSeats.Count(it => it == '#') >= 4 => 'L',
+                        _ => prev[(x, y)],
+                    };
+                }
+            );
         } while (curr.Any(it => prev[it.Key] != it.Value));
 
         return curr.Count(it => it.Value == '#');
@@ -64,18 +67,21 @@ public class Day11 : IAdventDay<int, int>
         do
         {
             prev = new SeatsMap(curr);
-            Parallel.ForEach(prev.ToList(), item =>
-            {
-                var ((x, y), value) = item;
-                var adjacentSeats = prev.GetFirstVisibleSeats(x, y).ToList();
-
-                curr[(x, y)] = value switch
+            Parallel.ForEach(
+                prev.ToList(),
+                item =>
                 {
-                    'L' when adjacentSeats.All(it => it != '#') => '#',
-                    '#' when adjacentSeats.Count(it => it == '#') >= 5 => 'L',
-                    _ => prev[(x, y)]
-                };
-            });
+                    var ((x, y), value) = item;
+                    var adjacentSeats = prev.GetFirstVisibleSeats(x, y).ToList();
+
+                    curr[(x, y)] = value switch
+                    {
+                        'L' when adjacentSeats.All(it => it != '#') => '#',
+                        '#' when adjacentSeats.Count(it => it == '#') >= 5 => 'L',
+                        _ => prev[(x, y)],
+                    };
+                }
+            );
         } while (curr.Any(it => prev[it.Key] != it.Value));
 
         return curr.Count(it => it.Value == '#');

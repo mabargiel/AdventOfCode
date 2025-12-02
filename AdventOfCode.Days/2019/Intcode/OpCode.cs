@@ -11,5 +11,5 @@ public enum OpCode
     LessThan,
     Equals,
     IncrementRelativeBase,
-    HaltProgram = 99
+    HaltProgram = 99,
 }

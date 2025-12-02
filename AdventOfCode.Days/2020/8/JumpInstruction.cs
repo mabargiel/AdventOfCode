@@ -2,9 +2,8 @@
 
 public class JumpInstruction : Instruction
 {
-    public JumpInstruction(int argument) : base(argument)
-    {
-    }
+    public JumpInstruction(int argument)
+        : base(argument) { }
 
     public override (int Move, int Increase) Execute()
     {

@@ -18,7 +18,8 @@ public class Day5
     [Test]
     public void ParseRawInput_WithExampleInput_SplitsItIntoPairsOfRanges()
     {
-        const string rawInput = @"    [D]    
+        const string rawInput =
+            @"    [D]    
 [N] [C]    
 [Z] [M] [P]
  1   2   3 
@@ -33,37 +34,44 @@ move 1 from 1 to 2";
         input.Containers.Length.ShouldBe(3);
         input.Actions.Length.ShouldBe(4);
 
-        input.Containers.ShouldBe(new[]
-        {
-            new Stack<char>(new[] { 'Z', 'N' }),
-            new Stack<char>(new[] { 'M', 'C', 'D' }),
-            new Stack<char>(new[] { 'P' })
-        });
+        input.Containers.ShouldBe(
+            new[]
+            {
+                new Stack<char>(new[] { 'Z', 'N' }),
+                new Stack<char>(new[] { 'M', 'C', 'D' }),
+                new Stack<char>(new[] { 'P' }),
+            }
+        );
 
-        input.Actions.ShouldBe(new[]
-        {
-            new ContainerCraneAction(1, 2, 1),
-            new ContainerCraneAction(3, 1, 3),
-            new ContainerCraneAction(2, 2, 1),
-            new ContainerCraneAction(1, 1, 2)
-        });
+        input.Actions.ShouldBe(
+            new[]
+            {
+                new ContainerCraneAction(1, 2, 1),
+                new ContainerCraneAction(3, 1, 3),
+                new ContainerCraneAction(2, 2, 1),
+                new ContainerCraneAction(1, 1, 2),
+            }
+        );
     }
 
     [Test]
     public void Part1_WithGivenExample_ReturnsTopContainers()
     {
-        var input = (new[]
-        {
-            new Stack<char>(new[] { 'Z', 'N' }),
-            new Stack<char>(new[] { 'M', 'C', 'D' }),
-            new Stack<char>(new[] { 'P' })
-        }, new[]
-        {
-            new ContainerCraneAction(1, 2, 1),
-            new ContainerCraneAction(3, 1, 3),
-            new ContainerCraneAction(2, 2, 1),
-            new ContainerCraneAction(1, 1, 2)
-        });
+        var input = (
+            new[]
+            {
+                new Stack<char>(new[] { 'Z', 'N' }),
+                new Stack<char>(new[] { 'M', 'C', 'D' }),
+                new Stack<char>(new[] { 'P' }),
+            },
+            new[]
+            {
+                new ContainerCraneAction(1, 2, 1),
+                new ContainerCraneAction(3, 1, 3),
+                new ContainerCraneAction(2, 2, 1),
+                new ContainerCraneAction(1, 1, 2),
+            }
+        );
 
         var result = _day5.Part1(input);
 
@@ -73,18 +81,21 @@ move 1 from 1 to 2";
     [Test]
     public void Part2_WithGivenExample_ReturnsTopContainers()
     {
-        var input = (new[]
-        {
-            new Stack<char>(new[] { 'Z', 'N' }),
-            new Stack<char>(new[] { 'M', 'C', 'D' }),
-            new Stack<char>(new[] { 'P' })
-        }, new[]
-        {
-            new ContainerCraneAction(1, 2, 1),
-            new ContainerCraneAction(3, 1, 3),
-            new ContainerCraneAction(2, 2, 1),
-            new ContainerCraneAction(1, 1, 2)
-        });
+        var input = (
+            new[]
+            {
+                new Stack<char>(new[] { 'Z', 'N' }),
+                new Stack<char>(new[] { 'M', 'C', 'D' }),
+                new Stack<char>(new[] { 'P' }),
+            },
+            new[]
+            {
+                new ContainerCraneAction(1, 2, 1),
+                new ContainerCraneAction(3, 1, 3),
+                new ContainerCraneAction(2, 2, 1),
+                new ContainerCraneAction(1, 1, 2),
+            }
+        );
 
         var result = _day5.Part2(input);
 

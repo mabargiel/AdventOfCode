@@ -7,7 +7,8 @@ public class IncrementRelativeBaseOperation : BaseOperation
     private readonly ArgumentMode _arg1;
     private readonly Program _program;
 
-    public IncrementRelativeBaseOperation(Program program, ArgumentMode arg1) : base(program, 2)
+    public IncrementRelativeBaseOperation(Program program, ArgumentMode arg1)
+        : base(program, 2)
     {
         _program = program;
         _arg1 = arg1;

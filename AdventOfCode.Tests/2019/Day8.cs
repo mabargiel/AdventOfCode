@@ -22,7 +22,9 @@ public class Day8
     [TestCase(6U, 6U)]
     public void Part1_CorruptedData(uint width, uint height)
     {
-        Assert.Throws<ArgumentException>(() => new Days._2019._8.Day8("102111729002123123", width, height));
+        Assert.Throws<ArgumentException>(() =>
+            new Days._2019._8.Day8("102111729002123123", width, height)
+        );
     }
 
     [Test]

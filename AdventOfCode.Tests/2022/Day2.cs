@@ -25,8 +25,10 @@ public class Day2
 
     [Test]
     [TestCase("A Y\nB X\nC Z", 15)]
-    [TestCase("A Y\nB Y\nB Z\nB Z\nB X\nB Z\nC Y\nA Z\nC X\nC X\nB Z\nB Z\nB Z\nA X\nB Z\nB Z\nA Y\nB Z\nA Z\nB X",
-        130)]
+    [TestCase(
+        "A Y\nB Y\nB Z\nB Z\nB X\nB Z\nC Y\nA Z\nC X\nC X\nB Z\nB Z\nB Z\nA X\nB Z\nB Z\nA Y\nB Z\nA Z\nB X",
+        130
+    )]
     public void Part1_WithExampleInput_CalculateScore(string input, int expectedScore)
     {
         var parsedInput = _day2.ParseRawInput(input);
@@ -38,8 +40,10 @@ public class Day2
 
     [Test]
     [TestCase("A Y\nB X\nC Z", 12)]
-    [TestCase("A Y\nB Y\nB Z\nB Z\nB X\nB Z\nC Y\nA Z\nC X\nC X\nB Z\nB Z\nB Z\nA X\nB Z\nB Z\nA Y\nB Z\nA Z\nB X",
-        125)]
+    [TestCase(
+        "A Y\nB Y\nB Z\nB Z\nB X\nB Z\nC Y\nA Z\nC X\nC X\nB Z\nB Z\nB Z\nA X\nB Z\nB Z\nA Y\nB Z\nA Z\nB X",
+        125
+    )]
     public void Part2_WithExampleInput_CalculateCorrectScore(string input, int expectedScore)
     {
         var parsedInput = _day2.ParseRawInput(input);

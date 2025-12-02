@@ -50,7 +50,7 @@ public class Day16 : AdventDay<byte[], int, long>
     private static long ProcessPacket(Queue<byte> reader, ref int versionsSum)
     {
         var packetVersion = Decode(DequeueChunk(reader, 3));
-        versionsSum += (int) packetVersion;
+        versionsSum += (int)packetVersion;
 
         var packetTypeId = Decode(DequeueChunk(reader, 3));
         if (packetTypeId == 4) //literal
@@ -66,7 +66,7 @@ public class Day16 : AdventDay<byte[], int, long>
             return Decode(literalBytes.ToArray());
         }
         //else
-        
+
         var literals = new List<long>();
         var lengthTypeId = reader.Dequeue();
         if (lengthTypeId == 0)
@@ -88,7 +88,7 @@ public class Day16 : AdventDay<byte[], int, long>
             }
         }
 
-        return ExecuteOperation(literals, (int) packetTypeId);
+        return ExecuteOperation(literals, (int)packetTypeId);
     }
 
     private static long ExecuteOperation(List<long> literals, int packetTypeId)
@@ -102,7 +102,7 @@ public class Day16 : AdventDay<byte[], int, long>
             5 => literals[0] > literals[1] ? 1 : 0,
             6 => literals[0] < literals[1] ? 1 : 0,
             7 => literals[0] == literals[1] ? 1 : 0,
-            _ => throw new ArgumentException("Invalid operation", nameof(packetTypeId))
+            _ => throw new ArgumentException("Invalid operation", nameof(packetTypeId)),
         };
     }
 
@@ -122,7 +122,7 @@ public class Day16 : AdventDay<byte[], int, long>
         var result = 0L;
         for (var i = bits.Length - 1; i >= 0; i--)
         {
-            result += bits[^(i + 1)] * (long) Math.Pow(2, i);
+            result += bits[^(i + 1)] * (long)Math.Pow(2, i);
         }
 
         return result;

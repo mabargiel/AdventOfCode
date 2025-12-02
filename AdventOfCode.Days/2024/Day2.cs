@@ -8,7 +8,10 @@ public class Day2 : AdventDay<List<int[]>, int, int>
 {
     public override List<int[]> ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(Environment.NewLine).Select(x => x.Split(' ').Select(int.Parse).ToArray())
+        return rawInput
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(x => x.Split(' ').Select(int.Parse).ToArray())
             .ToList();
     }
 
@@ -37,7 +40,11 @@ public class Day2 : AdventDay<List<int[]>, int, int>
             {
                 safeReports++;
             }
-            else if (report.Select((t, i) => report.Take(i).Concat(report.Skip(i + 1)).ToArray()).Any(IsSafe))
+            else if (
+                report
+                    .Select((t, i) => report.Take(i).Concat(report.Skip(i + 1)).ToArray())
+                    .Any(IsSafe)
+            )
             {
                 safeReports++;
             }
@@ -55,7 +62,7 @@ public class Day2 : AdventDay<List<int[]>, int, int>
         for (var i = 0; i < report.Length - 1; i++)
         {
             var distance = Math.Abs(report[i] - report[i + 1]);
-            if(distance is > upper or < lower)
+            if (distance is > upper or < lower)
             {
                 return false;
             }

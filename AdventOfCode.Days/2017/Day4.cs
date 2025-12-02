@@ -19,6 +19,8 @@ public class Day4 : AdventDay<List<List<string>>, int, int>
     public override int Part2(List<List<string>> input)
     {
         return input.Count(words =>
-            new HashSet<string>(words.Select(x => string.Concat(x.OrderBy(y => y)))).Count == words.Count);
+            new HashSet<string>(words.Select(x => string.Concat(x.OrderBy(y => y)))).Count
+            == words.Count
+        );
     }
 }

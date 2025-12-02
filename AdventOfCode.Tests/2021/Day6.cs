@@ -30,8 +30,11 @@ public class Day6 : AdventDayTest<Days._2021.Day6>
     [TestCase(new[] { 3, 4, 3, 1, 2 }, 18, 26)]
     [TestCase(new[] { 1 }, 18, 7)]
     [TestCase(new[] { 3, 4, 3, 1, 2 }, 256, 26984457539)]
-    public void Part2_CountFishAfter256Days_LargeValueReturned(int[] initialSchool, int days,
-        long expectedFishCount)
+    public void Part2_CountFishAfter256Days_LargeValueReturned(
+        int[] initialSchool,
+        int days,
+        long expectedFishCount
+    )
     {
         var result = _day.Part2((initialSchool, days));
 

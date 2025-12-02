@@ -30,7 +30,9 @@ public class Day3 : AdventDay<string[], int, int>
         var badges = new List<char>();
         for (var i = 0; i < input.Length; i += 3)
         {
-            badges.Add(input[i].First(item => input[i + 1].Contains(item) && input[i + 2].Contains(item)));
+            badges.Add(
+                input[i].First(item => input[i + 1].Contains(item) && input[i + 2].Contains(item))
+            );
         }
 
         return badges.Sum(GetPriority);

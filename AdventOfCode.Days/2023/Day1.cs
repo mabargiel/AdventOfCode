@@ -24,10 +24,24 @@ public class Day1 : AdventDay<string[], int, int>
     {
         var words = new Dictionary<string, int>
         {
-            { "nine", 9 }, { "eight", 8 }, { "seven", 7 }, { "six", 6 }, { "five", 5 },
-            { "four", 4 }, { "three", 3 }, { "two", 2 }, { "one", 1 },
-            { "1", 1 }, { "2", 2 }, { "3", 3 }, { "4", 4 },
-            { "5", 5 }, { "6", 6 }, { "7", 7 }, { "8", 8 }, { "9", 9 }
+            { "nine", 9 },
+            { "eight", 8 },
+            { "seven", 7 },
+            { "six", 6 },
+            { "five", 5 },
+            { "four", 4 },
+            { "three", 3 },
+            { "two", 2 },
+            { "one", 1 },
+            { "1", 1 },
+            { "2", 2 },
+            { "3", 3 },
+            { "4", 4 },
+            { "5", 5 },
+            { "6", 6 },
+            { "7", 7 },
+            { "8", 8 },
+            { "9", 9 },
         };
 
         var totalSum = 0;
@@ -42,7 +56,10 @@ public class Day1 : AdventDay<string[], int, int>
             {
                 foreach (var word in words)
                 {
-                    if (i + word.Key.Length <= line.Length && line.Substring(i, word.Key.Length) == word.Key)
+                    if (
+                        i + word.Key.Length <= line.Length
+                        && line.Substring(i, word.Key.Length) == word.Key
+                    )
                     {
                         firstNum = word.Value;
                         break;
@@ -55,7 +72,10 @@ public class Day1 : AdventDay<string[], int, int>
             {
                 foreach (var word in words)
                 {
-                    if (i - word.Key.Length >= 0 && line.Substring(i - word.Key.Length, word.Key.Length) == word.Key)
+                    if (
+                        i - word.Key.Length >= 0
+                        && line.Substring(i - word.Key.Length, word.Key.Length) == word.Key
+                    )
                     {
                         lastNum = word.Value;
                         break;

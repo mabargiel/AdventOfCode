@@ -16,7 +16,8 @@ public class Day7
     [Test]
     public void ParseRawInput_WithExampleInput_SplitsItIntoPairsOfRanges()
     {
-        const string rawInput = @"$ cd /
+        const string rawInput =
+            @"$ cd /
 $ ls
 dir a
 14848514 b.txt
@@ -42,32 +43,34 @@ $ ls
 
         var input = _day7.ParseRawInput(rawInput);
 
-        input.ShouldBeEquivalentTo(new[]
-        {
-            "$ cd /",
-            "$ ls",
-            "dir a",
-            "14848514 b.txt",
-            "8504156 c.dat",
-            "dir d",
-            "$ cd a",
-            "$ ls",
-            "dir e",
-            "29116 f",
-            "2557 g",
-            "62596 h.lst",
-            "$ cd e",
-            "$ ls",
-            "584 i",
-            "$ cd ..",
-            "$ cd ..",
-            "$ cd d",
-            "$ ls",
-            "4060174 j",
-            "8033020 d.log",
-            "5626152 d.ext",
-            "7214296 k"
-        });
+        input.ShouldBeEquivalentTo(
+            new[]
+            {
+                "$ cd /",
+                "$ ls",
+                "dir a",
+                "14848514 b.txt",
+                "8504156 c.dat",
+                "dir d",
+                "$ cd a",
+                "$ ls",
+                "dir e",
+                "29116 f",
+                "2557 g",
+                "62596 h.lst",
+                "$ cd e",
+                "$ ls",
+                "584 i",
+                "$ cd ..",
+                "$ cd ..",
+                "$ cd d",
+                "$ ls",
+                "4060174 j",
+                "8033020 d.log",
+                "5626152 d.ext",
+                "7214296 k",
+            }
+        );
     }
 
     [Test]
@@ -97,7 +100,7 @@ $ ls
             "4060174 j",
             "8033020 d.log",
             "5626152 d.ext",
-            "7214296 k"
+            "7214296 k",
         };
 
         var result = _day7.Part1(input);
@@ -132,7 +135,7 @@ $ ls
             "4060174 j",
             "8033020 d.log",
             "5626152 d.ext",
-            "7214296 k"
+            "7214296 k",
         };
 
         var result = _day7.Part2(input);

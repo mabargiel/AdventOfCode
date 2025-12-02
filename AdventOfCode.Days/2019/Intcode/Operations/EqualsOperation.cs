@@ -8,8 +8,8 @@ public class EqualsOperation : BaseOperation
     private readonly ArgumentMode _arg2;
     private readonly ArgumentMode _arg3;
 
-    public EqualsOperation(Program program, ArgumentMode arg1, ArgumentMode arg2, ArgumentMode arg3) : base(program,
-        4)
+    public EqualsOperation(Program program, ArgumentMode arg1, ArgumentMode arg2, ArgumentMode arg3)
+        : base(program, 4)
     {
         _arg1 = arg1;
         _arg2 = arg2;

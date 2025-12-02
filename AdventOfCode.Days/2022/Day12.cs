@@ -46,8 +46,10 @@ public class Day12 : AdventDay<Input, int, int>
     {
         var graph = BuildGraph(input);
 
-        return graph.DijkstraShortestPath(input.Src.X * input.Map.GetLength(1) + input.Src.Y,
-            input.Dst.X * input.Map.GetLength(1) + input.Dst.Y);
+        return graph.DijkstraShortestPath(
+            input.Src.X * input.Map.GetLength(1) + input.Src.Y,
+            input.Dst.X * input.Map.GetLength(1) + input.Dst.Y
+        );
     }
 
     public override int Part2(Input input)
@@ -66,7 +68,10 @@ public class Day12 : AdventDay<Input, int, int>
                     continue;
                 }
 
-                var path = graph.DijkstraShortestPath(i * width + j, input.Dst.X * width + input.Dst.Y);
+                var path = graph.DijkstraShortestPath(
+                    i * width + j,
+                    input.Dst.X * width + input.Dst.Y
+                );
                 shortestPath = path < shortestPath ? path : shortestPath;
             }
         }

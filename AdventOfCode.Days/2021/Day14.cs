@@ -10,11 +10,15 @@ namespace AdventOfCode.Days._2021
         {
             var split = rawInput.Trim().Split(Environment.NewLine + Environment.NewLine);
             var template = split[0];
-            Dictionary<string, char> insertions = new(split[1].Split(Environment.NewLine).Select(s =>
-            {
-                var adjacency = s.Split(" -> ");
-                return new KeyValuePair<string, char>(adjacency[0], adjacency[1].First());
-            }));
+            Dictionary<string, char> insertions = new(
+                split[1]
+                    .Split(Environment.NewLine)
+                    .Select(s =>
+                    {
+                        var adjacency = s.Split(" -> ");
+                        return new KeyValuePair<string, char>(adjacency[0], adjacency[1].First());
+                    })
+            );
 
             return new PolymerRules(template, insertions);
         }
@@ -22,7 +26,7 @@ namespace AdventOfCode.Days._2021
         public override int Part1(PolymerRules input)
         {
             const int steps = 10;
-            return (int) Solve(input, steps);
+            return (int)Solve(input, steps);
         }
 
         public override long Part2(PolymerRules input)
@@ -46,7 +50,10 @@ namespace AdventOfCode.Days._2021
                 foreach (var (molecule, count) in moleculeCount)
                 {
                     var between = input.Insertions[molecule];
-                    var (ai, ib) = (molecule[0].ToString() + between, between + molecule[1].ToString());
+                    var (ai, ib) = (
+                        molecule[0].ToString() + between,
+                        between + molecule[1].ToString()
+                    );
                     updated[ai] = count + updated.GetValueOrDefault(ai);
                     updated[ib] = count + updated.GetValueOrDefault(ib);
                 }
@@ -60,7 +67,7 @@ namespace AdventOfCode.Days._2021
                 var a = molecule[0];
                 elementCounts[a] = elementCounts.GetValueOrDefault(a) + count;
             }
-            
+
             elementCounts[input.Polymer.Last()]++;
 
             return elementCounts.Values.Max() - elementCounts.Values.Min();

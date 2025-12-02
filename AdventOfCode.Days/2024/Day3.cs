@@ -34,9 +34,10 @@ public partial class Day3 : AdventDay<string, int, int>
         while (currentIndex < input.Length)
         {
             var dontIndex = input.IndexOf(Dont, currentIndex, StringComparison.Ordinal);
-            var doIndex = dontIndex != -1
-                ? input.IndexOf(Do, dontIndex + Dont.Length, StringComparison.Ordinal)
-                : -1;
+            var doIndex =
+                dontIndex != -1
+                    ? input.IndexOf(Do, dontIndex + Dont.Length, StringComparison.Ordinal)
+                    : -1;
 
             var endIndex = dontIndex != -1 ? dontIndex : input.Length;
             var enabledSubstring = input[currentIndex..endIndex];
@@ -50,6 +51,8 @@ public partial class Day3 : AdventDay<string, int, int>
 
     private static int SumMuls(MatchCollection matches)
     {
-        return matches.Sum(match => int.Parse(match.Groups["num1"].ToString()) * int.Parse(match.Groups["num2"].ToString()));
+        return matches.Sum(match =>
+            int.Parse(match.Groups["num1"].ToString()) * int.Parse(match.Groups["num2"].ToString())
+        );
     }
 }

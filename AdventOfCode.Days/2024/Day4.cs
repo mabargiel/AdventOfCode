@@ -40,14 +40,14 @@ public class Day4 : AdventDay<char[,], int, int>
 
         var directions = new (int row, int col)[]
         {
-            (0, -1),  // Top
+            (0, -1), // Top
             (-1, -1), // Top-left
-            (-1, 0),  // Left
-            (-1, 1),  // Bottom-left
-            (0, 1),   // Bottom
-            (1, 1),   // Bottom-right
-            (1, 0),   // Right
-            (1, -1)   // Top-right
+            (-1, 0), // Left
+            (-1, 1), // Bottom-left
+            (0, 1), // Bottom
+            (1, 1), // Bottom-right
+            (1, 0), // Right
+            (1, -1), // Top-right
         };
 
         for (var i = 0; i < rows; i++)
@@ -67,7 +67,13 @@ public class Day4 : AdventDay<char[,], int, int>
                 var newRow = startRow + k * direction.row;
                 var newCol = startCol + k * direction.col;
 
-                if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols || input[newRow, newCol] != xmasWord[k])
+                if (
+                    newRow < 0
+                    || newRow >= rows
+                    || newCol < 0
+                    || newCol >= cols
+                    || input[newRow, newCol] != xmasWord[k]
+                )
                     return false;
             }
             return true;

@@ -14,15 +14,21 @@ public class Day1
     }
 
     [Test]
-    [TestCase("""
-              3   4
-              4   3
-              2   5
-              1   3
-              3   9
-              3   3
-              """, 11)]
-    public void Part1_should_return_sum_of_distances_between_smallest_numbers_in_order(string testInput, int expectedResult)
+    [TestCase(
+        """
+            3   4
+            4   3
+            2   5
+            1   3
+            3   9
+            3   3
+            """,
+        11
+    )]
+    public void Part1_should_return_sum_of_distances_between_smallest_numbers_in_order(
+        string testInput,
+        int expectedResult
+    )
     {
         var parsedInput = _day1.ParseRawInput(testInput);
 
@@ -32,15 +38,21 @@ public class Day1
     }
 
     [Test]
-    [TestCase("""
-              3   4
-              4   3
-              2   5
-              1   3
-              3   9
-              3   3
-              """, 31)]
-    public void Part2_should_calculate_similarity_score_between_two_lists(string testInput, int expectedResult)
+    [TestCase(
+        """
+            3   4
+            4   3
+            2   5
+            1   3
+            3   9
+            3   3
+            """,
+        31
+    )]
+    public void Part2_should_calculate_similarity_score_between_two_lists(
+        string testInput,
+        int expectedResult
+    )
     {
         var parsedInput = _day1.ParseRawInput(testInput);
 

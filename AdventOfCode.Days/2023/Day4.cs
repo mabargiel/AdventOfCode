@@ -10,16 +10,23 @@ public class Day4 : AdventDay<List<(int[] WinningNumbers, int[] NumbersIHave)>, 
     {
         var split = rawInput.Trim().Split(Environment.NewLine);
 
-        return (from row in split
-            select row[(row.IndexOf(':') + 1)..].Split('|').Select(x => x.Trim()).ToArray()
-            into numbers
+        return (
+            from row in split
+            select row[(row.IndexOf(':') + 1)..]
+                .Split('|')
+                .Select(x => x.Trim())
+                .ToArray() into numbers
             let winningNumbers = ParseNumbers(numbers[0]).ToArray()
             let numbersIHave = ParseNumbers(numbers[1]).ToArray()
-            select (winningNumbers, numbersIHave)).ToList();
+            select (winningNumbers, numbersIHave)
+        ).ToList();
 
         IEnumerable<int> ParseNumbers(string numbersString)
         {
-            return numbersString.Split(' ').Where(x => !string.IsNullOrEmpty(x)).Select(x => int.Parse(x.Trim()));
+            return numbersString
+                .Split(' ')
+                .Where(x => !string.IsNullOrEmpty(x))
+                .Select(x => int.Parse(x.Trim()));
         }
     }
 
@@ -29,7 +36,9 @@ public class Day4 : AdventDay<List<(int[] WinningNumbers, int[] NumbersIHave)>, 
 
         foreach (var (winningNumbers, numbersIHave) in input)
         {
-            var matches = winningNumbers.Count(winningNumber => numbersIHave.Contains(winningNumber));
+            var matches = winningNumbers.Count(winningNumber =>
+                numbersIHave.Contains(winningNumber)
+            );
 
             if (matches == 0)
             {
@@ -55,7 +64,9 @@ public class Day4 : AdventDay<List<(int[] WinningNumbers, int[] NumbersIHave)>, 
         for (var i = 0; i < input.Count; i++)
         {
             var (winningNumbers, numbersIHave) = input[i];
-            var matches = winningNumbers.Count(winningNumber => numbersIHave.Contains(winningNumber));
+            var matches = winningNumbers.Count(winningNumber =>
+                numbersIHave.Contains(winningNumber)
+            );
             matchesArray[i] = matches;
         }
 

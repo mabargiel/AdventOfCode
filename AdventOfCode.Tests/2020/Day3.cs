@@ -8,7 +8,8 @@ public class Day3
     [Test]
     public void Part1_Goes3_1_Hits7Trees()
     {
-        const string input = @"..##.......
+        const string input =
+            @"..##.......
 #...#...#..
 .#....#..#.
 ..#.#...#.#
@@ -29,7 +30,8 @@ public class Day3
     [Test]
     public void Part1_TraversesMapMultipleTimesAsExpected_ReturnsMultipliedResult()
     {
-        const string input = @"..##.......
+        const string input =
+            @"..##.......
 #...#...#..
 .#....#..#.
 ..#.#...#.#

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/belav/csharpier/main/schema.json",
+  "indentWidth": 4,
+  "lineWidth": 120,
+  "printDocComments": true,
+  "printTrailingCommas": true,
+  "useTabs": false
+}

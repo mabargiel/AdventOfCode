@@ -8,11 +8,14 @@ public class Day2 : AdventDay<List<(string direction, int distance)>, int, int>
 {
     public override List<(string direction, int distance)> ParseRawInput(string rawInput)
     {
-        return rawInput.Split(Environment.NewLine).Select(x =>
-        {
-            var values = x.Split(' ');
-            return (values[0], int.Parse(values[1]));
-        }).ToList();
+        return rawInput
+            .Split(Environment.NewLine)
+            .Select(x =>
+            {
+                var values = x.Split(' ');
+                return (values[0], int.Parse(values[1]));
+            })
+            .ToList();
     }
 
     public override int Part1(List<(string direction, int distance)> input)

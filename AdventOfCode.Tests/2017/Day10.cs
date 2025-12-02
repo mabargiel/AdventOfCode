@@ -23,7 +23,11 @@ public class Day10 : AdventDayTest<Days._2017.Day10>
     [TestCase("120,93,0,90,5,80,129,74,1,165,204,255,254,2,50,113", 256, 826)]
     [TestCase("1,4", 5, 0)]
     [TestCase("3,4,0,2", 5, 12)]
-    public void Part1_TieAKnot_ReturnTwoFirstNumbersMultiplied(string input, int size, int expectedResult)
+    public void Part1_TieAKnot_ReturnTwoFirstNumbersMultiplied(
+        string input,
+        int size,
+        int expectedResult
+    )
     {
         var result = _day.Part1((input, size));
 

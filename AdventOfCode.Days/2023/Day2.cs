@@ -10,14 +10,18 @@ public class Day2 : AdventDay<List<List<Dictionary<string, int>>>, int, int>
     {
         var rawGameStrings = rawInput.Trim().Split(Environment.NewLine);
 
-        return (from rawGameString in rawGameStrings
-                let game = new Dictionary<string, int>()
-                select rawGameString[(rawGameString.IndexOf(':') + 1)..]
-                    .Split(';')
-                    .Select(turn => turn.Split(',')
+        return (
+            from rawGameString in rawGameStrings
+            let game = new Dictionary<string, int>()
+            select rawGameString[(rawGameString.IndexOf(':') + 1)..]
+                .Split(';')
+                .Select(turn =>
+                    turn.Split(',')
                         .Select(x => x.Trim().Split(" "))
-                        .ToDictionary(x => x[1], x => int.Parse(x[0]))).ToList()
-            ).ToList();
+                        .ToDictionary(x => x[1], x => int.Parse(x[0]))
+                )
+                .ToList()
+        ).ToList();
     }
 
     public override int Part1(List<List<Dictionary<string, int>>> input)
@@ -26,7 +30,7 @@ public class Day2 : AdventDay<List<List<Dictionary<string, int>>>, int, int>
         {
             ["red"] = 12,
             ["green"] = 13,
-            ["blue"] = 14
+            ["blue"] = 14,
         };
 
         var result = 0;
@@ -55,7 +59,7 @@ public class Day2 : AdventDay<List<List<Dictionary<string, int>>>, int, int>
             {
                 ["red"] = 0,
                 ["green"] = 0,
-                ["blue"] = 0
+                ["blue"] = 0,
             };
 
             foreach (var turn in game)

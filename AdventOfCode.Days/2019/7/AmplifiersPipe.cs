@@ -20,12 +20,14 @@ public class AmplifiersPipe
 
     public async Task<long> ExecuteAsync()
     {
-        var amplifiers = new LinkedList<IntcodeComputer>(_phases.Select(phase =>
-        {
-            var intcodeComputer = new IntcodeComputer(_code);
-            intcodeComputer.Input(phase);
-            return intcodeComputer;
-        }));
+        var amplifiers = new LinkedList<IntcodeComputer>(
+            _phases.Select(phase =>
+            {
+                var intcodeComputer = new IntcodeComputer(_code);
+                intcodeComputer.Input(phase);
+                return intcodeComputer;
+            })
+        );
 
         var currentOutput = 0L;
 

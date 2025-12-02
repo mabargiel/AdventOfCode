@@ -8,11 +8,15 @@ public class Day7 : AdventDay<Hand[], int, int>
 {
     public override Hand[] ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(Environment.NewLine).Select(x =>
-        {
-            var hand = x.Split(' ');
-            return new Hand(hand[0].ToCharArray(), int.Parse(hand[1]));
-        }).ToArray();
+        return rawInput
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(x =>
+            {
+                var hand = x.Split(' ');
+                return new Hand(hand[0].ToCharArray(), int.Parse(hand[1]));
+            })
+            .ToArray();
     }
 
     public override int Part1(Hand[] input)
@@ -57,7 +61,7 @@ public class Day7 : AdventDay<Hand[], int, int>
             'Q' => 11,
             'J' => jokerValue,
             'T' => 9,
-            _ => (int) char.GetNumericValue(card) - 1
+            _ => (int)char.GetNumericValue(card) - 1,
         };
     }
 
@@ -68,7 +72,7 @@ public class Day7 : AdventDay<Hand[], int, int>
 
         if (distinctCount.Any(x => x.Value == 5))
         {
-            return (int) HandTypes.FiveOfAKind;
+            return (int)HandTypes.FiveOfAKind;
         }
 
         if (distinctCount.Any(x => x.Value == 4))
@@ -77,31 +81,31 @@ public class Day7 : AdventDay<Hand[], int, int>
             {
                 if (value is 1 or 4)
                 {
-                    return (int) HandTypes.FiveOfAKind;
+                    return (int)HandTypes.FiveOfAKind;
                 }
             }
 
-            return (int) HandTypes.FourOfAKind;
+            return (int)HandTypes.FourOfAKind;
         }
 
         if (distinctCount.Count == 2)
         {
             if (includeJokers && distinctCount.ContainsKey('J'))
             {
-                return (int) HandTypes.FiveOfAKind;
+                return (int)HandTypes.FiveOfAKind;
             }
 
-            return (int) HandTypes.FullHouse;
+            return (int)HandTypes.FullHouse;
         }
 
         if (distinctCount.Any(x => x.Value == 3))
         {
             if (includeJokers && distinctCount.ContainsKey('J'))
             {
-                return (int) HandTypes.FourOfAKind;
+                return (int)HandTypes.FourOfAKind;
             }
 
-            return (int) HandTypes.ThreeOfAKind;
+            return (int)HandTypes.ThreeOfAKind;
         }
 
         if (distinctCount.Count(x => x.Value == 2) == 2)
@@ -111,13 +115,13 @@ public class Day7 : AdventDay<Hand[], int, int>
                 switch (count)
                 {
                     case 1:
-                        return (int) HandTypes.FullHouse;
+                        return (int)HandTypes.FullHouse;
                     case 2:
-                        return  (int) HandTypes.FourOfAKind;
+                        return (int)HandTypes.FourOfAKind;
                 }
             }
 
-            return (int) HandTypes.TwoPairs;
+            return (int)HandTypes.TwoPairs;
         }
 
         if (distinctCount.Count == 4)
@@ -126,19 +130,19 @@ public class Day7 : AdventDay<Hand[], int, int>
             {
                 if (v1 is 1 or 2)
                 {
-                    return (int) HandTypes.ThreeOfAKind;
+                    return (int)HandTypes.ThreeOfAKind;
                 }
             }
 
-            return (int) HandTypes.OnePair;
+            return (int)HandTypes.OnePair;
         }
 
         if (includeJokers && distinctCount.ContainsKey('J'))
         {
-            return (int) HandTypes.OnePair;
+            return (int)HandTypes.OnePair;
         }
 
-        return (int) HandTypes.HighCard;
+        return (int)HandTypes.HighCard;
     }
 
     private enum HandTypes
@@ -149,7 +153,7 @@ public class Day7 : AdventDay<Hand[], int, int>
         ThreeOfAKind,
         FullHouse,
         FourOfAKind,
-        FiveOfAKind
+        FiveOfAKind,
     }
 }
 

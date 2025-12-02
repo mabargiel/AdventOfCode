@@ -49,7 +49,7 @@ public class Day6 : AdventDay<LabMap, int, int>
                 Direction.Right => guardPos with { Y = guardPos.Y + 1 },
                 Direction.Down => guardPos with { X = guardPos.X + 1 },
                 Direction.Left => guardPos with { Y = guardPos.Y - 1 },
-                _ => null
+                _ => null,
             };
 
             if (obstacles.Contains(newGuardPos))
@@ -87,11 +87,16 @@ public class Day6 : AdventDay<LabMap, int, int>
 
         foreach (var pos in originalPath)
         {
-            Point[] newObstacles = [..obstacles, pos];
+            Point[] newObstacles = [.. obstacles, pos];
             var lab = new Lab(new LabMap(startingGuardPos, newObstacles, rows, cols));
             var visited = new HashSet<Guard>();
 
-            while (lab.Guard.Pos!.X >= 0 && lab.Guard.Pos.X < cols && lab.Guard.Pos.Y >= 0 && lab.Guard.Pos.Y < rows)
+            while (
+                lab.Guard.Pos!.X >= 0
+                && lab.Guard.Pos.X < cols
+                && lab.Guard.Pos.Y >= 0
+                && lab.Guard.Pos.Y < rows
+            )
             {
                 if (!visited.Add(lab.Guard))
                 {
@@ -123,7 +128,7 @@ public class Day6 : AdventDay<LabMap, int, int>
                     Direction.Down => guardPos with { X = guardPos.X + 1 },
                     Direction.Left => guardPos with { Y = guardPos.Y - 1 },
                     Direction.Right => guardPos with { Y = guardPos.Y + 1 },
-                    _ => null
+                    _ => null,
                 };
 
                 if (Map.Obstacles.Contains(newGuardPos))
@@ -149,7 +154,12 @@ public class Day6 : AdventDay<LabMap, int, int>
         {
             lab.MoveGuard();
             originalPath.Add(lab.Guard.Pos);
-        } while (lab.Guard.Pos!.X >= 0 && lab.Guard.Pos.X < cols && lab.Guard.Pos.Y >= 0 && lab.Guard.Pos.Y < rows);
+        } while (
+            lab.Guard.Pos!.X >= 0
+            && lab.Guard.Pos.X < cols
+            && lab.Guard.Pos.Y >= 0
+            && lab.Guard.Pos.Y < rows
+        );
 
         originalPath.RemoveAt(originalPath.Count - 1);
 

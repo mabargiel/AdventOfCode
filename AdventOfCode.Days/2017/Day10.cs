@@ -29,7 +29,10 @@ public class Day10 : AdventDay<(string InputString, int Size), int, string>
     public override string Part2((string InputString, int Size) input)
     {
         var (inputString, size) = input;
-        var lengths = inputString.Select(c => (int)c).Concat(new[] { 17, 31, 73, 47, 23 }).ToImmutableArray();
+        var lengths = inputString
+            .Select(c => (int)c)
+            .Concat(new[] { 17, 31, 73, 47, 23 })
+            .ToImmutableArray();
         var sparseHash = Enumerable.Range(0, size).ToArray();
         var currentPosition = 0;
         var skipSize = 0;
@@ -49,8 +52,13 @@ public class Day10 : AdventDay<(string InputString, int Size), int, string>
         return string.Join("", denseHash.Select(x => x.ToString("X2"))).ToLower();
     }
 
-    private static void TieAKnot(IEnumerable<int> lengths, int size, IList<int> numbers, ref int currentPosition,
-        ref int skipSize)
+    private static void TieAKnot(
+        IEnumerable<int> lengths,
+        int size,
+        IList<int> numbers,
+        ref int currentPosition,
+        ref int skipSize
+    )
     {
         foreach (var length in lengths)
         {
@@ -61,8 +69,10 @@ public class Day10 : AdventDay<(string InputString, int Size), int, string>
 
                 if (localPos != swapPosition)
                 {
-                    (numbers[localPos], numbers[swapPosition]) =
-                        (numbers[swapPosition], numbers[localPos]);
+                    (numbers[localPos], numbers[swapPosition]) = (
+                        numbers[swapPosition],
+                        numbers[localPos]
+                    );
                 }
 
                 localPos++;

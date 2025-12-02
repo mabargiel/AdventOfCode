@@ -54,11 +54,14 @@ public partial class Day3 : AdventDay<GondolaEngine, int, int>
             var length = (int)Math.Floor(Math.Log10(value) + 1);
             var endPos = startPos with { Y = startPos.Y + length - 1 };
 
-            if (input.Symbols.Any(symbol =>
-                    symbol.X >= startPos.X - 1 &&
-                    symbol.X <= endPos.X + 1 &&
-                    symbol.Y >= startPos.Y - 1 &&
-                    symbol.Y <= endPos.Y + 1))
+            if (
+                input.Symbols.Any(symbol =>
+                    symbol.X >= startPos.X - 1
+                    && symbol.X <= endPos.X + 1
+                    && symbol.Y >= startPos.Y - 1
+                    && symbol.Y <= endPos.Y + 1
+                )
+            )
             {
                 result += value;
             }
@@ -79,10 +82,12 @@ public partial class Day3 : AdventDay<GondolaEngine, int, int>
 
             foreach (var inputGear in input.Gears)
             {
-                if (inputGear.X < startPos.X - 1 ||
-                    inputGear.X > endPos.X + 1 ||
-                    inputGear.Y < startPos.Y - 1 ||
-                    inputGear.Y > endPos.Y + 1)
+                if (
+                    inputGear.X < startPos.X - 1
+                    || inputGear.X > endPos.X + 1
+                    || inputGear.Y < startPos.Y - 1
+                    || inputGear.Y > endPos.Y + 1
+                )
                 {
                     continue;
                 }

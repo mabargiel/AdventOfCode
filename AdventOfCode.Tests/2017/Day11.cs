@@ -13,11 +13,20 @@ public class Day11 : AdventDayTest<Days._2017.Day11>
 
         var input = _day.ParseRawInput(rawInput);
 
-        input.ShouldBe(new[]
-        {
-            Direction.SE, Direction.SW, Direction.SE, Direction.SW, Direction.SW, Direction.N, Direction.S,
-            Direction.NW, Direction.NE
-        });
+        input.ShouldBe(
+            new[]
+            {
+                Direction.SE,
+                Direction.SW,
+                Direction.SE,
+                Direction.SW,
+                Direction.SW,
+                Direction.N,
+                Direction.S,
+                Direction.NW,
+                Direction.NE,
+            }
+        );
     }
 
     [Test]

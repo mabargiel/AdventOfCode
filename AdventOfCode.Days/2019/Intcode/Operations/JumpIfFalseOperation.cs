@@ -8,7 +8,8 @@ public class JumpIfFalseOperation : BaseOperation
     private readonly ArgumentMode _arg2;
     private readonly Program _program;
 
-    public JumpIfFalseOperation(Program program, ArgumentMode arg1, ArgumentMode arg2) : base(program, 3)
+    public JumpIfFalseOperation(Program program, ArgumentMode arg1, ArgumentMode arg2)
+        : base(program, 3)
     {
         _program = program;
         _arg1 = arg1;

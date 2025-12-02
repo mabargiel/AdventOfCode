@@ -8,7 +8,8 @@ public class Day10 : AdventDayTest<Days._2021.Day10>
     [Test]
     public override void ParseRawInputTest()
     {
-        const string rawInput = @"[({(<(())[]>[[{[]{<()<>>
+        const string rawInput =
+            @"[({(<(())[]>[[{[]{<()<>>
 [(()[<>])]({[<{<<[]>>(";
 
         var input = _day.ParseRawInput(rawInput);
@@ -30,7 +31,7 @@ public class Day10 : AdventDayTest<Days._2021.Day10>
             "{<[[]]>}<{[{[{[]{()[[[]",
             "[<(<(<(<{}))><([]([]()",
             "<{([([[(<>()){}]>(<<{{",
-            "<{([{{}}[<[[[<>{}]]]>[]]"
+            "<{([{{}}[<[[[<>{}]]]>[]]",
         };
 
         var result = _day.Part1(input);
@@ -52,7 +53,7 @@ public class Day10 : AdventDayTest<Days._2021.Day10>
             "{<[[]]>}<{[{[{[]{()[[[]",
             "[<(<(<(<{}))><([]([]()",
             "<{([([[(<>()){}]>(<<{{",
-            "<{([{{}}[<[[[<>{}]]]>[]]"
+            "<{([{{}}[<[[[<>{}]]]>[]]",
         };
 
         var result = _day.Part2(input);

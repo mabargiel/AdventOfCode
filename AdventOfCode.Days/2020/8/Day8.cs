@@ -58,9 +58,9 @@ public class Day8 : IAdventDay<int, int>
     {
         var visitedInstructions = new HashSet<Instruction>();
         var process = _process;
-        var operationsToTest =
-            new Queue<Instruction>(
-                _process.LoadedProgram.Where(instr => instr is JumpInstruction or NoInstruction));
+        var operationsToTest = new Queue<Instruction>(
+            _process.LoadedProgram.Where(instr => instr is JumpInstruction or NoInstruction)
+        );
 
         while (true)
         {

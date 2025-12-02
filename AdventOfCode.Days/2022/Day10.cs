@@ -9,21 +9,27 @@ public class Day10 : AdventDay<Instruction[], int, string>
 {
     public override Instruction[] ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(Environment.NewLine).Select(x =>
-        {
-            var split = x.Split(' ');
-            var operation = split[0];
-            int? value = split.Length == 2 ? int.Parse(split[1]) : null;
+        return rawInput
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(x =>
+            {
+                var split = x.Split(' ');
+                var operation = split[0];
+                int? value = split.Length == 2 ? int.Parse(split[1]) : null;
 
-            return new Instruction(operation, value);
-        }).ToArray();
+                return new Instruction(operation, value);
+            })
+            .ToArray();
     }
 
     public override int Part1(Instruction[] input)
     {
         var xValuesPerEndCycle = SimulateCpu(input);
 
-        return new[] { 20, 60, 100, 140, 180, 220 }.Sum(theCycle => theCycle * xValuesPerEndCycle[theCycle - 1]);
+        return new[] { 20, 60, 100, 140, 180, 220 }.Sum(theCycle =>
+            theCycle * xValuesPerEndCycle[theCycle - 1]
+        );
     }
 
     public override string Part2(Instruction[] input)
@@ -32,16 +38,16 @@ public class Day10 : AdventDay<Instruction[], int, string>
         const int pixels = width * 6; //width * height
         var xValuesPerCycle = SimulateCpu(input);
         var sb = new StringBuilder();
-        
-        for(var i = 0 ; i < pixels; i ++)
+
+        for (var i = 0; i < pixels; i++)
         {
             var crtDrawPos = i % width;
-            
+
             if (i != 0 && crtDrawPos == 0)
             {
                 sb.AppendLine();
             }
-            
+
             var spritePosition = xValuesPerCycle[i];
             sb.Append(Math.Abs(spritePosition - crtDrawPos) < 2 ? '#' : '.');
         }

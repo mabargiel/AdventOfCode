@@ -19,17 +19,17 @@ public class Day3
     public void ParseRawInput_IntoLogicalObject()
     {
         const string rawInput = """
-                                467..114..
-                                ...*......
-                                ..35..633.
-                                ......#...
-                                617*......
-                                .....+.58.
-                                ..592.....
-                                ......755.
-                                ...$.*....
-                                .664.598..
-                                """;
+            467..114..
+            ...*......
+            ..35..633.
+            ......#...
+            617*......
+            .....+.58.
+            ..592.....
+            ......755.
+            ...$.*....
+            .664.598..
+            """;
 
         var input = _day3.ParseRawInput(rawInput);
 
@@ -47,7 +47,7 @@ public class Day3
                     [new Point(6, 2)] = 592,
                     [new Point(7, 6)] = 755,
                     [new Point(9, 1)] = 664,
-                    [new Point(9, 5)] = 598
+                    [new Point(9, 5)] = 598,
                 },
                 Symbols =
                 {
@@ -56,30 +56,29 @@ public class Day3
                     new Point(4, 3),
                     new Point(5, 5),
                     new Point(8, 3),
-                    new Point(8, 5)
+                    new Point(8, 5),
                 },
-                Gears =
-                {
-                    new Point(1, 3),
-                    new Point(4, 3),
-                    new Point(8, 5)
-                }
-            });
+                Gears = { new Point(1, 3), new Point(4, 3), new Point(8, 5) },
+            }
+        );
     }
 
     [Test]
-    [TestCase("""
-              467..114..
-              ...*......
-              ..35..633.
-              ......#...
-              617*......
-              .....+.58.
-              ..592.....
-              ......755.
-              ...$.*....
-              .664.598..
-              """, 4361)]
+    [TestCase(
+        """
+            467..114..
+            ...*......
+            ..35..633.
+            ......#...
+            617*......
+            .....+.58.
+            ..592.....
+            ......755.
+            ...$.*....
+            .664.598..
+            """,
+        4361
+    )]
     public void Part1_WithExampleInput_CalculateSumOfPartNumbers(string input, int expectedResult)
     {
         var parsedInput = _day3.ParseRawInput(input);
@@ -90,18 +89,21 @@ public class Day3
     }
 
     [Test]
-    [TestCase("""
-              467..114..
-              ...*......
-              ..35..633.
-              ......#...
-              617*......
-              .....+.58.
-              ..592.....
-              ......755.
-              ...$.*....
-              .664.598..
-              """, 467_835)]
+    [TestCase(
+        """
+            467..114..
+            ...*......
+            ..35..633.
+            ......#...
+            617*......
+            .....+.58.
+            ..592.....
+            ......755.
+            ...$.*....
+            .664.598..
+            """,
+        467_835
+    )]
     public void Part2_WithExampleInput_CalculateSumOfGearPowers(string input, int expectedResult)
     {
         var parsedInput = _day3.ParseRawInput(input);

@@ -17,23 +17,20 @@ public class Day10
     [Test]
     public void ParseRawInput_WithExampleInput_CreatesArrayOfOperations()
     {
-        const string rawInput = @"noop
+        const string rawInput =
+            @"noop
 addx 3
 addx -5";
 
         var input = _day10.ParseRawInput(rawInput);
-        input.ShouldBe(new Instruction[]
-        {
-            new("noop", null),
-            new("addx", 3),
-            new("addx", -5)
-        });
+        input.ShouldBe(new Instruction[] { new("noop", null), new("addx", 3), new("addx", -5) });
     }
 
     [Test]
     public void Part1_WithExampleInput_CheckXValuesPerCycles()
     {
-        const string rawInput = @"addx 15
+        const string rawInput =
+            @"addx 15
 addx -11
 addx 6
 addx -3
@@ -181,14 +178,15 @@ noop
 noop";
 
         var result = _day10.Part1(_day10.ParseRawInput(rawInput));
-        
+
         result.ShouldBe(13140);
     }
-    
+
     [Test]
     public void Part2_WithExampleInput_ExecuteProgram()
     {
-        const string rawInput = @"addx 15
+        const string rawInput =
+            @"addx 15
 addx -11
 addx 6
 addx -3
@@ -336,12 +334,14 @@ noop
 noop";
 
         var result = _day10.Part2(_day10.ParseRawInput(rawInput));
-        
-        result.ShouldBe(@"##..##..##..##..##..##..##..##..##..##..
+
+        result.ShouldBe(
+            @"##..##..##..##..##..##..##..##..##..##..
 ###...###...###...###...###...###...###.
 ####....####....####....####....####....
 #####.....#####.....#####.....#####.....
 ######......######......######......####
-#######.......#######.......#######.....");
+#######.......#######.......#######....."
+        );
     }
 }

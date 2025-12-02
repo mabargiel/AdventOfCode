@@ -8,14 +8,21 @@ public class Day7 : AdventDay<TowerProgram[], string, int>
 {
     public override TowerProgram[] ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(Environment.NewLine).Select(x =>
-        {
-            var splitInfo = x.Split(" -> ");
-            var mainProgram = splitInfo[0].Split(' ');
-            var dependencies = splitInfo.Length > 1 ? splitInfo[1].Split(", ") : null;
-            return new TowerProgram(mainProgram[0], int.Parse(mainProgram[1].TrimStart('(').TrimEnd(')')),
-                dependencies);
-        }).ToArray();
+        return rawInput
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(x =>
+            {
+                var splitInfo = x.Split(" -> ");
+                var mainProgram = splitInfo[0].Split(' ');
+                var dependencies = splitInfo.Length > 1 ? splitInfo[1].Split(", ") : null;
+                return new TowerProgram(
+                    mainProgram[0],
+                    int.Parse(mainProgram[1].TrimStart('(').TrimEnd(')')),
+                    dependencies
+                );
+            })
+            .ToArray();
     }
 
     public override string Part1(TowerProgram[] input)
@@ -26,7 +33,9 @@ public class Day7 : AdventDay<TowerProgram[], string, int>
         while (true)
         {
             var (name, _, _) = current;
-            var parent = programsWithChildren.FirstOrDefault(program => program.ProgramsAbove.Contains(name));
+            var parent = programsWithChildren.FirstOrDefault(program =>
+                program.ProgramsAbove.Contains(name)
+            );
 
             if (parent == null)
             {
@@ -96,8 +105,10 @@ public class Day7 : AdventDay<TowerProgram[], string, int>
     {
         var (name, weight, programsAboveNames) = towerProgram;
 
-        var programsAbove = programsAboveNames?.Select(x => input.First(y => y.Name == x))
-            .Select(x => TransformToTree(x, input)).ToArray();
+        var programsAbove = programsAboveNames
+            ?.Select(x => input.First(y => y.Name == x))
+            .Select(x => TransformToTree(x, input))
+            .ToArray();
 
         return new ProgramTree(name, weight, programsAbove);
     }

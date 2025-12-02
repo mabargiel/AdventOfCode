@@ -9,7 +9,10 @@ public class Day11 : AdventDay<Direction[], int, int>
 {
     public override Direction[] ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(',').Select(x => (Direction)Enum.Parse(typeof(Direction), x.ToUpper()))
+        return rawInput
+            .Trim()
+            .Split(',')
+            .Select(x => (Direction)Enum.Parse(typeof(Direction), x.ToUpper()))
             .ToArray();
     }
 
@@ -17,7 +20,10 @@ public class Day11 : AdventDay<Direction[], int, int>
     {
         var position = new CubeCoords(0, 0, 0);
 
-        position = input.Aggregate(position, (current, direction) => HexagonalGrid.Move(current, direction));
+        position = input.Aggregate(
+            position,
+            (current, direction) => HexagonalGrid.Move(current, direction)
+        );
 
         return HexagonalGrid.Distance(position, new CubeCoords(0, 0, 0));
     }
@@ -50,7 +56,7 @@ public enum Direction
     SE,
     S,
     SW,
-    NW
+    NW,
 }
 
 // Solution from https://www.redblobgames.com/grids/hexagons
@@ -66,7 +72,7 @@ public static class HexagonalGrid
             [Direction.SE] = new(1, 0, -1),
             [Direction.S] = new(0, 1, -1),
             [Direction.SW] = new(-1, 1, 0),
-            [Direction.NW] = new(-1, 0, 1)
+            [Direction.NW] = new(-1, 0, 1),
         }.ToImmutableDictionary();
 
     public static CubeCoords Move(CubeCoords position, Direction direction)

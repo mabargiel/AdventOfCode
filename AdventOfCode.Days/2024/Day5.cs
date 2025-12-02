@@ -9,14 +9,19 @@ public class Day5 : AdventDay<PrinterPages, int, int>
     {
         var pages = rawInput.Trim().Split(Environment.NewLine + Environment.NewLine);
 
-        var rules = pages[0].Split(Environment.NewLine).Select(x =>
-        {
-            var split = x.Split('|');
-            return (int.Parse(split[0]), int.Parse(split[1]));
-        }).ToArray();
+        var rules = pages[0]
+            .Split(Environment.NewLine)
+            .Select(x =>
+            {
+                var split = x.Split('|');
+                return (int.Parse(split[0]), int.Parse(split[1]));
+            })
+            .ToArray();
 
-        var updates = pages[1].Split(Environment.NewLine).Select(x =>
-            x.Split(',').Select(int.Parse).ToArray()).ToArray();
+        var updates = pages[1]
+            .Split(Environment.NewLine)
+            .Select(x => x.Split(',').Select(int.Parse).ToArray())
+            .ToArray();
 
         return new PrinterPages(rules, updates);
     }
@@ -71,7 +76,8 @@ public class Day5 : AdventDay<PrinterPages, int, int>
 
         foreach (var update in updates)
         {
-            var filteredRules = rules.Where(rule => update.Contains(rule.Number) && update.Contains(rule.AfterNumber))
+            var filteredRules = rules
+                .Where(rule => update.Contains(rule.Number) && update.Contains(rule.AfterNumber))
                 .ToArray();
 
             var isInvalid = false;
@@ -92,7 +98,10 @@ public class Day5 : AdventDay<PrinterPages, int, int>
                     continue;
                 }
 
-                (update[numberIndex], update[afterNumberIndex]) = (update[afterNumberIndex], update[numberIndex]);
+                (update[numberIndex], update[afterNumberIndex]) = (
+                    update[afterNumberIndex],
+                    update[numberIndex]
+                );
                 isInvalid = true;
                 goto restartRuleCheck;
             }

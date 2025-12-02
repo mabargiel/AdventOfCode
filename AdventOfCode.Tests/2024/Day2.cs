@@ -14,14 +14,17 @@ public class Day2
     }
 
     [Test]
-    [TestCase("""
-              7 6 4 2 1
-              1 2 7 8 9
-              9 7 6 2 1
-              1 3 2 4 5
-              8 6 4 4 1
-              1 3 6 7 9
-              """, 2)]
+    [TestCase(
+        """
+            7 6 4 2 1
+            1 2 7 8 9
+            9 7 6 2 1
+            1 3 2 4 5
+            8 6 4 4 1
+            1 3 6 7 9
+            """,
+        2
+    )]
     public void Part1_should_count_number_of_safe_reports(string testInput, int expectedResult)
     {
         var parsedInput = _day2.ParseRawInput(testInput);
@@ -32,15 +35,21 @@ public class Day2
     }
 
     [Test]
-    [TestCase("""
-              7 6 4 2 1
-              1 2 7 8 9
-              9 7 6 2 1
-              1 3 2 4 5
-              8 6 4 4 1
-              1 3 6 7 9
-              """, 4)]
-    public void Part2_should_calculate_similarity_score_between_two_lists(string testInput, int expectedResult)
+    [TestCase(
+        """
+            7 6 4 2 1
+            1 2 7 8 9
+            9 7 6 2 1
+            1 3 2 4 5
+            8 6 4 4 1
+            1 3 6 7 9
+            """,
+        4
+    )]
+    public void Part2_should_calculate_similarity_score_between_two_lists(
+        string testInput,
+        int expectedResult
+    )
     {
         var parsedInput = _day2.ParseRawInput(testInput);
 

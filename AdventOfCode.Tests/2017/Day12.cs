@@ -9,7 +9,8 @@ public class Day12 : AdventDayTest<Days._2017.Day12>
     [Test]
     public override void ParseRawInputTest()
     {
-        var rawInput = @"0 <-> 2
+        var rawInput =
+            @"0 <-> 2
 1 <-> 1
 2 <-> 0, 3, 4
 3 <-> 2, 4
@@ -42,7 +43,7 @@ public class Day12 : AdventDayTest<Days._2017.Day12>
             [6] = new[] { 4, 5 },
             [7] = new[] { 1, 8 },
             [8] = new[] { 7, 1, 9 },
-            [9] = new[] { 7, 8 }
+            [9] = new[] { 7, 8 },
         };
 
         var result = _day.Part1(input);
@@ -64,7 +65,7 @@ public class Day12 : AdventDayTest<Days._2017.Day12>
             [6] = new[] { 4, 5 },
             [7] = new[] { 1, 8 },
             [8] = new[] { 7, 1, 9 },
-            [9] = new[] { 7, 8 }
+            [9] = new[] { 7, 8 },
         };
 
         var result = _day.Part2(input);

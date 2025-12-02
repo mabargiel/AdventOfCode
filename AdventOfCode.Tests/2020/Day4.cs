@@ -8,7 +8,8 @@ public class Day4
     [Test]
     public void Part1_MissingHGTField_ShouldBeInvalid()
     {
-        const string input = @"iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+        const string input =
+            @"iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
 hcl:#cfa07d byr:1929
 ";
         var d4 = new Days._2020._4.Day4(input);
@@ -20,7 +21,8 @@ hcl:#cfa07d byr:1929
     [Test]
     public void Part1_Example_2ShouldBeInvalid()
     {
-        const string input = @"ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+        const string input =
+            @"ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
 byr:1937 iyr:2017 cid:147 hgt:183cm
 
 iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
@@ -43,7 +45,8 @@ iyr:2011 ecl:brn hgt:59in";
     [Test]
     public void Part2_AllInvalidPassports_Returns0()
     {
-        const string input = @"eyr:1972 cid:100
+        const string input =
+            @"eyr:1972 cid:100
 hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
 
 iyr:2019
@@ -66,7 +69,8 @@ pid:3556412378 byr:2007";
     [Test]
     public void Part2_4ValidPassports_Returns4()
     {
-        const string input = @"pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
+        const string input =
+            @"pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2f
 
 eyr:2029 ecl:blu cid:129 byr:1989
@@ -88,7 +92,8 @@ iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719";
     [Test]
     public void Part2_InvalidPid_Returns0()
     {
-        const string input = @"pid:08749970445 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
+        const string input =
+            @"pid:08749970445 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2f";
 
         var d4 = new Days._2020._4.Day4(input);
@@ -100,7 +105,8 @@ hcl:#623a2f";
     [Test]
     public void Part2_InvalidHcl_Returns0()
     {
-        const string input = @"pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
+        const string input =
+            @"pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2fd";
 
         var d4 = new Days._2020._4.Day4(input);

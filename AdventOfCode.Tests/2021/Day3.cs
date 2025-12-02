@@ -17,7 +17,8 @@ public class Day3
     [Test]
     public void ParseRawInput_Into2dIntArray()
     {
-        var rawInput = @"00100
+        var rawInput =
+            @"00100
 11110
 10110
 10111
@@ -31,21 +32,23 @@ public class Day3
 01010";
         var input = _day.ParseRawInput(rawInput);
 
-        input.ShouldBe(new BitArray[]
-        {
-            new(new[] { false, false, true, false, false }),
-            new(new[] { true, true, true, true, false }),
-            new(new[] { true, false, true, true, false }),
-            new(new[] { true, false, true, true, true }),
-            new(new[] { true, false, true, false, true }),
-            new(new[] { false, true, true, true, true }),
-            new(new[] { false, false, true, true, true }),
-            new(new[] { true, true, true, false, false }),
-            new(new[] { true, false, false, false, false }),
-            new(new[] { true, true, false, false, true }),
-            new(new[] { false, false, false, true, false }),
-            new(new[] { false, true, false, true, false })
-        });
+        input.ShouldBe(
+            new BitArray[]
+            {
+                new(new[] { false, false, true, false, false }),
+                new(new[] { true, true, true, true, false }),
+                new(new[] { true, false, true, true, false }),
+                new(new[] { true, false, true, true, true }),
+                new(new[] { true, false, true, false, true }),
+                new(new[] { false, true, true, true, true }),
+                new(new[] { false, false, true, true, true }),
+                new(new[] { true, true, true, false, false }),
+                new(new[] { true, false, false, false, false }),
+                new(new[] { true, true, false, false, true }),
+                new(new[] { false, false, false, true, false }),
+                new(new[] { false, true, false, true, false }),
+            }
+        );
     }
 
     [Test]
@@ -64,7 +67,7 @@ public class Day3
             new(new[] { true, false, false, false, false }),
             new(new[] { true, true, false, false, true }),
             new(new[] { false, false, false, true, false }),
-            new(new[] { false, true, false, true, false })
+            new(new[] { false, true, false, true, false }),
         };
 
         var result = _day.Part1(input);
@@ -88,7 +91,7 @@ public class Day3
             new(new[] { true, false, false, false, false }),
             new(new[] { true, true, false, false, true }),
             new(new[] { false, false, false, true, false }),
-            new(new[] { false, true, false, true, false })
+            new(new[] { false, true, false, true, false }),
         };
 
         var result = _day.Part2(input);

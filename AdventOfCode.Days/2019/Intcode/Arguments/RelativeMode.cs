@@ -4,8 +4,8 @@ public class RelativeMode : ArgumentMode
 {
     private readonly long _relativeBase;
 
-    public RelativeMode(ProgramMemory memory, long relativePosition, long relativeBase) : base(memory,
-        relativePosition)
+    public RelativeMode(ProgramMemory memory, long relativePosition, long relativeBase)
+        : base(memory, relativePosition)
     {
         _relativeBase = relativeBase;
     }

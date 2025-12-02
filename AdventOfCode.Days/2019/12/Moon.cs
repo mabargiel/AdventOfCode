@@ -8,8 +8,18 @@ public class Moon : ICloneable, IEquatable<Moon>
 {
     public Moon(long x, long y, long z)
     {
-        Position = new Dictionary<char, long> { { 'X', x }, { 'Y', y }, { 'Z', z } };
-        Velocity = new Dictionary<char, long> { { 'X', 0 }, { 'Y', 0 }, { 'Z', 0 } };
+        Position = new Dictionary<char, long>
+        {
+            { 'X', x },
+            { 'Y', y },
+            { 'Z', z },
+        };
+        Velocity = new Dictionary<char, long>
+        {
+            { 'X', 0 },
+            { 'Y', 0 },
+            { 'Z', 0 },
+        };
     }
 
     public Dictionary<char, long> Position { get; }
@@ -32,8 +42,8 @@ public class Moon : ICloneable, IEquatable<Moon>
             return true;
         }
 
-        return Position.All(pair => other.Position[pair.Key] == pair.Value) &&
-               Velocity.All(pair => other.Velocity[pair.Key] == pair.Value);
+        return Position.All(pair => other.Position[pair.Key] == pair.Value)
+            && Velocity.All(pair => other.Velocity[pair.Key] == pair.Value);
     }
 
     public void ApplyVelocity(char[] dimensions)

@@ -17,37 +17,38 @@ public class Day5
     public void ParseRawInput_returns_printer_pages()
     {
         const string rawInput = """
-                                47|53
-                                97|13
-                                97|61
-                                97|47
-                                75|29
-                                61|13
-                                75|53
-                                29|13
-                                97|29
-                                53|29
-                                61|53
-                                97|53
-                                61|29
-                                47|13
-                                75|47
-                                97|75
-                                47|61
-                                75|61
-                                47|29
-                                75|13
-                                53|13
-                                
-                                75,47,61,53,29
-                                97,61,53,29,13
-                                75,29,13
-                                75,97,47,61,53
-                                61,13,29
-                                97,13,75,29,47
-                                """;
+            47|53
+            97|13
+            97|61
+            97|47
+            75|29
+            61|13
+            75|53
+            29|13
+            97|29
+            53|29
+            61|53
+            97|53
+            61|29
+            47|13
+            75|47
+            97|75
+            47|61
+            75|61
+            47|29
+            75|13
+            53|13
 
-        (int, int)[] expectedPairs = [
+            75,47,61,53,29
+            97,61,53,29,13
+            75,29,13
+            75,97,47,61,53
+            61,13,29
+            97,13,75,29,47
+            """;
+
+        (int, int)[] expectedPairs =
+        [
             (47, 53),
             (97, 13),
             (97, 61),
@@ -68,16 +69,17 @@ public class Day5
             (75, 61),
             (47, 29),
             (75, 13),
-            (53, 13)
+            (53, 13),
         ];
 
-        int[][] expectedPages = [
+        int[][] expectedPages =
+        [
             [75, 47, 61, 53, 29],
             [97, 61, 53, 29, 13],
             [75, 29, 13],
             [75, 97, 47, 61, 53],
             [61, 13, 29],
-            [97, 13, 75, 29, 47]
+            [97, 13, 75, 29, 47],
         ];
 
         var result = _day5.ParseRawInput(rawInput);
@@ -90,37 +92,43 @@ public class Day5
     }
 
     [Test]
-    [TestCase("""
-              47|53
-              97|13
-              97|61
-              97|47
-              75|29
-              61|13
-              75|53
-              29|13
-              97|29
-              53|29
-              61|53
-              97|53
-              61|29
-              47|13
-              75|47
-              97|75
-              47|61
-              75|61
-              47|29
-              75|13
-              53|13
-              
-              75,47,61,53,29
-              97,61,53,29,13
-              75,29,13
-              75,97,47,61,53
-              61,13,29
-              97,13,75,29,47
-              """, 143)]
-    public void Part1_should_return_sum_of_all_middle_page_numbers_in_correct_updates(string input, int expectedResult)
+    [TestCase(
+        """
+            47|53
+            97|13
+            97|61
+            97|47
+            75|29
+            61|13
+            75|53
+            29|13
+            97|29
+            53|29
+            61|53
+            97|53
+            61|29
+            47|13
+            75|47
+            97|75
+            47|61
+            75|61
+            47|29
+            75|13
+            53|13
+
+            75,47,61,53,29
+            97,61,53,29,13
+            75,29,13
+            75,97,47,61,53
+            61,13,29
+            97,13,75,29,47
+            """,
+        143
+    )]
+    public void Part1_should_return_sum_of_all_middle_page_numbers_in_correct_updates(
+        string input,
+        int expectedResult
+    )
     {
         var parsedInput = _day5.ParseRawInput(input);
 
@@ -130,37 +138,43 @@ public class Day5
     }
 
     [Test]
-    [TestCase("""
-              47|53
-              97|13
-              97|61
-              97|47
-              75|29
-              61|13
-              75|53
-              29|13
-              97|29
-              53|29
-              61|53
-              97|53
-              61|29
-              47|13
-              75|47
-              97|75
-              47|61
-              75|61
-              47|29
-              75|13
-              53|13
+    [TestCase(
+        """
+            47|53
+            97|13
+            97|61
+            97|47
+            75|29
+            61|13
+            75|53
+            29|13
+            97|29
+            53|29
+            61|53
+            97|53
+            61|29
+            47|13
+            75|47
+            97|75
+            47|61
+            75|61
+            47|29
+            75|13
+            53|13
 
-              75,47,61,53,29
-              97,61,53,29,13
-              75,29,13
-              75,97,47,61,53
-              61,13,29
-              97,13,75,29,47
-              """, 123)]
-    public void Part2_should_correct_invalid_updates_return_sum_of_all_their_middle_page_numbers(string input, int expectedResult)
+            75,47,61,53,29
+            97,61,53,29,13
+            75,29,13
+            75,97,47,61,53
+            61,13,29
+            97,13,75,29,47
+            """,
+        123
+    )]
+    public void Part2_should_correct_invalid_updates_return_sum_of_all_their_middle_page_numbers(
+        string input,
+        int expectedResult
+    )
     {
         var parsedInput = _day5.ParseRawInput(input);
 

@@ -15,7 +15,11 @@ public class Board
 
         for (var i = 0; i < rows.Length; i++)
         {
-            var columns = rows[i].Split(' ').Where(x => !string.IsNullOrEmpty(x)).Select(int.Parse).ToArray();
+            var columns = rows[i]
+                .Split(' ')
+                .Where(x => !string.IsNullOrEmpty(x))
+                .Select(int.Parse)
+                .ToArray();
 
             for (var j = 0; j < columns.Length; j++)
             {

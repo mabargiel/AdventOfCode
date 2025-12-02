@@ -27,15 +27,17 @@ forward 2";
 
         var input = _day.ParseRawInput(rawInput);
 
-        input.ShouldBe(new List<(string direction, int distance)>
-        {
-            ("forward", 5),
-            ("down", 5),
-            ("forward", 8),
-            ("up", 3),
-            ("down", 8),
-            ("forward", 2)
-        });
+        input.ShouldBe(
+            new List<(string direction, int distance)>
+            {
+                ("forward", 5),
+                ("down", 5),
+                ("forward", 8),
+                ("up", 3),
+                ("down", 8),
+                ("forward", 2),
+            }
+        );
     }
 
     [Test]
@@ -48,7 +50,7 @@ forward 2";
             ("forward", 8),
             ("up", 3),
             ("down", 8),
-            ("forward", 2)
+            ("forward", 2),
         };
 
         var result = _day.Part1(input);
@@ -66,7 +68,7 @@ forward 2";
             ("forward", 8),
             ("up", 3),
             ("down", 8),
-            ("forward", 2)
+            ("forward", 2),
         };
 
         var result = _day.Part2(input);

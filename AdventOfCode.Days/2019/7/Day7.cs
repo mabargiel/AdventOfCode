@@ -24,7 +24,9 @@ public class Day7 : IAdventDay<long, long>
             return pipe.ExecuteAsync();
         }
 
-        return new Permutations<int>(Enumerable.Range(0, 5).ToArray()).Select(x => GetOutput(x).Result).Max();
+        return new Permutations<int>(Enumerable.Range(0, 5).ToArray())
+            .Select(x => GetOutput(x).Result)
+            .Max();
     }
 
     public long Part2()

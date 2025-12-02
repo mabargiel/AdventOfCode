@@ -18,7 +18,7 @@ public class Day3 : AdventDay<(string[], string[]), int, int>
     public override int Part1((string[], string[]) input)
     {
         var (wire1, wire2) = input;
-        
+
         int ManhattanDistance(Point point)
         {
             return Math.Abs(point.X - CentralPort.X) + Math.Abs(point.Y - CentralPort.Y);
@@ -40,7 +40,8 @@ public class Day3 : AdventDay<(string[], string[]), int, int>
 
         var intersectionPoints = wire1Segments.GetIntersects(wire2Segments);
 
-        var distances = from point in intersectionPoints
+        var distances =
+            from point in intersectionPoints
             let w1Dist = GetDistance(wire1Segments, point)
             let w2Dist = GetDistance(wire2Segments, point)
             select w1Dist + w2Dist;
@@ -89,8 +90,10 @@ public class Day3 : AdventDay<(string[], string[]), int, int>
                 var bX = pointA.X;
                 var bY = pointA.Y;
 
-                var (direction, distance) = (Enum.Parse<Direction>(wirePoint[0].ToString()),
-                    int.Parse(wirePoint.Substring(1, wirePoint.Length - 1)));
+                var (direction, distance) = (
+                    Enum.Parse<Direction>(wirePoint[0].ToString()),
+                    int.Parse(wirePoint.Substring(1, wirePoint.Length - 1))
+                );
 
                 switch (direction)
                 {
@@ -123,8 +126,10 @@ public class Day3 : AdventDay<(string[], string[]), int, int>
 
         public IEnumerable<Point> GetIntersects(Wire wire)
         {
-            var intersectingSegments = Segments.SelectMany(x => wire.Segments.Select(y => y.GetIntersection(x)))
-                .Where(x => x != null).Cast<Point>();
+            var intersectingSegments = Segments
+                .SelectMany(x => wire.Segments.Select(y => y.GetIntersection(x)))
+                .Where(x => x != null)
+                .Cast<Point>();
             return intersectingSegments;
         }
 
@@ -133,10 +138,10 @@ public class Day3 : AdventDay<(string[], string[]), int, int>
             U,
             D,
             R,
-            L
+            L,
         }
     }
-    
+
     private class Segment
     {
         public Segment(Point start, Point end)
@@ -150,8 +155,13 @@ public class Day3 : AdventDay<(string[], string[]), int, int>
 
         public Point? GetIntersection(Segment segment)
         {
-            if (Equals(segment) || Start.Equals(segment.End) || End.Equals(segment.Start) ||
-                Start.Equals(segment.Start) || End.Equals(segment.End))
+            if (
+                Equals(segment)
+                || Start.Equals(segment.End)
+                || End.Equals(segment.Start)
+                || Start.Equals(segment.Start)
+                || End.Equals(segment.End)
+            )
             {
                 return null;
             }
@@ -177,8 +187,10 @@ public class Day3 : AdventDay<(string[], string[]), int, int>
                 return null;
             }
 
-            var ua = (dx2 * (ab.Start.Y - cd.Start.Y) - dy2 * (ab.Start.X - cd.Start.X)) / (double)denom;
-            var ub = (dx1 * (ab.Start.Y - cd.Start.Y) - dy1 * (ab.Start.X - cd.Start.X)) / (double)denom;
+            var ua =
+                (dx2 * (ab.Start.Y - cd.Start.Y) - dy2 * (ab.Start.X - cd.Start.X)) / (double)denom;
+            var ub =
+                (dx1 * (ab.Start.Y - cd.Start.Y) - dy1 * (ab.Start.X - cd.Start.X)) / (double)denom;
 
             if (ua < 0 || ua > 1 || ub < 0 || ub > 1)
             {

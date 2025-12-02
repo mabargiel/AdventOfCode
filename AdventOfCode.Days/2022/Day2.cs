@@ -7,11 +7,15 @@ public class Day2 : AdventDay<char[][], int, int>
 {
     public override char[][] ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(Environment.NewLine).Select(x =>
-        {
-            var hands = x.Split(' ');
-            return new[] { hands[0].First(), hands[1].First() };
-        }).ToArray();
+        return rawInput
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(x =>
+            {
+                var hands = x.Split(' ');
+                return new[] { hands[0].First(), hands[1].First() };
+            })
+            .ToArray();
     }
 
     public override int Part1(char[][] input)
@@ -50,8 +54,7 @@ public class Day2 : AdventDay<char[][], int, int>
                 //lose
                 case 'X':
                 {
-                    score += CalculateWinAnswer(hisHand + 1) +
-                             1; //get next possible choice and calculate win to get the loosing answer
+                    score += CalculateWinAnswer(hisHand + 1) + 1; //get next possible choice and calculate win to get the loosing answer
                     break;
                 }
                 case 'Y':

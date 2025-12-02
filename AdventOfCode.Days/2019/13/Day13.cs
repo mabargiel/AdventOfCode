@@ -108,5 +108,5 @@ public enum TileId
     Wall,
     Block,
     HorizontalPaddle,
-    Ball
+    Ball,
 }

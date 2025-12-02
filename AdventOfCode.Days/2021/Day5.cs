@@ -10,14 +10,18 @@ public class Day5 : AdventDay<ImmutableArray<Line>, int, int>
 {
     public override ImmutableArray<Line> ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(Environment.NewLine).Select(x =>
-        {
-            var points = x.Split("->");
-            var pointA = points[0].Trim().Split(',').Select(int.Parse).ToArray();
-            var pointB = points[1].Trim().Split(',').Select(int.Parse).ToArray();
+        return rawInput
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(x =>
+            {
+                var points = x.Split("->");
+                var pointA = points[0].Trim().Split(',').Select(int.Parse).ToArray();
+                var pointB = points[1].Trim().Split(',').Select(int.Parse).ToArray();
 
-            return new Line(new Point(pointA[0], pointA[1]), new Point(pointB[0], pointB[1]));
-        }).ToImmutableArray();
+                return new Line(new Point(pointA[0], pointA[1]), new Point(pointB[0], pointB[1]));
+            })
+            .ToImmutableArray();
     }
 
     public override int Part1(ImmutableArray<Line> input)

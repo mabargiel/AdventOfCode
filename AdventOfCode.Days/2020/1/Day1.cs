@@ -31,9 +31,9 @@ public class Day1 : IAdventDay<int, int>
             throw new ArgumentException("Value cannot be less than 1", nameof(valuesCount));
         }
 
-        var topMinimums = (from number in _input
-            orderby number
-            select number).Distinct().Take(valuesCount - 1);
+        var topMinimums = (from number in _input orderby number select number)
+            .Distinct()
+            .Take(valuesCount - 1);
 
         var max = 2020 - topMinimums.Sum();
         var possibleValues = _input.Where(v => v <= max).ToList();

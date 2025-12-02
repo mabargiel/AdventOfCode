@@ -12,11 +12,16 @@ public class Day13 : AdventDay<Manual, int, string>
     {
         var instructionsSplit = rawInput.Trim().Split(Environment.NewLine + Environment.NewLine);
 
-        var dotsList = instructionsSplit[0].Split(Environment.NewLine).Select(dots => dots.Split(","))
-            .Select(split => new Point(int.Parse(split[0]), int.Parse(split[1]))).ToList();
+        var dotsList = instructionsSplit[0]
+            .Split(Environment.NewLine)
+            .Select(dots => dots.Split(","))
+            .Select(split => new Point(int.Parse(split[0]), int.Parse(split[1])))
+            .ToList();
 
-        var instructions = instructionsSplit[1].Split(Environment.NewLine).Select(instr => instr.Split("=")).Select(
-            split =>
+        var instructions = instructionsSplit[1]
+            .Split(Environment.NewLine)
+            .Select(instr => instr.Split("="))
+            .Select(split =>
             {
                 var axis = Enum.Parse<Axis>(split[0].Last().ToString().ToUpper());
                 return new FoldInstruction(axis, int.Parse(split[1]));
@@ -108,5 +113,5 @@ public record FoldInstruction(Axis Axis, int Index);
 public enum Axis
 {
     X,
-    Y
+    Y,
 }

@@ -28,8 +28,7 @@ public abstract class AdventDay<TIn, TOut1, TOut2> : IAdventDay
         watch.Stop();
         var executionTime = watch.Elapsed.TotalMilliseconds;
 
-        return
-            $"{name} >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime:F2} ms\n>>> Execution time: {FormatExecutionTime(executionTime)}";
+        return $"{name} >\n>>> Result: {result}\n>>> Input parse time: {inputParsingTime:F2} ms\n>>> Execution time: {FormatExecutionTime(executionTime)}";
     }
 
     private string FormatExecutionTime(double executionTime)
@@ -38,7 +37,7 @@ public abstract class AdventDay<TIn, TOut1, TOut2> : IAdventDay
         {
             < 1000 => $"{executionTime:F2} ms",
             < 60000 => $"{executionTime / 1000:F2} s",
-            _ => $"{executionTime / 60000:F2} m"
+            _ => $"{executionTime / 60000:F2} m",
         };
     }
 

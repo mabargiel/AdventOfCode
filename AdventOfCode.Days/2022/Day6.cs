@@ -36,6 +36,8 @@ public class Day6 : AdventDay<string, int, int>
             window.RemoveAt(0);
         }
 
-        throw new ArgumentException($"Could not find the marker of length {markerLength} in the given input");
+        throw new ArgumentException(
+            $"Could not find the marker of length {markerLength} in the given input"
+        );
     }
 }

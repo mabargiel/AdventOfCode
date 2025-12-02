@@ -11,7 +11,7 @@ public class Day10 : AdventDay<string[], int, long>
         [')'] = 3,
         [']'] = 57,
         ['}'] = 1197,
-        ['>'] = 25137
+        ['>'] = 25137,
     };
 
     private readonly Dictionary<char, int> _incompleteScoring = new()
@@ -19,7 +19,7 @@ public class Day10 : AdventDay<string[], int, long>
         [')'] = 1,
         [']'] = 2,
         ['}'] = 3,
-        ['>'] = 4
+        ['>'] = 4,
     };
 
     private readonly Dictionary<char, char> _tagMap = new()
@@ -27,7 +27,7 @@ public class Day10 : AdventDay<string[], int, long>
         ['('] = ')',
         ['['] = ']',
         ['{'] = '}',
-        ['<'] = '>'
+        ['<'] = '>',
     };
 
     public override string[] ParseRawInput(string rawInput)
@@ -82,11 +82,13 @@ public class Day10 : AdventDay<string[], int, long>
                 }
             }
 
-            var score = expectedTags.Select(x => (long)_incompleteScoring[x])
+            var score = expectedTags
+                .Select(x => (long)_incompleteScoring[x])
                 .Aggregate(0L, (prev, curr) => prev * 5 + curr);
             result.Add(score);
 
-            nextLine: ;
+            nextLine:
+            ;
         }
 
         var sorted = result.OrderBy(x => x);

@@ -7,13 +7,17 @@ public class Day4 : AdventDay<Range[][], int, int>
 {
     public override Range[][] ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(Environment.NewLine).Select(info =>
-        {
-            var pair = info.Split(',');
-            return pair
-                .Select(elf => elf.Split('-'))
-                .Select(elf => new Range(int.Parse(elf[0]), int.Parse(elf[1]))).ToArray();
-        }).ToArray();
+        return rawInput
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(info =>
+            {
+                var pair = info.Split(',');
+                return pair.Select(elf => elf.Split('-'))
+                    .Select(elf => new Range(int.Parse(elf[0]), int.Parse(elf[1])))
+                    .ToArray();
+            })
+            .ToArray();
     }
 
     public override int Part1(Range[][] input)

@@ -24,9 +24,9 @@ public class Day7
                 new("jptl", 61),
                 new("ugml", 68, new[] { "gyxo", "ebii", "jptl" }),
                 new("gyxo", 61),
-                new("cntj", 57)
+                new("cntj", 57),
             },
-            60
+            60,
         },
         new object[]
         {
@@ -46,10 +46,10 @@ public class Day7
                 new("gyxo", 61),
                 new("cntj", 57),
                 new("dupa", 22),
-                new("dupa1", 22)
+                new("dupa1", 22),
             },
-            22
-        }
+            22,
+        },
     };
 
     private Days._2017.Day7 _day;
@@ -63,7 +63,8 @@ public class Day7
     [Test]
     public void ParseRawInput_ReturnsBottomProgramTree()
     {
-        var rawInput = @"pbga (66)
+        var rawInput =
+            @"pbga (66)
 xhth (57)
 ebii (61)
 havc (66)
@@ -79,22 +80,24 @@ cntj (57)";
 
         var input = _day.ParseRawInput(rawInput);
 
-        input.ShouldBeEquivalentTo(new TowerProgram[]
-        {
-            new("pbga", 66),
-            new("xhth", 57),
-            new("ebii", 61),
-            new("havc", 66),
-            new("ktlj", 57),
-            new("fwft", 72, new[] { "ktlj", "cntj", "xhth" }),
-            new("qoyq", 66),
-            new("padx", 45, new[] { "pbga", "havc", "qoyq" }),
-            new("tknk", 41, new[] { "ugml", "padx", "fwft" }),
-            new("jptl", 61),
-            new("ugml", 68, new[] { "gyxo", "ebii", "jptl" }),
-            new("gyxo", 61),
-            new("cntj", 57)
-        });
+        input.ShouldBeEquivalentTo(
+            new TowerProgram[]
+            {
+                new("pbga", 66),
+                new("xhth", 57),
+                new("ebii", 61),
+                new("havc", 66),
+                new("ktlj", 57),
+                new("fwft", 72, new[] { "ktlj", "cntj", "xhth" }),
+                new("qoyq", 66),
+                new("padx", 45, new[] { "pbga", "havc", "qoyq" }),
+                new("tknk", 41, new[] { "ugml", "padx", "fwft" }),
+                new("jptl", 61),
+                new("ugml", 68, new[] { "gyxo", "ebii", "jptl" }),
+                new("gyxo", 61),
+                new("cntj", 57),
+            }
+        );
     }
 
     [Test]
@@ -114,7 +117,7 @@ cntj (57)";
             new("jptl", 61),
             new("ugml", 68, new[] { "gyxo", "ebii", "jptl" }),
             new("gyxo", 61),
-            new("cntj", 57)
+            new("cntj", 57),
         };
 
         var result = _day.Part1(input);

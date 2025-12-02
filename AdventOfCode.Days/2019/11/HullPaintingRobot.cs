@@ -8,8 +8,9 @@ namespace AdventOfCode.Days._2019._11;
 
 public class HullPaintingRobot
 {
-    private readonly LinkedList<Direction> _allDirections =
-        new(new[] { Direction.Up, Direction.Right, Direction.Bottom, Direction.Left });
+    private readonly LinkedList<Direction> _allDirections = new(
+        new[] { Direction.Up, Direction.Right, Direction.Bottom, Direction.Left }
+    );
 
     private readonly IIntcodeComputer _boardComputer;
     private readonly Dictionary<Point, bool> _paintArea;
@@ -33,9 +34,10 @@ public class HullPaintingRobot
             if (_moveMode)
             {
                 var linkedListNode = _allDirections.Find(_facingDirection);
-                _facingDirection = output == 0
-                    ? linkedListNode?.Previous?.Value ?? _allDirections.Last.Value
-                    : linkedListNode?.Next?.Value ?? _allDirections.First.Value;
+                _facingDirection =
+                    output == 0
+                        ? linkedListNode?.Previous?.Value ?? _allDirections.Last.Value
+                        : linkedListNode?.Next?.Value ?? _allDirections.First.Value;
 
                 Move();
 
@@ -61,7 +63,7 @@ public class HullPaintingRobot
             Direction.Right => new Point(_currentPosition.X + 1, _currentPosition.Y),
             Direction.Bottom => new Point(_currentPosition.X, _currentPosition.Y + 1),
             Direction.Left => new Point(_currentPosition.X - 1, _currentPosition.Y),
-            _ => throw new ArgumentOutOfRangeException()
+            _ => throw new ArgumentOutOfRangeException(),
         };
     }
 
@@ -70,6 +72,6 @@ public class HullPaintingRobot
         Up,
         Right,
         Bottom,
-        Left
+        Left,
     }
 }

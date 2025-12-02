@@ -21,7 +21,8 @@ public class Day10
                             6
                             12
                             4".TrimIndent(),
-            7 * 5, 8
+            7 * 5,
+            8,
         },
         new object[]
         {
@@ -56,8 +57,9 @@ public class Day10
                             34
                             10
                             3".TrimIndent(),
-            22 * 10, 19_208
-        }
+            22 * 10,
+            19_208,
+        },
     };
 
     [Test]

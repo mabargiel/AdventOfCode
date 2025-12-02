@@ -19,9 +19,8 @@ public class Day8
                     acc +1
                     jmp -4
                     acc +6".TrimIndent(),
-            5
+            5,
         },
-
         new object[]
         {
             @"nop +0
@@ -33,8 +32,8 @@ public class Day8
                     acc +1
                     jmp -4
                     acc +6".TrimIndent(),
-            104
-        }
+            104,
+        },
     };
 
     [Test]

@@ -19,7 +19,13 @@ steps:
   inputs:
     command: build
     projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)' # Update this to match your nee
+    arguments: '--configuration $(buildConfiguration)'
+    
+- script: dotnet tool install --global csharpier
+  displayName: Install CSharpier
+
+- script: csharpier --check .
+  displayName: Check formatting
 
 - task: DotNetCoreCLI@2
   inputs:

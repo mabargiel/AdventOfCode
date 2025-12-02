@@ -96,8 +96,13 @@ public class Day11 : AdventDay<Monkey[], int, long>
 
 public class Monkey
 {
-    public Monkey(IEnumerable<long> worryLevels, Func<long, long> operation, int testDivisibleBy, int ifTrue,
-        int ifFalse)
+    public Monkey(
+        IEnumerable<long> worryLevels,
+        Func<long, long> operation,
+        int testDivisibleBy,
+        int ifTrue,
+        int ifFalse
+    )
     {
         Items = new Queue<long>(worryLevels);
         Operation = operation;

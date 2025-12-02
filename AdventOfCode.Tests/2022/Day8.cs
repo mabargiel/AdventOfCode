@@ -16,21 +16,24 @@ public class Day8
     [Test]
     public void ParseRawInput_WithExampleInput_SplitsItIntoAGridOfHeights()
     {
-        var rawInput = @"30373
+        var rawInput =
+            @"30373
 25512
 65332
 33549
 35390";
 
         var input = _day8.ParseRawInput(rawInput);
-        input.ShouldBe(new[,]
-        {
-            { 3, 0, 3, 7, 3 },
-            { 2, 5, 5, 1, 2 },
-            { 6, 5, 3, 3, 2 },
-            { 3, 3, 5, 4, 9 },
-            { 3, 5, 3, 9, 0 }
-        });
+        input.ShouldBe(
+            new[,]
+            {
+                { 3, 0, 3, 7, 3 },
+                { 2, 5, 5, 1, 2 },
+                { 6, 5, 3, 3, 2 },
+                { 3, 3, 5, 4, 9 },
+                { 3, 5, 3, 9, 0 },
+            }
+        );
     }
 
     [Test]
@@ -42,7 +45,7 @@ public class Day8
             { 2, 5, 5, 1, 2 },
             { 6, 5, 3, 3, 2 },
             { 3, 3, 5, 4, 9 },
-            { 3, 5, 3, 9, 0 }
+            { 3, 5, 3, 9, 0 },
         };
 
         var result = _day8.Part1(input);
@@ -59,7 +62,7 @@ public class Day8
             { 2, 5, 5, 1, 2 },
             { 6, 5, 3, 3, 2 },
             { 3, 3, 5, 4, 9 },
-            { 3, 5, 3, 9, 0 }
+            { 3, 5, 3, 9, 0 },
         };
 
         var result = _day8.Part2(input);
@@ -76,7 +79,7 @@ public class Day8
             { 8, 5, 5, 1, 2, 2 },
             { 7, 5, 3, 3, 2, 8 },
             { 6, 3, 5, 4, 9, 1 },
-            { 5, 5, 3, 9, 0, 7 }
+            { 5, 5, 3, 9, 0, 7 },
         };
 
         var result = _day8.Part2(input);

@@ -17,7 +17,8 @@ public class Day4
     [Test]
     public void ParseRawInput_WithExampleInput_SplitsItIntoPairsOfRanges()
     {
-        const string rawInput = @"2-4,6-8
+        const string rawInput =
+            @"2-4,6-8
 2-3,4-5
 5-7,7-9
 2-8,3-7
@@ -26,15 +27,17 @@ public class Day4
 
         var input = _day4.ParseRawInput(rawInput);
 
-        input.ShouldBe(new[]
-        {
-            new Range[] { new(2, 4), new(6, 8) },
-            new Range[] { new(2, 3), new(4, 5) },
-            new Range[] { new(5, 7), new(7, 9) },
-            new Range[] { new(2, 8), new(3, 7) },
-            new Range[] { new(6, 6), new(4, 6) },
-            new Range[] { new(2, 6), new(4, 8) }
-        });
+        input.ShouldBe(
+            new[]
+            {
+                new Range[] { new(2, 4), new(6, 8) },
+                new Range[] { new(2, 3), new(4, 5) },
+                new Range[] { new(5, 7), new(7, 9) },
+                new Range[] { new(2, 8), new(3, 7) },
+                new Range[] { new(6, 6), new(4, 6) },
+                new Range[] { new(2, 6), new(4, 8) },
+            }
+        );
     }
 
     [Test]
@@ -47,7 +50,7 @@ public class Day4
             new Range[] { new(5, 7), new(7, 9) },
             new Range[] { new(2, 8), new(3, 7) },
             new Range[] { new(6, 6), new(4, 6) },
-            new Range[] { new(2, 6), new(4, 8) }
+            new Range[] { new(2, 6), new(4, 8) },
         };
 
         var result = _day4.Part1(input);
@@ -65,7 +68,7 @@ public class Day4
             new Range[] { new(5, 7), new(7, 9) },
             new Range[] { new(2, 8), new(3, 7) },
             new Range[] { new(6, 6), new(4, 6) },
-            new Range[] { new(2, 6), new(4, 8) }
+            new Range[] { new(2, 6), new(4, 8) },
         };
 
         var result = _day4.Part2(input);

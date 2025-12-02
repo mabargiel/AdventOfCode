@@ -15,11 +15,21 @@ public class Day8 : AdventDayTest<Days._2021.Day8>
                 new(
                     new[]
                     {
-                        "acedgfb", "cdfbe", "gcdfa", "fbcad", "dab", "cefabd", "cdfgeb", "eafb", "cagedb", "ab"
+                        "acedgfb",
+                        "cdfbe",
+                        "gcdfa",
+                        "fbcad",
+                        "dab",
+                        "cefabd",
+                        "cdfgeb",
+                        "eafb",
+                        "cagedb",
+                        "ab",
                     },
-                    new[] { "cdfeb", "fcadb", "cdfeb", "cdbaf" })
+                    new[] { "cdfeb", "fcadb", "cdfeb", "cdbaf" }
+                ),
             },
-            5353
+            5353,
         },
         new object[]
         {
@@ -28,83 +38,214 @@ public class Day8 : AdventDayTest<Days._2021.Day8>
                 new(
                     new[]
                     {
-                        "be", "cfbegad", "cbdgef", "fgaecd", "cgeb", "fdcge", "agebfd", "fecdb", "fabcd", "edb"
+                        "be",
+                        "cfbegad",
+                        "cbdgef",
+                        "fgaecd",
+                        "cgeb",
+                        "fdcge",
+                        "agebfd",
+                        "fecdb",
+                        "fabcd",
+                        "edb",
                     },
-                    new[] { "fdgacbe", "cefdb", "cefbgd", "gcbe" }),
+                    new[] { "fdgacbe", "cefdb", "cefbgd", "gcbe" }
+                ),
                 new(
                     new[]
                     {
-                        "edbfga", "begcd", "cbg", "gc", "gcadebf", "fbgde", "acbgfd", "abcde", "gfcbed", "gfec"
+                        "edbfga",
+                        "begcd",
+                        "cbg",
+                        "gc",
+                        "gcadebf",
+                        "fbgde",
+                        "acbgfd",
+                        "abcde",
+                        "gfcbed",
+                        "gfec",
                     },
-                    new[] { "fcgedb", "cgb", "dgebacf", "gc" }),
+                    new[] { "fcgedb", "cgb", "dgebacf", "gc" }
+                ),
                 new(
                     new[]
                     {
-                        "fgaebd", "cg", "bdaec", "gdafb", "agbcfd", "gdcbef", "bgcad", "gfac", "gcb", "cdgabef"
+                        "fgaebd",
+                        "cg",
+                        "bdaec",
+                        "gdafb",
+                        "agbcfd",
+                        "gdcbef",
+                        "bgcad",
+                        "gfac",
+                        "gcb",
+                        "cdgabef",
                     },
-                    new[] { "cg", "cg", "fdcagb", "cbg" }),
+                    new[] { "cg", "cg", "fdcagb", "cbg" }
+                ),
                 new(
                     new[]
                     {
-                        "fbegcd", "cbd", "adcefb", "dageb", "afcb", "bc", "aefdc", "ecdab", "fgdeca", "fcdbega"
+                        "fbegcd",
+                        "cbd",
+                        "adcefb",
+                        "dageb",
+                        "afcb",
+                        "bc",
+                        "aefdc",
+                        "ecdab",
+                        "fgdeca",
+                        "fcdbega",
                     },
-                    new[] { "efabcd", "cedba", "gadfec", "cb" }),
+                    new[] { "efabcd", "cedba", "gadfec", "cb" }
+                ),
                 new(
                     new[]
                     {
-                        "aecbfdg", "fbg", "gf", "bafeg", "dbefa", "fcge", "gcbea", "fcaegb", "dgceab", "fcbdga"
+                        "aecbfdg",
+                        "fbg",
+                        "gf",
+                        "bafeg",
+                        "dbefa",
+                        "fcge",
+                        "gcbea",
+                        "fcaegb",
+                        "dgceab",
+                        "fcbdga",
                     },
-                    new[] { "gecf", "egdcabf", "bgf", "bfgea" }),
+                    new[] { "gecf", "egdcabf", "bgf", "bfgea" }
+                ),
                 new(
                     new[]
                     {
-                        "fgeab", "ca", "afcebg", "bdacfeg", "cfaedg", "gcfdb", "baec", "bfadeg", "bafgc", "acf"
+                        "fgeab",
+                        "ca",
+                        "afcebg",
+                        "bdacfeg",
+                        "cfaedg",
+                        "gcfdb",
+                        "baec",
+                        "bfadeg",
+                        "bafgc",
+                        "acf",
                     },
-                    new[] { "gebdcfa", "ecba", "ca", "fadegcb" }),
+                    new[] { "gebdcfa", "ecba", "ca", "fadegcb" }
+                ),
                 new(
                     new[]
                     {
-                        "dbcfg", "fgd", "bdegcaf", "fgec", "aegbdf", "ecdfab", "fbedc", "dacgb", "gdcebf", "gf"
+                        "dbcfg",
+                        "fgd",
+                        "bdegcaf",
+                        "fgec",
+                        "aegbdf",
+                        "ecdfab",
+                        "fbedc",
+                        "dacgb",
+                        "gdcebf",
+                        "gf",
                     },
-                    new[] { "cefg", "dcbef", "fcge", "gbcadfe" }),
+                    new[] { "cefg", "dcbef", "fcge", "gbcadfe" }
+                ),
                 new(
                     new[]
                     {
-                        "bdfegc", "cbegaf", "gecbf", "dfcage", "bdacg", "ed", "bedf", "ced", "adcbefg", "gebcd"
+                        "bdfegc",
+                        "cbegaf",
+                        "gecbf",
+                        "dfcage",
+                        "bdacg",
+                        "ed",
+                        "bedf",
+                        "ced",
+                        "adcbefg",
+                        "gebcd",
                     },
-                    new[] { "ed", "bcgafe", "cdgba", "cbgef" }),
+                    new[] { "ed", "bcgafe", "cdgba", "cbgef" }
+                ),
                 new(
                     new[]
                     {
-                        "egadfb", "cdbfeg", "cegd", "fecab", "cgb", "gbdefca", "cg", "fgcdab", "egfdb", "bfceg"
+                        "egadfb",
+                        "cdbfeg",
+                        "cegd",
+                        "fecab",
+                        "cgb",
+                        "gbdefca",
+                        "cg",
+                        "fgcdab",
+                        "egfdb",
+                        "bfceg",
                     },
-                    new[] { "gbdfcae", "bgc", "cg", "cgb" }),
+                    new[] { "gbdfcae", "bgc", "cg", "cgb" }
+                ),
                 new(
                     new[]
                     {
-                        "gcafb", "gcf", "dcaebfg", "ecagb", "gf", "abcdeg", "gaef", "cafbge", "fdbac", "fegbdc"
+                        "gcafb",
+                        "gcf",
+                        "dcaebfg",
+                        "ecagb",
+                        "gf",
+                        "abcdeg",
+                        "gaef",
+                        "cafbge",
+                        "fdbac",
+                        "fegbdc",
                     },
-                    new[] { "fgae", "cfgab", "fg", "bagce" })
+                    new[] { "fgae", "cfgab", "fg", "bagce" }
+                ),
             },
-            61229
-        }
+            61229,
+        },
     };
 
     [Test]
     public override void ParseRawInputTest()
     {
-        var rawInput = @"acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf
+        var rawInput =
+            @"acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf
 acedgfb cdfbe gcdfa fbcad dab ceffbd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbad";
 
         var input = _day.ParseRawInput(rawInput);
 
-        input.ShouldBeEquivalentTo(new SignalPattern[]
-        {
-            new(new[] { "acedgfb", "cdfbe", "gcdfa", "fbcad", "dab", "cefabd", "cdfgeb", "eafb", "cagedb", "ab" },
-                new[] { "cdfeb", "fcadb", "cdfeb", "cdbaf" }),
-            new(new[] { "acedgfb", "cdfbe", "gcdfa", "fbcad", "dab", "ceffbd", "cdfgeb", "eafb", "cagedb", "ab" },
-                new[] { "cdfeb", "fcadb", "cdfeb", "cdbad" })
-        });
+        input.ShouldBeEquivalentTo(
+            new SignalPattern[]
+            {
+                new(
+                    new[]
+                    {
+                        "acedgfb",
+                        "cdfbe",
+                        "gcdfa",
+                        "fbcad",
+                        "dab",
+                        "cefabd",
+                        "cdfgeb",
+                        "eafb",
+                        "cagedb",
+                        "ab",
+                    },
+                    new[] { "cdfeb", "fcadb", "cdfeb", "cdbaf" }
+                ),
+                new(
+                    new[]
+                    {
+                        "acedgfb",
+                        "cdfbe",
+                        "gcdfa",
+                        "fbcad",
+                        "dab",
+                        "ceffbd",
+                        "cdfgeb",
+                        "eafb",
+                        "cagedb",
+                        "ab",
+                    },
+                    new[] { "cdfeb", "fcadb", "cdfeb", "cdbad" }
+                ),
+            }
+        );
     }
 
     [Test]

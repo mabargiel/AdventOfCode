@@ -15,8 +15,10 @@ public class Day8 : IAdventDay<int, string>
         var imageSize = width * height;
         if (imageData.Length < imageSize || imageData.Length % imageSize > 0)
         {
-            throw new ArgumentException("The image data is corrupted and cannot be parsed to layers",
-                nameof(imageData));
+            throw new ArgumentException(
+                "The image data is corrupted and cannot be parsed to layers",
+                nameof(imageData)
+            );
         }
 
         _layers = imageData.Batch((int)(width * height)).Select(x => x.ToArray());
@@ -24,7 +26,8 @@ public class Day8 : IAdventDay<int, string>
 
     public int Part1()
     {
-        var leastZerosLayer = _layers.MinBy(layer => layer.Count(c => c == '0'))?.ToArray() ?? Array.Empty<char>();
+        var leastZerosLayer =
+            _layers.MinBy(layer => layer.Count(c => c == '0'))?.ToArray() ?? Array.Empty<char>();
 
         var onesCount = leastZerosLayer.Count(c => c == '1');
         var twosCount = leastZerosLayer.Count(c => c == '2');
@@ -35,7 +38,8 @@ public class Day8 : IAdventDay<int, string>
     public string Part2()
     {
         var size = _layers.First().Length;
-        var drillJobs = Enumerable.Range(0, size)
+        var drillJobs = Enumerable
+            .Range(0, size)
             .Select(pixelIndex => Task.Run(() => DrillThroughLayers(pixelIndex)));
 
         var password = Task.WhenAll(drillJobs).Result;

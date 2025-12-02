@@ -8,7 +8,8 @@ public class Day5
     [Test]
     public void Part1()
     {
-        const string input = @"BFFFBBFRRR
+        const string input =
+            @"BFFFBBFRRR
 FFFBBBFRRR
 BBFFBBFRLL";
 

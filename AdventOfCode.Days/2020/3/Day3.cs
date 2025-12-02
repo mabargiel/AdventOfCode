@@ -37,7 +37,7 @@ public class Day3 : IAdventDay<int, int>
             CalculateTreeCount(3, 1),
             CalculateTreeCount(5, 1),
             CalculateTreeCount(7, 1),
-            CalculateTreeCount(1, 2)
+            CalculateTreeCount(1, 2),
         }.Aggregate(1, (prev, curr) => prev * curr);
     }
 

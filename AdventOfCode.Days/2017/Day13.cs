@@ -9,11 +9,15 @@ public class Day13 : AdventDay<ImmutableDictionary<int, int>, int, int>
 {
     public override ImmutableDictionary<int, int> ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(Environment.NewLine).Select(x =>
-        {
-            var split = x.Split(": ");
-            return new KeyValuePair<int, int>(int.Parse(split[0]), int.Parse(split[1]));
-        }).ToImmutableDictionary();
+        return rawInput
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(x =>
+            {
+                var split = x.Split(": ");
+                return new KeyValuePair<int, int>(int.Parse(split[0]), int.Parse(split[1]));
+            })
+            .ToImmutableDictionary();
     }
 
     public override int Part1(ImmutableDictionary<int, int> input)

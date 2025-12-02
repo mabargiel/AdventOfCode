@@ -20,7 +20,9 @@ public class Day6 : IAdventDay<int, int>
 
     public int Part2()
     {
-        return _groups.Sum(s => s.GroupBy(c => c).Count(c => c.Count() == s.Split(Environment.NewLine).Length));
+        return _groups.Sum(s =>
+            s.GroupBy(c => c).Count(c => c.Count() == s.Split(Environment.NewLine).Length)
+        );
     }
 
     private static string TrimWhiteCharacters(string s)

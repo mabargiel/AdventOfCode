@@ -11,11 +11,19 @@ public class Day6 : AdventDay<Race[], int, int>
         var durationsString = split[0];
         var currentRecordsString = split[1];
 
-        var durations = durationsString[(durationsString.IndexOf(':') + 2)..].Trim().Split(' ')
-            .Where(x => !string.IsNullOrEmpty(x)).Select(int.Parse).ToArray();
+        var durations = durationsString[(durationsString.IndexOf(':') + 2)..]
+            .Trim()
+            .Split(' ')
+            .Where(x => !string.IsNullOrEmpty(x))
+            .Select(int.Parse)
+            .ToArray();
 
-        var currentRecords = currentRecordsString[(currentRecordsString.IndexOf(':') + 2)..].Trim().Split(' ')
-            .Where(x => !string.IsNullOrEmpty(x)).Select(int.Parse).ToArray();
+        var currentRecords = currentRecordsString[(currentRecordsString.IndexOf(':') + 2)..]
+            .Trim()
+            .Split(' ')
+            .Where(x => !string.IsNullOrEmpty(x))
+            .Select(int.Parse)
+            .ToArray();
 
         var races = new Race[durations.Length];
 
@@ -29,14 +37,17 @@ public class Day6 : AdventDay<Race[], int, int>
 
     public override int Part1(Race[] input)
     {
-        return input.Select(race => CountWaysToWin(race.Duration, race.CurrentRecord))
+        return input
+            .Select(race => CountWaysToWin(race.Duration, race.CurrentRecord))
             .Aggregate(1, (current, waysToBeatARecord) => current * waysToBeatARecord);
     }
 
     public override int Part2(Race[] input)
     {
         var duration = long.Parse(string.Join(string.Empty, input.Select(x => x.Duration)));
-        var currentRecord = long.Parse(string.Join(string.Empty, input.Select(x => x.CurrentRecord)));
+        var currentRecord = long.Parse(
+            string.Join(string.Empty, input.Select(x => x.CurrentRecord))
+        );
 
         var result = CountWaysToWin(duration, currentRecord);
 
@@ -46,7 +57,7 @@ public class Day6 : AdventDay<Race[], int, int>
     private static int CountWaysToWin(long duration, long currentRecord)
     {
         var mid = duration / 2.0;
-        var floor = (int) Math.Floor(mid);
+        var floor = (int)Math.Floor(mid);
         var firstWinnableIndex = -1;
 
         for (var i = 1; i <= floor; i++)
@@ -58,9 +69,10 @@ public class Day6 : AdventDay<Race[], int, int>
             }
         }
 
-        var result = duration % 2 == 0 
-            ? 2 * (floor - firstWinnableIndex) + 1 
-            : 2 * (floor - firstWinnableIndex + 1);
+        var result =
+            duration % 2 == 0
+                ? 2 * (floor - firstWinnableIndex) + 1
+                : 2 * (floor - firstWinnableIndex + 1);
 
         return result;
     }

@@ -6,7 +6,7 @@ public class Day1 : AdventDay<int[], int, int>
 {
     public override int[] ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Select(c => (int) char.GetNumericValue(c)).ToArray();
+        return rawInput.Trim().Select(c => (int)char.GetNumericValue(c)).ToArray();
     }
 
     public override int Part1(int[] input)

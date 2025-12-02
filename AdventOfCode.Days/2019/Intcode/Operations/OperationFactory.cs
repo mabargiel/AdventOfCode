@@ -36,7 +36,7 @@ public class OperationFactory
             OpCode.Equals => new EqualsOperation(_program, arg1, arg2, arg3),
             OpCode.IncrementRelativeBase => new IncrementRelativeBaseOperation(_program, arg1),
             OpCode.HaltProgram => null,
-            _ => throw new ArgumentOutOfRangeException($"Could not process opcode: {opCode}")
+            _ => throw new ArgumentOutOfRangeException($"Could not process opcode: {opCode}"),
         };
     }
 
@@ -46,8 +46,12 @@ public class OperationFactory
         {
             ArgModes.Position => new PositionMode(_program.Memory, relativePosition),
             ArgModes.Immediate => new ImmediateMode(_program.Memory, relativePosition),
-            ArgModes.Relative => new RelativeMode(_program.Memory, relativePosition, _program.RelativeBase),
-            _ => throw new ArgumentOutOfRangeException(nameof(argMode), argMode, null)
+            ArgModes.Relative => new RelativeMode(
+                _program.Memory,
+                relativePosition,
+                _program.RelativeBase
+            ),
+            _ => throw new ArgumentOutOfRangeException(nameof(argMode), argMode, null),
         };
     }
 }

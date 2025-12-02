@@ -42,10 +42,16 @@ public class Day10 : IAdventDay<int, IEnumerable<Point>>
         var station = CalculateVisibility(_asteroids).MaxBy(pair => pair.Value).Key;
         var asteroids = _asteroids.Except(new[] { station }).ToList();
 
-        var possibleLaserVectors = new LinkedList<Vector2>(asteroids
-            .Select(asteroid => new Vector2(asteroid.Point.X - station.Point.X, asteroid.Point.Y - station.Point.Y))
-            .DistinctBy(Vector2.Normalize).OrderBy(Angle)
-            .ToList());
+        var possibleLaserVectors = new LinkedList<Vector2>(
+            asteroids
+                .Select(asteroid => new Vector2(
+                    asteroid.Point.X - station.Point.X,
+                    asteroid.Point.Y - station.Point.Y
+                ))
+                .DistinctBy(Vector2.Normalize)
+                .OrderBy(Angle)
+                .ToList()
+        );
 
         var vaporizedAsteroids = new Queue<Asteroid>();
 
@@ -61,10 +67,16 @@ public class Day10 : IAdventDay<int, IEnumerable<Point>>
             var laser = currentLaser.Value;
             var toBeVaporized = asteroids.FirstOrDefault(asteroid =>
             {
-                var asteroidLineOfView = new Vector2(asteroid.Point.X - station.Point.X,
-                    asteroid.Point.Y - station.Point.Y);
-                return IsOnLaserLine(laser, asteroidLineOfView) && asteroids.Except(new[] { station, asteroid })
-                    .All(asteroid1 => !IsBetween(station.Point, asteroid.Point, asteroid1.Point));
+                var asteroidLineOfView = new Vector2(
+                    asteroid.Point.X - station.Point.X,
+                    asteroid.Point.Y - station.Point.Y
+                );
+                return IsOnLaserLine(laser, asteroidLineOfView)
+                    && asteroids
+                        .Except(new[] { station, asteroid })
+                        .All(asteroid1 =>
+                            !IsBetween(station.Point, asteroid.Point, asteroid1.Point)
+                        );
             });
 
             if (toBeVaporized != null && !vaporizedAsteroids.Contains(toBeVaporized))
@@ -100,12 +112,20 @@ public class Day10 : IAdventDay<int, IEnumerable<Point>>
 
     private static Dictionary<Asteroid, int> CalculateVisibility(Asteroid[] asteroids)
     {
-        var combinations = new Combinations<Asteroid>(asteroids.ToList(), 2, GenerateOption.WithoutRepetition);
+        var combinations = new Combinations<Asteroid>(
+            asteroids.ToList(),
+            2,
+            GenerateOption.WithoutRepetition
+        );
         var visibilityMap = asteroids.ToDictionary(x => x, x => 0);
 
         foreach (var pair in combinations)
         {
-            if (asteroids.Except(pair).Any(asteroid => IsBetween(pair[0].Point, pair[1].Point, asteroid.Point)))
+            if (
+                asteroids
+                    .Except(pair)
+                    .Any(asteroid => IsBetween(pair[0].Point, pair[1].Point, asteroid.Point))
+            )
             {
                 continue;
             }
@@ -122,7 +142,8 @@ public class Day10 : IAdventDay<int, IEnumerable<Point>>
         var xy = new Vector2(b.X - a.X, b.Y - a.Y);
         var zy = new Vector2(b.X - p.X, b.Y - p.Y);
 
-        return zy.Length() < xy.Length() && Math.Abs(Vector2.Normalize(zy).X - Vector2.Normalize(xy).X) < 0.001 &&
-               Math.Abs(Vector2.Normalize(zy).Y - Vector2.Normalize(xy).Y) < 0.001;
+        return zy.Length() < xy.Length()
+            && Math.Abs(Vector2.Normalize(zy).X - Vector2.Normalize(xy).X) < 0.001
+            && Math.Abs(Vector2.Normalize(zy).Y - Vector2.Normalize(xy).Y) < 0.001;
     }
 }

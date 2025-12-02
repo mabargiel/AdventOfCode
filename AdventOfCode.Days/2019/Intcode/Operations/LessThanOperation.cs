@@ -8,8 +8,13 @@ public class LessThanOperation : BaseOperation
     private readonly ArgumentMode _arg2;
     private readonly ArgumentMode _arg3;
 
-    public LessThanOperation(Program program, ArgumentMode arg1, ArgumentMode arg2, ArgumentMode arg3) :
-        base(program, 4)
+    public LessThanOperation(
+        Program program,
+        ArgumentMode arg1,
+        ArgumentMode arg2,
+        ArgumentMode arg3
+    )
+        : base(program, 4)
     {
         _arg1 = arg1;
         _arg2 = arg2;

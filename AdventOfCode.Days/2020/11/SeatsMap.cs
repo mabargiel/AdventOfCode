@@ -21,8 +21,12 @@ internal class SeatsMap : Dictionary<(int, int), char>
 
         for (var distance = 1; seen.Any(it => !it); distance++)
         {
-            if (x + distance > _maxX && x - distance < 0 && y + distance > _maxY &&
-                y - distance < 0)
+            if (
+                x + distance > _maxX
+                && x - distance < 0
+                && y + distance > _maxY
+                && y - distance < 0
+            )
             {
                 break;
             }
@@ -36,7 +40,7 @@ internal class SeatsMap : Dictionary<(int, int), char>
                 (x - distance, y + distance),
                 (x + distance, y - distance),
                 (x + distance, y + distance),
-                (x - distance, y - distance)
+                (x - distance, y - distance),
             };
 
             for (var i = 0; i < n8directions.Length; i++)

@@ -10,7 +10,7 @@ public class Day2 : AdventDay<long[], long, long>
 {
     public override long[] ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Select(c => (long) char.GetNumericValue(c)).ToArray();
+        return rawInput.Trim().Select(c => (long)char.GetNumericValue(c)).ToArray();
     }
 
     public override long Part1(long[] input)
@@ -26,8 +26,11 @@ public class Day2 : AdventDay<long[], long, long>
     {
         var target = input[0];
         var computerInput = input[1..];
-        var combinations = new Combinations<int>(Enumerable.Range(0, computerInput.Length).ToList(), 2,
-            GenerateOption.WithRepetition);
+        var combinations = new Combinations<int>(
+            Enumerable.Range(0, computerInput.Length).ToList(),
+            2,
+            GenerateOption.WithRepetition
+        );
 
         foreach (var combination in combinations)
         {
@@ -45,6 +48,8 @@ public class Day2 : AdventDay<long[], long, long>
             computerInput[2] = combination[1];
         }
 
-        throw new ArgumentException("Could not find a noun and a verb to achieve the expected result");
+        throw new ArgumentException(
+            "Could not find a noun and a verb to achieve the expected result"
+        );
     }
 }

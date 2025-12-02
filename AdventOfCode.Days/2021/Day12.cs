@@ -53,7 +53,11 @@ public class Day12 : AdventDay<string, int, int>
             AdjacentList[w].Add(v);
         }
 
-        public int DfsToEnd(string vertex = "start", HashSet<string> visited = null, int pathCount = 0)
+        public int DfsToEnd(
+            string vertex = "start",
+            HashSet<string> visited = null,
+            int pathCount = 0
+        )
         {
             visited ??= new HashSet<string>();
 
@@ -86,9 +90,12 @@ public class Day12 : AdventDay<string, int, int>
             return CountPaths();
         }
 
-        private int CountPaths(string vertex = "start", string visitedTwiceVertex = null,
+        private int CountPaths(
+            string vertex = "start",
+            string visitedTwiceVertex = null,
             HashSet<string> visited = null,
-            int pathCount = 0)
+            int pathCount = 0
+        )
         {
             visited ??= new HashSet<string>();
 
@@ -98,7 +105,10 @@ public class Day12 : AdventDay<string, int, int>
                 return pathCount;
             }
 
-            if (visitedTwiceVertex == vertex || (visitedTwiceVertex != null && visited.Contains(vertex)))
+            if (
+                visitedTwiceVertex == vertex
+                || (visitedTwiceVertex != null && visited.Contains(vertex))
+            )
             {
                 return pathCount;
             }

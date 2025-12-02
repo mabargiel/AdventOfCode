@@ -9,14 +9,29 @@ public class Day5 : AdventDay<Almanac, long, long>
     {
         var split = rawInput.Trim().Split(Environment.NewLine + Environment.NewLine);
         var seedsString = split[0];
-        var seeds = seedsString[(seedsString.IndexOf(':') + 2)..].Split(' ').Select(long.Parse).ToArray();
+        var seeds = seedsString[(seedsString.IndexOf(':') + 2)..]
+            .Split(' ')
+            .Select(long.Parse)
+            .ToArray();
 
-        return new Almanac(seeds, split[1..]
-            .Select(mapStrings => mapStrings.Split(Environment.NewLine)[1..])
-            .Select(rangesStrings => new Map(rangesStrings
-                .Select(rangesString => rangesString.Split(' ').Select(long.Parse).ToArray())
-                .Select(rangesInfo => new MapRange(rangesInfo[1], rangesInfo[0], rangesInfo[2]))
-                .ToArray())).ToArray());
+        return new Almanac(
+            seeds,
+            split[1..]
+                .Select(mapStrings => mapStrings.Split(Environment.NewLine)[1..])
+                .Select(rangesStrings => new Map(
+                    rangesStrings
+                        .Select(rangesString =>
+                            rangesString.Split(' ').Select(long.Parse).ToArray()
+                        )
+                        .Select(rangesInfo => new MapRange(
+                            rangesInfo[1],
+                            rangesInfo[0],
+                            rangesInfo[2]
+                        ))
+                        .ToArray()
+                ))
+                .ToArray()
+        );
     }
 
     public override long Part1(Almanac input)
@@ -32,7 +47,8 @@ public class Day5 : AdventDay<Almanac, long, long>
                 var currentSource = seeds[i];
 
                 var matchingRange = ranges.FirstOrDefault(range =>
-                    currentSource >= range.Source && currentSource < range.Source + range.Length);
+                    currentSource >= range.Source && currentSource < range.Source + range.Length
+                );
 
                 if (matchingRange != null)
                 {
@@ -49,7 +65,10 @@ public class Day5 : AdventDay<Almanac, long, long>
     {
         var (seeds, maps) = input;
 
-        var seedRanges = seeds.Chunk(2).Select(chunk => (chunk[0], chunk[0] + chunk[1] - 1)).ToList();
+        var seedRanges = seeds
+            .Chunk(2)
+            .Select(chunk => (chunk[0], chunk[0] + chunk[1] - 1))
+            .ToList();
 
         foreach (var map in maps)
         {
@@ -78,7 +97,6 @@ public class Day5 : AdventDay<Almanac, long, long>
                         var diff = destStart - sourceStart;
                         seedRanges[i] = (seedStart + diff, seedEnd + diff);
                     }
-
                     //whole map inside seed
                     else if (sourceStart > seedStart && sourceEnd < seedEnd)
                     {
@@ -90,7 +108,11 @@ public class Day5 : AdventDay<Almanac, long, long>
                         seedRanges.Add((destStart, destEnd));
                     }
                     //left side intersection
-                    else if (seedStart < sourceStart && seedEnd >= sourceStart && seedEnd <= sourceEnd)
+                    else if (
+                        seedStart < sourceStart
+                        && seedEnd >= sourceStart
+                        && seedEnd <= sourceEnd
+                    )
                     {
                         //left
                         seedRanges[i] = (seedStart, sourceStart - 1);
@@ -100,7 +122,11 @@ public class Day5 : AdventDay<Almanac, long, long>
                         seedRanges.Add((destStart, destStart + diff));
                     }
                     //right side intersection
-                    else if (seedStart >= sourceStart && seedStart <= sourceEnd && seedEnd > sourceEnd)
+                    else if (
+                        seedStart >= sourceStart
+                        && seedStart <= sourceEnd
+                        && seedEnd > sourceEnd
+                    )
                     {
                         //right
                         seedRanges[i] = (sourceEnd + 1, seedEnd);

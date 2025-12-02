@@ -15,7 +15,10 @@ public class IntcodeComputer : IIntcodeComputer
     {
         var instructions = code.Select((x, i) => (x, (long)i)).ToDictionary(x => x.Item2, x => x.x);
         Program = new Program(instructions, _input);
-        Program.OnOutput += l => { OnOutput?.Invoke(l); };
+        Program.OnOutput += l =>
+        {
+            OnOutput?.Invoke(l);
+        };
     }
 
     public Program Program { get; }

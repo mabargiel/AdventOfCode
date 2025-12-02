@@ -10,7 +10,7 @@ public class Day15 : AdventDay<int[,], int, int>
         var split = rawInput.Trim().Split(Environment.NewLine);
         var height = split.Length;
         var width = split[0].Length;
-        var result = new int [height, width];
+        var result = new int[height, width];
 
         for (var i = 0; i < height; i++)
         {

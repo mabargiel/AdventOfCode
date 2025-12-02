@@ -18,25 +18,23 @@ public class Day6
     public void ParseRawInput_IntoLogicalObject()
     {
         const string rawInput = """
-                                Time:      7  15   30
-                                Distance:  9  40  200
-                                """;
+            Time:      7  15   30
+            Distance:  9  40  200
+            """;
 
         var input = _day6.ParseRawInput(rawInput);
 
-        input.ShouldBe(new Race[]
-        {
-            new(7, 9),
-            new(15, 40),
-            new(30, 200)
-        });
+        input.ShouldBe(new Race[] { new(7, 9), new(15, 40), new(30, 200) });
     }
 
     [Test]
-    [TestCase("""
-              Time:      7  15   30
-              Distance:  9  40  200
-              """, 288)]
+    [TestCase(
+        """
+            Time:      7  15   30
+            Distance:  9  40  200
+            """,
+        288
+    )]
     public void Part1_WithExampleInput_CalculateWaysOfAllRaces(string input, int expectedResult)
     {
         var parsedInput = _day6.ParseRawInput(input);
@@ -47,11 +45,17 @@ public class Day6
     }
 
     [Test]
-    [TestCase("""
-              Time:      7  15   30
-              Distance:  9  40  200
-              """, 71503)]
-    public void Part2_WithExampleInput_CalculateAllWaysOfSingleRace(string input, int expectedResult)
+    [TestCase(
+        """
+            Time:      7  15   30
+            Distance:  9  40  200
+            """,
+        71503
+    )]
+    public void Part2_WithExampleInput_CalculateAllWaysOfSingleRace(
+        string input,
+        int expectedResult
+    )
     {
         var parsedInput = _day6.ParseRawInput(input);
 

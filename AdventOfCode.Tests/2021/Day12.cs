@@ -10,7 +10,8 @@ public class Day12 : AdventDayTest<Days._2021.Day12>
     [Test]
     public override void ParseRawInputTest()
     {
-        const string rawInput = @"start-A
+        const string rawInput =
+            @"start-A
 start-b
 A-c
 A-b
@@ -24,14 +25,18 @@ b-end";
     }
 
     [Test]
-    [TestCase(@"start-A
+    [TestCase(
+        @"start-A
 start-b
 A-c
 A-b
 b-d
 A-end
-b-end", 10)]
-    [TestCase(@"dc-end
+b-end",
+        10
+    )]
+    [TestCase(
+        @"dc-end
 HN-start
 start-kj
 dc-start
@@ -40,8 +45,11 @@ LN-dc
 HN-end
 kj-sa
 kj-HN
-kj-dc", 19)]
-    [TestCase(@"fs-end
+kj-dc",
+        19
+    )]
+    [TestCase(
+        @"fs-end
 he-DX
 fs-he
 start-DX
@@ -58,7 +66,9 @@ start-pj
 he-WI
 zg-he
 pj-fs
-start-RW", 226)]
+start-RW",
+        226
+    )]
     public void Part1_FindUniquePathsCount(string input, int expectedResult)
     {
         var result = _day.Part1(input);
@@ -67,14 +77,18 @@ start-RW", 226)]
     }
 
     [Test]
-    [TestCase(@"start-A
+    [TestCase(
+        @"start-A
 start-b
 A-c
 A-b
 b-d
 A-end
-b-end", 36)]
-    [TestCase(@"dc-end
+b-end",
+        36
+    )]
+    [TestCase(
+        @"dc-end
 HN-start
 start-kj
 dc-start
@@ -83,8 +97,11 @@ LN-dc
 HN-end
 kj-sa
 kj-HN
-kj-dc", 103)]
-    [TestCase(@"fs-end
+kj-dc",
+        103
+    )]
+    [TestCase(
+        @"fs-end
 he-DX
 fs-he
 start-DX
@@ -101,8 +118,13 @@ start-pj
 he-WI
 zg-he
 pj-fs
-start-RW", 3509)]
-    public void Part2_FindUniquePathsWithVisitingSmallCaveTwiceCount(string input, int expectedResult)
+start-RW",
+        3509
+    )]
+    public void Part2_FindUniquePathsWithVisitingSmallCaveTwiceCount(
+        string input,
+        int expectedResult
+    )
     {
         var result = _day.Part2(input);
 

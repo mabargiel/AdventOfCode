@@ -50,7 +50,14 @@ public class Day9 : AdventDay<int[,], int, int>
         return basins.OrderByDescending(x => x).Take(3).Aggregate(1, (curr, prev) => curr * prev);
     }
 
-    private void GetFlowingPoints(int[,] input, int rows, int cols, int x, int y, HashSet<(int, int)> points)
+    private void GetFlowingPoints(
+        int[,] input,
+        int rows,
+        int cols,
+        int x,
+        int y,
+        HashSet<(int, int)> points
+    )
     {
         var current = input[y, x];
 
@@ -117,7 +124,11 @@ public class Day9 : AdventDay<int[,], int, int>
             return false;
         }
 
-        return !((y + 1 < rows && input[y + 1, x] <= current) || (y - 1 >= 0 && input[y - 1, x] <= current) ||
-                 (x + 1 < cols && input[y, x + 1] <= current) || (x - 1 >= 0 && input[y, x - 1] <= current));
+        return !(
+            (y + 1 < rows && input[y + 1, x] <= current)
+            || (y - 1 >= 0 && input[y - 1, x] <= current)
+            || (x + 1 < cols && input[y, x + 1] <= current)
+            || (x - 1 >= 0 && input[y, x - 1] <= current)
+        );
     }
 }

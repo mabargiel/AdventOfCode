@@ -9,8 +9,11 @@ public class Day9 : AdventDay<Motion[], int, int>
 {
     public override Motion[] ParseRawInput(string rawInput)
     {
-        return rawInput.Trim().Split(Environment.NewLine)
-            .Select(x => new Motion(x.First(), int.Parse(x[(x.IndexOf(' ') + 1)..]))).ToArray();
+        return rawInput
+            .Trim()
+            .Split(Environment.NewLine)
+            .Select(x => new Motion(x.First(), int.Parse(x[(x.IndexOf(' ') + 1)..])))
+            .ToArray();
     }
 
     public override int Part1(Motion[] input)
@@ -37,7 +40,7 @@ public class Day9 : AdventDay<Motion[], int, int>
                 'D' => p => p with { Y = p.Y - 1 },
                 'L' => p => p with { X = p.X - 1 },
                 'R' => p => p with { X = p.X + 1 },
-                _ => p => p
+                _ => p => p,
             };
 
             for (var i = 0; i < motion.Steps; i++)
@@ -48,9 +51,9 @@ public class Day9 : AdventDay<Motion[], int, int>
                     'D' => head with { Y = head.Y - 1 },
                     'L' => head with { X = head.X - 1 },
                     'R' => head with { X = head.X + 1 },
-                    _ => head
+                    _ => head,
                 };
-                
+
                 var curr = head;
                 for (var j = 0; j < tailLength; j++)
                 {
@@ -62,8 +65,18 @@ public class Day9 : AdventDay<Motion[], int, int>
 
                     if (xDistance > 1 || yDistance > 1)
                     {
-                        xDiff += xDistance > 1 ? curr.X < tailPart.X ? 1 : -1 : 0;
-                        yDiff += yDistance > 1 ? curr.Y < tailPart.Y ? 1 : -1 : 0;
+                        xDiff +=
+                            xDistance > 1
+                                ? curr.X < tailPart.X
+                                    ? 1
+                                    : -1
+                                : 0;
+                        yDiff +=
+                            yDistance > 1
+                                ? curr.Y < tailPart.Y
+                                    ? 1
+                                    : -1
+                                : 0;
                         tail[j] = new Point(tailPart.X + xDiff, tailPart.Y + yDiff);
                     }
                     else
@@ -83,4 +96,3 @@ public class Day9 : AdventDay<Motion[], int, int>
 }
 
 public record Motion(char Direction, int Steps);
-

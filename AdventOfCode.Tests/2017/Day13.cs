@@ -16,9 +16,9 @@ public class Day13 : AdventDayTest<Days._2017.Day13>
                 { 0, 3 },
                 { 1, 2 },
                 { 4, 4 },
-                { 6, 4 }
+                { 6, 4 },
             },
-            24
+            24,
         },
         new object[]
         {
@@ -31,16 +31,17 @@ public class Day13 : AdventDayTest<Days._2017.Day13>
                 { 8, 3 },
                 { 12, 4 },
                 { 16, 3 },
-                { 18, 4 }
+                { 18, 4 },
             },
-            0 * 3 + 6 * 4 + 8 * 3 + 12 * 4 + 16 * 3 + 18 * 4
-        }
+            0 * 3 + 6 * 4 + 8 * 3 + 12 * 4 + 16 * 3 + 18 * 4,
+        },
     };
 
     [Test]
     public override void ParseRawInputTest()
     {
-        const string rawInput = @"0: 3
+        const string rawInput =
+            @"0: 3
 1: 2
 4: 4
 6: 4";
@@ -70,7 +71,7 @@ public class Day13 : AdventDayTest<Days._2017.Day13>
             { 0, 3 },
             { 1, 2 },
             { 4, 4 },
-            { 6, 4 }
+            { 6, 4 },
         }.ToImmutableDictionary();
 
         var result = _day.Part2(input);

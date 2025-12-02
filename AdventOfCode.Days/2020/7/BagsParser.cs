@@ -30,18 +30,27 @@ internal static class BagsParser
         from bag in Bag
         select ((int)char.GetNumericValue(qty), bag.Item1, bag.Item2);
 
-    private static readonly Parser<List<(int, string, string)>> BagContent =
-        Parse.String("no other bags").Return(new List<(int, string, string)>()).Or(from leading in BagWithQty
+    private static readonly Parser<List<(int, string, string)>> BagContent = Parse
+        .String("no other bags")
+        .Return(new List<(int, string, string)>())
+        .Or(
+            from leading in BagWithQty
             from rest in BagSeparator.Optional().Then(_ => BagWithQty).Many()
-            select Cons(leading, rest.ToList()).ToList());
+            select Cons(leading, rest.ToList()).ToList()
+        );
 
     private static readonly Parser<List<Bag>> AllBags =
-        from bags in (from main in Bag
-                from separator in ContentSeparator
-                from content in BagContent
-                select new Bag(main.Item1, main.Item2, 1,
-                    content.Select(bag => new Bag(bag.Item2, bag.Item3, bag.Item1)).ToList()))
-            .DelimitedBy(Parse.Char('.').Then(_ => Parse.LineEnd))
+        from bags in (
+            from main in Bag
+            from separator in ContentSeparator
+            from content in BagContent
+            select new Bag(
+                main.Item1,
+                main.Item2,
+                1,
+                content.Select(bag => new Bag(bag.Item2, bag.Item3, bag.Item1)).ToList()
+            )
+        ).DelimitedBy(Parse.Char('.').Then(_ => Parse.LineEnd))
         select bags.ToList();
 
     public static List<Bag> ParseInput(string input)
