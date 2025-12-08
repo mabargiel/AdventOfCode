@@ -24,7 +24,7 @@ steps:
 - script: dotnet tool install --global csharpier
   displayName: Install CSharpier
 
-- script: csharpier --check .
+- script: csharpier check .
   displayName: Check formatting
 
 - task: DotNetCoreCLI@2
