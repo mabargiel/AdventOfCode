@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using AdventOfCode.Days._2024;
 using AdventOfCode.Days.Common;
 using NUnit.Framework;
 using Shouldly;
