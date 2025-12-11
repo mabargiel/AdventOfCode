@@ -62,7 +62,7 @@ public class Day15 : AdventDay<int[,], int, int>
     {
         var height = input.GetLength(0);
         var width = input.GetLength(1);
-        var graph = new Graph(input.Length);
+        var graph = new Graph<int>(input.Length);
 
         for (var i = 0; i < height; i++)
         {

@@ -79,12 +79,12 @@ public class Day12 : AdventDay<Input, int, int>
         return shortestPath;
     }
 
-    private static Graph BuildGraph(Input input)
+    private static Graph<int> BuildGraph(Input input)
     {
         var height = input.Map.GetLength(0);
         var width = input.Map.GetLength(1);
 
-        var graph = new Graph(width * height);
+        var graph = new Graph<int>(width * height);
 
         for (var i = 0; i < height; i++)
         {
