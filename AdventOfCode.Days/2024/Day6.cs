@@ -37,6 +37,78 @@ public class Day6 : AdventDay<LabMap, int, int>
     public override int Part1(LabMap input)
     {
         var (guardPos, obstacles, rows, cols) = input;
+        var visited = MarkPath(guardPos, cols, rows, obstacles);
+
+        return visited.Count;
+    }
+
+    /*
+     *
+     *  #.........
+        .........#
+        ..........
+        ..........
+        ..........
+        ..........
+        ^.........
+        ..........
+        .#........
+        ........#.
+     */
+
+    public override int Part2(LabMap input)
+    {
+        var (guardPos, obstacles, rows, cols) = input;
+        var originalPath = MarkPath(guardPos, cols, rows, obstacles).Except([guardPos]).ToArray();
+
+        return originalPath.Count(point => CausesLoop(guardPos, cols, rows, obstacles, point));
+    }
+
+    private static bool CausesLoop(
+        Point guardPos,
+        int cols,
+        int rows,
+        Point[] obstacles,
+        Point extraObstacle
+    )
+    {
+        var visitedStates = new HashSet<(Point Pos, Direction)>();
+        var currentDirection = Direction.Up;
+        var hashedObstacles = obstacles.ToHashSet();
+
+        while (guardPos!.X >= 0 && guardPos.X < cols && guardPos.Y >= 0 && guardPos.Y < rows)
+        {
+            visitedStates.Add((guardPos, currentDirection));
+
+            var newGuardPos = currentDirection switch
+            {
+                Direction.Up => guardPos with { X = guardPos.X - 1 },
+                Direction.Right => guardPos with { Y = guardPos.Y + 1 },
+                Direction.Down => guardPos with { X = guardPos.X + 1 },
+                Direction.Left => guardPos with { Y = guardPos.Y - 1 },
+                _ => null,
+            };
+
+            if (hashedObstacles.Contains(newGuardPos) || newGuardPos == extraObstacle)
+            {
+                currentDirection = (Direction)(((int)currentDirection + 1) % 4);
+            }
+            else
+            {
+                guardPos = newGuardPos;
+            }
+
+            if (visitedStates.Contains((guardPos, currentDirection)))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static HashSet<Point> MarkPath(Point guardPos, int cols, int rows, Point[] obstacles)
+    {
         var visited = new HashSet<Point>();
         var currentDirection = Direction.Up;
 
@@ -62,108 +134,7 @@ public class Day6 : AdventDay<LabMap, int, int>
             }
         }
 
-        return visited.Count;
-    }
-
-    /*
-     *
-     *  #.........
-        .........#
-        ..........
-        ..........
-        ..........
-        ..........
-        ^.........
-        ..........
-        .#........
-        ........#.
-     */
-
-    public override int Part2(LabMap input)
-    {
-        var originalPath = DrawPath(input);
-        var (startingGuardPos, obstacles, rows, cols) = input;
-        var loopObstacles = new HashSet<Point>();
-
-        foreach (var pos in originalPath)
-        {
-            Point[] newObstacles = [.. obstacles, pos];
-            var lab = new Lab(new LabMap(startingGuardPos, newObstacles, rows, cols));
-            var visited = new HashSet<Guard>();
-
-            while (
-                lab.Guard.Pos!.X >= 0
-                && lab.Guard.Pos.X < cols
-                && lab.Guard.Pos.Y >= 0
-                && lab.Guard.Pos.Y < rows
-            )
-            {
-                if (!visited.Add(lab.Guard))
-                {
-                    loopObstacles.Add(pos);
-                    break;
-                }
-
-                lab.MoveGuard();
-            }
-        }
-
-        return loopObstacles.Count;
-    }
-
-    private record Guard(Point Pos, Direction Direction);
-
-    private class Lab(LabMap Map)
-    {
-        public Guard Guard { get; private set; } = new(Map.GuardPos, Direction.Up);
-
-        public void MoveGuard()
-        {
-            var (guardPos, currentDirection) = Guard;
-            while (true)
-            {
-                var newGuardPos = currentDirection switch
-                {
-                    Direction.Up => guardPos with { X = guardPos.X - 1 },
-                    Direction.Down => guardPos with { X = guardPos.X + 1 },
-                    Direction.Left => guardPos with { Y = guardPos.Y - 1 },
-                    Direction.Right => guardPos with { Y = guardPos.Y + 1 },
-                    _ => null,
-                };
-
-                if (Map.Obstacles.Contains(newGuardPos))
-                {
-                    currentDirection = (Direction)(((int)currentDirection + 1) % 4);
-                }
-                else
-                {
-                    Guard = new Guard(newGuardPos, currentDirection);
-                    break;
-                }
-            }
-        }
-    }
-
-    private static List<Point> DrawPath(LabMap input)
-    {
-        var (startingGuardPos, obstacles, rows, cols) = input;
-        var originalPath = new List<Point>();
-
-        var lab = new Lab(new LabMap(startingGuardPos, obstacles, rows, cols));
-        do
-        {
-            lab.MoveGuard();
-            originalPath.Add(lab.Guard.Pos);
-        } while (
-            lab.Guard.Pos!.X >= 0
-            && lab.Guard.Pos.X < cols
-            && lab.Guard.Pos.Y >= 0
-            && lab.Guard.Pos.Y < rows
-        );
-
-        originalPath.RemoveAt(originalPath.Count - 1);
-
-        return originalPath;
+        return visited;
     }
 
     private enum Direction
